@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/derby.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-fff">
+		<div class="aui-content aui-padded-15">
+			<textarea class="aui-font-size-14 textarea" rows="6" placeholder="此时此刻,想和大家说点什么~" id="forwardtext"></textarea>
+			<div class=" aui-padded-15 img-round-sm bg-gray">
+				<div class="aui-ellipsis-2"  id="forward-tpl">
+					<!-- <span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+					号外号外!神预测出现,速来!http://t.cn.A42345B1 -->
+				</div> 
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="forward-list">
+	<span class="aui-margin-r-5 color-blue">@<%=nickname%>:</span>
+	<%=content%>
+</script>
+<script type="text/template" id="forward-lists">
+	<span class="aui-margin-r-5 color-blue">@转发:</span>
+	<%=content%>
+</script>
+<script type="text/javascript">
+	var post_id;
+	var content;
+	var years;
+	apiready = function() {
+		api.parseTapmode();
+		lotteryOpenType = api.pageParam[1];
+		post_id = lotteryOpenType.post_id;
+		lottery_id = lotteryOpenType.lottery_id;
+		type = lotteryOpenType.type;
+		content = lotteryOpenType.content;
+		gt_id = lotteryOpenType.gt_id;
+		years = lotteryOpenType.years;
+		if(type == 1){
+			var html = template('forward-lists',content);
+			$("#forward-tpl").append(html);
+		}else{
+			forwardList(post_id,lottery_id);
+		}
+	};
+	function forwardList(post_id,lottery_id){
+		$cjy.ajax({
+			url: configIndex.forwardList,
+			method: 'post',
+			data:{
+				'post_id' : post_id,
+				'lottery_id':lottery_id
+			}
+		}, function(ret) {
+			var data = ret.data;
+			var html = template('forward-list',data);
+			$api.html($api.byId('forward-tpl'), html);
+			content = ret.data.content;
+			api.parseTapmode();
+		});
+	};
+	function forwardClick(){
+		var forward = $('#forwardtext').val();
+		$cjy.ajax({
+			url: configIndex.forwarding,
+			method: 'post',
+			data:{
+				'lottery_id':lottery_id,
+				'id' : post_id,
+				'forward':forward,
+				'gallery_title_id':gt_id,
+				'content':content,
+				'years':years,
+				
+			}
+		}, function(ret) {
+			toast1('转发成功');
+			api.sendEvent({
+				name:'eventProcessing',
+				extra: {
+			      type: 'forwarding',
+			      num:1,
+			      id:post_id
+			    }
+			});
+
+
+
+
+
+			if( type == 1){
+				var list = {};
+				list.post_id = post_id;
+				list.type = 1;
+				$api.setStorage('forwarding',list);
+				var jsfun = 'forwarding()';
+				api.execScript({
+					name : 'photodetail_win',
+					frameName: 'photodetail',
+					script: jsfun
+				});
+				api.closeWin();
+			}else if(type == 2){
+				api.closeWin();
+			}else {
+				api.sendEvent({
+				    name: 'forwadrding',
+				      extra: {
+				        key1: post_id,
+				      }
+				    });       
+				api.closeWin();
+			}
+		});
+	}
+
+</script>

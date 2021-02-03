@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<script type="text/javascript" src="../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>打赏弹窗</title>
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="dialog" class="aui-content dialog dialog-reward bg-fff">
+			<div class="dialog-close-rt">
+				<img class="ml-auto" src="../../image/dialog-rt-close.png" tapmode onclick="api.closeFrame();"/>
+			</div>
+			<div class="aui-bar aui-bar-btn aui-padded-15 reward-bar" id="tab" style="width:70%;">
+				<div class="aui-bar-btn-item aui-active">打赏</div>
+				<div class="aui-bar-btn-item">打赏记录</div>
+			</div>
+			<!-- 打赏 -->
+			<div id="giveReward" style="padding-bottom: 3.5rem !important;">
+				<div class="aui-row aui-padded-15 aui-padded-b-0 reward-list">
+					<div class="aui-col-xs-4 aui-padded-5">
+						<div class="reward-list-item active">10</div>
+					</div>
+					<div class="aui-col-xs-4 aui-padded-5">
+						<div class="reward-list-item">20</div>
+					</div>
+					<div class="aui-col-xs-4 aui-padded-5">
+						<div class="reward-list-item">30</div>
+					</div>
+					<div class="aui-col-xs-4 aui-padded-5">
+						<div class="reward-list-item">50</div>
+					</div>
+					<div class="aui-col-xs-4 aui-padded-5">
+						<div class="reward-list-item">100</div>
+					</div>
+					<div class="aui-col-xs-4 aui-padded-5">
+						<div class="reward-list-item">200</div>
+					</div>
+				</div>
+				<div class="aui-padded-15">
+					<input class="aui-padded-l-10 aui-padded-r-10 border img-round-sm" id="reward-money" type="text" placeholder="请输入打赏积分" />
+				</div>
+				<footer class="aui-bar aui-bar-tab">
+					<div class="aui-bar-tab-item aui-text-left aui-padded-l-15 bg-gray" tapmode style="width: 70%;">
+						积分余额:<span class="aui-margin-l-5 color-red" id="memberMoney">0.00</span>
+					</div>
+					<div class="aui-bar-tab-item aui-text-white bg-reward" tapmode style="width: auto;" onclick="reward()">打赏</div>
+				</footer>
+			</div>
+			<!-- 打赏记录 -->
+			<div id="rewardRecord" class="aui-padded-15" style="display: none;">
+				<div class="aui-text-right aui-font-size-14 color-more" tapmode onclick="openWin('widget://app/derby/html/rewardrecord_win')">
+					查看更多
+				</div>
+				<div  style="height: 9.75rem;overflow: auto;-webkit-overflow-scrolling: touch;text-align:center;" id="reward-list">
+					<!-- <div class="aui-flex-col aui-flex-middle aui-flex-between aui-padded-t-10 aui-padded-b-10">
+						<div>
+							<img class="praisecredit-icon" src="../../image/praise-credit.png" />
+						</div>
+						<div class="flex-1 aui-margin-l-10">
+							<h3>超级程序员</h3>
+							<p>09-09 12:31</p>
+						</div>
+						<div class="aui-font-size-16 font-bold color-red">20积分</div>
+					</div> -->
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/utils.js"></script>
+<script type="text/javascript" src="../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../res/api-index.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/template" id="reward-tpl">
+	<% for(var i = 0; i<data.length; i++){ %>
+	<% if(i < 3) { %>
+	<div class="aui-flex-col aui-flex-middle aui-flex-between aui-padded-t-10 aui-padded-b-10">
+		<div>
+			<img class="praisecredit-icon" src="../../image/praise-credit.png" />
+		</div>
+		<div class="flex-1 aui-margin-l-10">
+			<h3><%=data[i]['nickname']%></h3>
+			<p><%=data[i]['create_time']%></p>
+		</div>
+		<div class="aui-font-size-16 font-bold color-red"><%=data[i]['growth_value']%>积分</div>
+	</div>
+	<% } %>
+	<% } %>
+</script>
+<script type="text/javascript">
+	var post_id;
+	var type ;
+	apiready = function() {
+		api.parseTapmode();
+		userInfo = $api.getStorage('userInfo');
+		lotteryOpenType = api.pageParam[1];
+		post_id = lotteryOpenType.post_id;
+		type = lotteryOpenType.type;
+		$('#memberMoney').text(userInfo.growth_value);
+		$(document.body).on('touchend', function(e) {
+			var dialog = $("#dialog")[0];
+			if (!$.contains(dialog, e.target)) {
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			}
+		});
+		$('#reward-money').val(10);
+	};
+	var tab = new auiTab({
+		element: document.getElementById("tab"),
+	}, function(ret) {
+        if(ret.index == 1){
+        	$('#giveReward').show();
+        	$('#rewardRecord').hide();
+        }else if(ret.index == 2){
+			$('#giveReward').hide();
+			$('#rewardRecord').show();
+			rewardRecord();
+		}
+	});
+	$('.reward-list-item').click(function(){
+		$('.reward-list-item').removeClass('active');
+		$(this).addClass('active');
+		var money = $(this).text();
+		$('#reward-money').val(money);
+	});
+	function reward() {
+		var money = $('#reward-money').val();
+		var growth_value = $('#memberMoney').text();
+		if(Number(money) > Number(growth_value)){
+			toast1('积分余额不足');
+			return false;
+		}
+		$cjy.ajax({
+			url: configIndex.reward,
+			method: 'post',
+			data: {
+				post_id: post_id,
+				growth_value : money
+			}
+		}, function(ret) {
+			if(ret.code == 0){
+				var list = {};
+				list.post_id = post_id;
+				list.growth_value = money;
+				$api.setStorage('reward_growth_value',list);
+				var jsfun = 'rewardMoney();';
+				api.execScript({
+					frameName: 'photodetail',
+					script: jsfun
+				});
+				toast1('打赏成功');
+				var userInfo = $api.getStorage('userInfo');
+				userInfo.growth_value = Number(userInfo.growth_value) - Number(list.growth_value);
+				$api.setStorage('userInfo',userInfo);
+				if(type == 1 ){
+					var jsfun = 'init();';
+					api.execScript({
+						frameName: 'mainbody',
+						script: jsfun
+					});
+				}else if(type == 2){
+//					var jsfun = 'init();';
+//					api.execScript({
+//						frameName: 'frame3',
+//						script: jsfun
+//					});
+				}else if(type ==3){
+					var jsfun = 'personal();';
+					api.execScript({
+						frameName: 'perscenter',
+						script: jsfun
+					});
+				}
+				//
+				
+				api.sendEvent({
+				name:'eventProcessing',
+				extra: {
+			      type: 'money',
+			      num:money,
+			      id:post_id
+			    }
+			});
+				
+				api.closeFrame();
+			}else{
+				toast1('打赏失败');
+			}
+		});
+	};
+	function rewardRecord(){
+		$cjy.ajax({
+			url: configIndex.rewardRecord,
+			method: 'post',
+			data: {
+				post_id: post_id
+			}
+		}, function(ret) {
+			$api.setStorage('rewardRecord',ret);
+			 console.log($api.jsonToStr(ret));
+			 if(ret.data.length<=0){
+			 	var html ="暂无打赏记录！";
+			 }else{
+			 	var html = template('reward-tpl', ret);
+			 }
+			
+			$("#reward-list").html(html);
+		});
+	}
+</script>

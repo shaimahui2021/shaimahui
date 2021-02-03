@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-gray">
+		<section class="aui-content">
+			<div class="aui-row  aui-margin-t-15 bg-fff record-list-header">
+				<div class="aui-col-xs-3 record-list-item">
+					商品名称
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					商品积分
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					兑换时间
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					状态
+				</div>
+			</div>
+			<div class="aui-row bg-fff record-list-body" id="con" style="text-align:center">
+				<!--<div class="aui-col-xs-3 record-list-item">
+					华为P40
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					<span class="color-red">20000</span>
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					<span class="aui-font-size-14 color-gray">09-01 13:54</span>
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					待发放
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					华为P40
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					<span class="color-red">20000</span>
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					<span class="aui-font-size-14 color-gray">09-01 13:54</span>
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					待发放
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					华为P40
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					<span class="color-red">20000</span>
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					<span class="aui-font-size-14 color-gray">09-01 13:54</span>
+				</div>
+				<div class="aui-col-xs-3 record-list-item">
+					待发放
+				</div>-->
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+
+
+<script type="text/template" id="tpl">
+<% for(var i = 0; i<data.length; i++){ %>
+		<div class="aui-col-xs-3 record-list-item">
+			<%=data[i]['product_name']%>
+		</div>
+		<div class="aui-col-xs-3 record-list-item">
+			<span class="color-red"><%=data[i]['growth_value']%></span>
+		</div>
+		<div class="aui-col-xs-3 record-list-item">
+			<span class="aui-font-size-14 color-gray"><%=data[i]['give_time']%></span>
+		</div>
+		<div class="aui-col-xs-3 record-list-item">
+			<%=data[i]['status']%>
+		</div>
+<% } %>
+</script>
+
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+		getRecord();
+	};
+	
+	
+	// 获取兑换记录
+	function getRecord(){
+		$cjy.ajax({
+			url: configIndex.getConvertRecord,
+			method: 'post',
+			data:{}
+		}, function(ret) {
+			
+			console.log($api.jsonToStr(ret));
+			if(ret.data.length<=0){
+				var html = "暂无数据~~";
+			}else{
+			var html = template('tpl', ret);
+			}
+			$("#con").html(html);
+	
+		},function(err){
+			console.log($api.jsonToStr(err));
+		});
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>

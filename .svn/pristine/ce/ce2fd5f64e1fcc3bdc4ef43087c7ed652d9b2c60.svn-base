@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<script type="text/javascript" src="../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>更换头像</title>
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+			}
+			.aui-radio:checked, .aui-radio.aui-checked, .aui-checkbox:checked, .aui-checkbox.aui-checked {
+			    background-color: #FF492B;
+			    border: solid 1px #FF492B;
+			}
+			.aui-select-list{
+				height: 11.5rem;
+				overflow-y: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+			.aui-select-list img{
+				display: inline-block;
+				width: 2.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="dialog" class="aui-content w-100">
+			<ul class="aui-list aui-select-list aui-list-in aui-list-noborder aui-padded-t-10  aui-padded-b-10" id="listData">
+
+				<!-- <li class="aui-list-item">
+				    <div class="aui-list-item-inner">
+				        <label class="flex align-center">
+				    		<input class="aui-radio" type="radio" name="radio">
+				    		<img class="aui-margin-l-10" src="../../image/empty-head.png" />
+				    	</label>
+				    </div>
+				</li>
+				<li class="aui-list-item">
+				   <div class="aui-list-item-inner">
+				       <label class="flex align-center">
+				   		<input class="aui-radio" type="radio" name="radio">
+				   		<img class="aui-margin-l-10" src="../../image/empty-head.png" />
+				   	</label>
+				   </div>
+				</li>
+				<li class="aui-list-item">
+				    <div class="aui-list-item-inner">
+				        <label class="flex align-center">
+				    		<input class="aui-radio" type="radio" name="radio">
+				    		<img class="aui-margin-l-10" src="../../image/empty-head.png" />
+				    	</label>
+				    </div>
+				</li>
+				<li class="aui-list-item">
+				   <div class="aui-list-item-inner">
+				       <label class="flex align-center">
+				   		<input class="aui-radio" type="radio" name="radio">
+				   		<img class="aui-margin-l-10" src="../../image/empty-head.png" />
+				   	</label>
+				   </div>
+				</li> -->
+			</ul>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/utils.js"></script>
+<script type="text/javascript" src="../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../res/api-index.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/template" id="Data-list">
+	<% for(var i = 0; i<listData.length; i++){ %>
+
+		<li class="aui-list-item" tapmode  onclick="selectHead(<%= listData[i]['id'] %>)">
+				<div class="aui-list-item-inner">
+						<label class="flex align-center">
+					<input class="aui-radio" type="radio" name="radio" checked>
+					<img class="aui-margin-l-10" src="<%= index_url.replace('/index.php/', '') + listData[i]['head_path'] %>" />
+					<span class="aui-margin-l-10"><%= listData[i]['title'] %></span>
+				</label>
+				</div>
+		</li>
+	<% } %>
+</script>
+<script type="text/javascript">
+	apiready = function() {
+
+		$(document.body).on('touchend', function(e) {
+			var dialog = $("#dialog")[0];
+			if (!$.contains(dialog, e.target)) {
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			}
+		});
+		$cjy.ajax({
+			url: index_url+'api/Member/getHeadImg',
+			method: 'post',
+			data:{}
+		}, function(ret) {
+			if(ret.code == 0){
+				var data = {};
+				data.listData = ret.data;
+				data.index_url = index_url;
+				var html = template('Data-list',data);
+				$api.html($api.byId('listData'), html);
+			}
+		});
+		api.parseTapmode();
+	}
+
+	function selectHead(headId){
+		console.log(headId);
+		api.execScript({
+				frameName: 'personinfo',
+				script: 'changeDetail({"head_id":'+ headId +'})'
+		});
+		api.closeFrame();
+	}
+
+</script>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<script type="text/javascript" src="../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>图库详情--期号</title>
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+			}
+		</style>
+		<style>
+		    .qihao-list{
+		    	padding-top: .5rem;
+		    	padding-bottom: .5rem;
+		    	max-height: 18.25rem;
+		    	overflow-y: auto;
+		    	-webkit-overflow-scrolling:touch;
+		    	background-color: #fff; 
+		    }
+		    .qihao-list .qihao-item{
+		    	padding-top: .25rem;
+		    	padding-left: .375rem;
+		    	padding-right: .375rem;
+		    	padding-bottom: .25rem;
+		    }
+		    .qihao-list .qihao-item .qihao-item-txt{ 
+		    	font-size: .7rem;
+		    	line-height: 1.3rem;
+		    	border-radius: .125rem;
+		    	border: 1px solid #999; 
+		    	width: 100%;
+		    	text-align: center;
+		    }
+		    .qihao-list .qihao-item.active .qihao-item-txt{
+		    	border: 1px solid #EF541E;
+		    	color: #EF541E;
+		    }
+		</style>
+	</head>
+	<body>
+		<section id="dialog" class="aui-content dialog  qihao-list">
+			<div class="aui-row" id="dialog-qihao-list">
+				<script type="text/template" id="dialog-qihao-list1">
+					<% for(var i = 0; i<qishu.length; i++){ %>
+							<div class="aui-col-xs-3 qihao-item" onclick="selectQishu(<%=qishu[i]['post_id']%>,<%=i%>)">
+								<span class="qihao-item-txt"><%=qishu[i]['title']%></span>
+							</div>
+					<% } %>
+				</script>
+				<!-- <div class="aui-col-xs-3 qihao-item active">
+					<span class="qihao-item-txt">第355期</span>
+				</div>
+				<div class="aui-col-xs-3 qihao-item">
+					<span class="qihao-item-txt">第355期</span>
+				</div>
+				<div class="aui-col-xs-3 qihao-item">
+					<span class="qihao-item-txt">第355期</span>
+				</div> -->
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/utils.js"></script>
+<script type="text/javascript" src="../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../res/api-index.js"></script>
+<script type="text/javascript">
+	var qishuDialog;
+	apiready = function() {
+		api.parseTapmode();
+		qishuDialog = $api.getStorage('qishuDialog');
+		console.log(JSON.stringify(qishuDialog.data));
+		if(qishuDialog.code == 0){
+			var text1 = template('dialog-qihao-list1', qishuDialog.data);
+			$('#dialog-qihao-list').html(text1);
+		}
+		
+		// pageParam = api.pageParam[1];
+		// years = pageParam['years'];
+		// lotteryId = pageParam['lotteryId'];
+		// postId = pageParam['postId'];
+		// console.log(JSON.stringify(pageParam));
+		$(document.body).on('touchend', function(e) {
+			var dialog = $("#dialog")[0];
+			if (!$.contains(dialog, e.target)) {
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			}
+		});
+	};
+	function selectQishu(qishu, clickedIndex){
+		api.sendEvent({
+			name: 'dialogQihao',
+			extra: {
+				qishu: qishu,
+				clickedIndex: clickedIndex
+			}
+		});
+		api.closeFrame();
+	}
+</script>

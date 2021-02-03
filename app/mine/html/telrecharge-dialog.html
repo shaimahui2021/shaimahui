@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>打赏弹窗</title>
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="dialog" class="aui-content dialog dialog-telrecharge bg-fff">
+			<ul class="aui-list aui-form-list aui-list-noborder ">
+				<li class="aui-list-item border-b-none">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label" style="width: 5rem;">
+							兑换说明:
+						</div>
+						<div class="aui-list-item-input">
+							<input type="text" placeholder="" value="充值等同价值话费" readonly="readonly">
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label" style="width: 8rem;">
+							输入手机号码:
+						</div>
+						<div class="aui-list-item-input">
+							<input class="border-b" type="number" placeholder="" id='phone'>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="aui-row dialog-btn-group">
+				<div class="aui-col-xs-6 aui-text-center border-r" tapmode onclick="api.closeFrame()">取消</div>
+				<div class="aui-col-xs-6 aui-text-center" tapmode onclick="duihuang()">确认</div>
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+		$(document.body).on('touchend', function(e) {
+			var dialog = $("#dialog")[0];
+			if (!$.contains(dialog, e.target)) {
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			}
+		});
+	};
+	var tab = new auiTab({
+		element: document.getElementById("tab"),
+	}, function(ret) {
+
+	});
+
+	function duihuang(){
+		var obj = $api.getStorage('duihuang');
+		api.execScript({
+				frameName: 'creditstore',
+				script: 'exchange('+ obj.id +','+ obj.growth_value +','+ $('#phone').val() +')'
+		});
+		api.closeFrame();
+	}
+</script>

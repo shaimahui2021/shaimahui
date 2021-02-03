@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="aui-content aui-padded-t-15">
+
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript">
+	var home = "";
+	var isViewOpened = false;
+	var X5broser = null;
+	apiready = function() {
+		api.parseTapmode();
+		home = api.pageParam[1];
+		X5broser = api.require('webBrowser'); 
+		showBrowserView();
+	};
+
+	function showBrowserView() {
+		isViewOpened = true;
+		X5broser.openView({
+			url: home,
+			rect: {
+				x: 0,
+				y: 70,
+				w: 'auto',
+				h: 'auto'
+			}
+		}, onBroserStateChange);
+	};
+
+	function onBroserStateChange(ret) {
+		if (0 == ret.state) { //BrowserView开始加载
+			var url = ret.url;
+			console.log('BrowserView loading start: ' + url);
+		} else if (1 == ret.state) { //BrowserView加载进度发生变化
+			var p = ret.progress;
+			console.log('BrowserView loading: ' + p);
+		} else if (2 == ret.state) { //BrowserView结束加载
+			var url = ret.url;
+			console.log('BrowserView loading finish: ' + url);
+		} else if (3 == ret.state) { //BrowserView标题发生变化
+			// $('title').innerHTML = ret.title;
+		}
+	};
+	function closeBrowserView(){ 
+		isViewOpened = false;
+		X5broser.closeView(); 
+	};
+	function GoToHisBack(){
+		alert(1)
+		if(!isViewOpened){
+			api.toast({msg:'还未openView！'});
+			return;
+		}
+		X5broser.historyBack(function(ret){
+			if(!ret.status){
+				//api.closeWin();
+				closeBrowserView();
+			}
+		});
+	}
+</script>

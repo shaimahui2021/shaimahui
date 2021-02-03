@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/swiper-3.4.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>首页</title>
+	</head>
+	<body class="bg-fff">
+		<!-- <div class="aui-flex-col aui-flex-center aui-flex-middle" style="width: 100%;height: 100%;background-color: #F5F5F5;">1</div> -->
+		<header class="aui-bar aui-bar-nav home-header" id="aui-header">
+			<div class="aui-tab" id="tab">
+				<div class="aui-tab-item aui-margin-r-15"><span>香港六合彩</span></div>
+				<div class="aui-tab-item aui-margin-r-15"><span>澳门六合彩</span></div>
+				<div class="aui-tab-item aui-margin-r-15 aui-active"><span>台湾六合彩</span></div>
+			</div>
+		</header>
+		<section class="aui-content bg-fff">
+			<!-- <div class="banner" id="indexAdvertising"> -->
+			<div class="banner">
+				<div class="occupied-top"></div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper" id="swiper-wrapper">
+						<!-- <div class="swiper-slide" style="height: 6.5rem;">
+							<img src="../../../image/l1.jpg" alt="" style="height: 6.5rem;">
+						</div> -->
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+				<div class="occupied-bottom"></div>
+			</div>
+			<div class="notice" style="overflow: hidden; position: relative;" width="100%">
+				<marquee id="notice-list" direction="left"></marquee>
+			</div>
+			<div class="lotteryhis-list aui-padded-10 aui-padded-b-0" id="indexWnData">
+				 <!-- <div class="lotteryhis-item" tapmode onclick="openWin('widget://app/home/html/lotteryhis_win')">
+					<div class="aui-info lotteryhis-latest">
+						<div class="aui-info-item">
+							<div>第<span class="lotteryhis-qihao">008</span>期最新开奖结果:</div>
+						</div>
+						<div class="aui-info-item">
+							<span class="lotteryhis-txt">开奖记录</span>
+						</div>
+					</div>
+					<div class="aui-flex-col lotteryhis-num "> 
+						<div>
+							<div class="ball ball-blue">47</div>
+							<div class="ball-txt">虎/水</div>
+						</div>
+						<div>
+							<div class="ball ball-green">43</div>
+							<div class="ball-txt">虎/金</div>
+						</div>
+						<div>
+							<div class="ball ball-green">43</div>
+							<div class="ball-txt">虎/水</div>
+						</div>
+						<div>
+							<div class="ball ball-red">30</div>
+							<div class="ball-txt">猴/金</div>
+						</div>
+						<div>
+							<div class="ball ball-blue">47</div>
+							<div class="ball-txt">虎/水</div>
+						</div>
+						<div>
+							<div class="ball ball-blue">47</div>
+							<div class="ball-txt">虎/水</div>
+						</div>  
+						<div>
+							<div class="ball ball-red">30</div>
+							<div class="ball-txt">猴/金</div>
+						</div>
+					</div>
+					<div class="lotteryhis-datetime">
+						第<span class="aui-margin-l-5 aui-margin-r-5">009</span>期:&nbsp;<span>07</span>月<span>21</span>日&nbsp;<span class="aui-margin-l-5 aui-margin-r-5">星期二</span><span>21</span>点<span>32</span>分
+					</div>
+				</div> -->
+			</div>
+			<div class="search-bar aui-padded-10 aui-padded-t-5" id="search-list">
+			</div>
+			<div>
+				<div class="search-type-list search-type-list aui-flex-col flex-nowrap aui-padded-t-10" id="indexGallery">
+					<!-- <div class="search-type-item active aui-flex-row aui-flex-center aui-flex-middle">
+						<img class="search-type-item-img" src="../../../image/search-type-blue.png" />
+						<span class="search-type-item-txt">2020彩图</span>
+					</div> -->
+				</div>
+				<div class="imgList aui-padded-t-5 aui-padded-b-15 bg-gray" id="indexGallery1">
+					<!--<div class="imgListItem">
+					    <div class="imgListItemImg" style="background: url(../../../image/img-1.jpg) no-repeat;background-size: cover;" ></div>
+						<h3 class="img-list-item-txt">澳门神机图</h3>
+					</div>
+					<div class="imgListItem">
+					    <div class="imgListItemImg" style="background: url(../../../image/img-1.jpg) no-repeat;background-size: cover;" ></div>
+						<h3 class="img-list-item-txt">澳门神机图</h3>
+					</div>-->
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../../../script/aui-skin.js"></script>
+<script type="text/javascript" src="../../../script/calendar.js"></script>
+<script type="text/javascript" src="../../../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../../../script/calendar.min.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="swiper-wrapper-list">
+	<% for(var i = 0; i<data.length; i++){ %>
+	<% if(data[i]['is_disable'] == 0) { %>
+	<div class="swiper-slide" style="height: 7.5rem;">
+		<% if(data[i]['url']) {%>
+		<img src="<%=img_url + data[i]['head_path']%>" alt="" style="height: 7.5rem;" tapmode onclick="openWin('widget://app/home/html/webbrowser_win','<%=data[i]['url']%>')">
+		<% }else { %>
+		<img src="<%=img_url + data[i]['head_path']%>" alt="" style="height: 7.5rem;">
+		<% } %>
+	</div> 
+	<% } %>
+	<% } %>
+</script>
+<script type="text/template" id="search-kpl">
+	<input class="search-input" type="text" placeholder="搜索你要的期号" readonly="readonly" tapmode onclick="openWin('widget://app/home/html/search_win',{lottery_id:<%=lottery_id%>})" />
+</script>
+<script type="text/template" id="wnData-list">
+	<div class="lotteryhis-list">
+		<div class="lotteryhis-item lotteryhis-green" tapmode onclick="openWin('widget://app/home/html/lotteryhis_win',{lottery_id:<%=getWnData['lottery_id']%>})">
+			<div class="aui-info lotteryhis-latest">
+				<div class="aui-info-item" style="font-size: 12px;">
+					<div>第<span class="lotteryhis-qihao"><%=getWnData['qihao']%></span>期最新开奖结果:</div>
+				</div>
+				<div class="aui-info-item">
+					<span class="lotteryhis-txt">开奖记录</span>
+				</div>
+			</div>
+			<div class="aui-flex-col lotteryhis-num ">
+				<%for(var i = 0;i < 7;i++){%> 
+					<% if (shengxiao[i]) {%>
+				    <div>
+				    	<div class="ball ball-<%=shengxiao[i]['color']%>"><%=shengxiao[i]['num']%></div>
+				    	<div class="ball-txt"><%=shengxiao[i]['shengxiao']%>/<%=shengxiao[i]['attributes']%></div>
+				    </div> 
+					<% } else {%>
+					<div>
+						<div class="ball ball-gray">?</div>
+					</div> 
+					<% } %>
+				<% } %>  
+			</div>
+			<% if(kjTime){ %>
+			<div class="lotteryhis-datetime">
+				<span class="aui-margin-l-5 aui-margin-r-5">开奖时间:&nbsp;<span><%=kjTime['m']%></span>月<span><%=kjTime['d']%></span>日&nbsp;<span class="aui-margin-l-5 aui-margin-r-5"><%=kjTime['week']%></span>
+				<span><%=kjTime['h']%></span>点<span><%=kjTime['i']%></span>分
+			</div>
+			<% } %>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="advertising-list">
+	<img src="<%= img_url + data['head_path']%>" />
+</script>
+<script type="text/template" id="gallery-list">
+	<% for(var i = 0; i<gallery.length; i++){ %>
+		<div id="active<%=gallery[i]['id']%>" class="search-type-item aui-flex-row aui-flex-center aui-flex-middle" tapmode onclick="toSearch(<%=gallery[i]['years']%>)">
+			<img class="search-type-item-img" src="../../../image/search-type-<%=color%>.png" />
+			<span class="search-type-item-txt"><%=gallery[i]['years']%></span>
+		</div>
+		<% } %>
+</script>
+<script type="text/template" id="gallery-list1">
+	<% for(var i = 0; i<data.length; i++){ %> 
+		<div class="imgListItem">
+			<div class="imgListItemImg" style="background: url('<%=data[i]['img_url'] + data[i]['head_path']%>') no-repeat;background-size: cover;" tapmode onclick="openWin('widget://app/home/html/photodetail_win',{'gallery_title_id':<%=data[i]['gallery_title_id']%>,post_id:<%=data[i]['id']%>,lottery_id:<%=lottery_id%>,years:<%=data[i]['years']%>,content:'<%=data[i]['content']%>'})"></div>
+			<h3 class="imgListItemTxt"><%=data[i]['content']%></h3>
+		</div>
+	<% } %>
+</script>
+<script type="text/javascript">
+	var lottery_id = 1;
+	var page = 1;
+	var galleryId;
+	var listData = Array();
+	var pages = 1;
+	var type;
+	apiready = function() {
+		api.parseTapmode();
+		var userInfo = $api.getStorage('userInfo');
+		if(!userInfo){
+			isMemberId();
+		}else{
+			indexAdvertising();
+			indexNotice(lottery_id);
+			indexGallery(lottery_id);
+			indexWnData();
+			searchLottery(lottery_id);
+		}
+		//设置主题
+		var skin = skinFunc('skin-red');
+		var tab = new auiTab({
+			element: document.getElementById("tab"),
+		}, function(ret) {
+			// alert(JSON.stringify(ret))
+			api.sendEvent({
+				name: 'removeSkinEvent'
+			});
+			if (ret.index == 1) {
+				skin = skinFunc('skin-red');
+				lottery_id = 1;
+				$("#indexGallery1").empty();
+			} else if (ret.index == 2) {
+				lottery_id = 2;
+				$("#indexGallery1").empty();
+				skin = skinFunc('skin-green');
+			} else if (ret.index == 3) {
+				$("#indexGallery1").empty();
+				lottery_id = 3;
+				skin = skinFunc('skin-blue');
+			}
+			page = 1;
+			indexGallery();
+			indexWnData();
+			searchLottery(lottery_id);
+			indexNotice(lottery_id);
+			indexAdvertising();
+			api.sendEvent({
+				name: 'setSkinEvent'
+			});
+		});
+		api.addEventListener({
+			name: 'setSkinEvent'
+		}, function(ret, err) {
+			if (ret) {
+				skin.setSkin();
+			}
+		});
+		api.addEventListener({
+			name:'refreshIndex1'
+		},function(){
+			indexAdvertising();
+			indexNotice(lottery_id);
+			indexGallery(lottery_id);
+			indexWnData();
+			searchLottery(lottery_id);
+		})
+		api.addEventListener({
+			name:'refreshIndex111'
+		},function(){
+			isMemberId()
+		})
+		api.addEventListener({
+			name: 'removeSkinEvent'
+		}, function(ret, err) {
+			if (ret) {
+				skin.removeSkin();
+			}
+		});
+		api.addEventListener({
+			name : 'scrolltobottom',
+			extra : {threshold : -50 }//设置距离底部多少距离时触发，默认值为0，数字类型
+		}, function(ret, err) {
+			if(type == 1){
+				page += 1;
+				indexGallery();
+			}else{
+				pages += 1;
+				postAui();
+			}
+		});
+
+
+	};
+	function isMemberId(){
+		$cjy.ajax({
+			url: configIndex.isMemberId,
+			method: 'post',
+		}, function(ret) {
+			if(ret.code == 0){
+				$api.setStorage('token', ret.data.token);
+				$api.setStorage('userInfo', ret.data.userInfo);
+				$api.setStorage('userId', ret.data.userInfo.id);
+				indexAdvertising();
+				indexNotice(lottery_id);
+				indexGallery(lottery_id);
+				indexWnData();
+				searchLottery(lottery_id);	 	    
+			}
+		});
+	}
+	function searchLottery(lottery_id) {
+		var data = {};
+		data.lottery_id = lottery_id;
+		var html = template('search-kpl', data);
+		$api.html($api.byId('search-list'), html);
+		api.parseTapmode();
+	}
+	//获取公告
+	function indexNotice() {
+		$cjy.ajax({
+			url: configIndex.indexNotice,
+			method: 'post',
+			data : {
+				'lottery_id': lottery_id,
+			}
+		}, function(ret) {
+			var content = ret.data.content;
+			$("#notice-list").text(content);
+		});
+	}
+
+	//获取图库
+	function indexGallery() {
+		type = 1;
+		$cjy.ajax({
+			url: configIndex.indexGallery,
+			method: 'post',
+			data: {
+				'lottery_id': lottery_id,
+				'page':page
+			}
+		}, function(ret) {
+			var data = ret.data;
+			data.color = '';
+			if (lottery_id == 1) {
+				data.color = 'red'
+			} else if (lottery_id == 2) {
+				data.color = 'green'
+			} else if (lottery_id == 3) {
+				data.color = 'blue'
+			}
+			var html = template('gallery-list', data);
+			$api.html($api.byId('indexGallery'), html);
+			if(ret.data.data.length > 0){
+				var list = {};
+				list.img_url = img_url;
+				list.lottery_id = lottery_id;
+				list.data = page != 1 ? listData[ret.data.gallery.id].concat(ret.data.data) : ret.data.data;
+				listData[ret.data.gallery.id] = list.data;
+				list.data.forEach(function(element, index, arr) {
+					// console.log(index + '.' + element) 
+					if(list.data[index].img_type == 0){
+						//内部图片要加头部
+						list.data[index].img_url = img_url;
+					}else{
+						//外连接图片不需要加头部
+						list.data[index].img_url = '';
+					}
+					
+					console.log(list.data[index].img_url)
+				});
+				console.log(JSON.stringify(list));
+				var text = template('gallery-list1', list);
+				$('#indexGallery1').html(text);
+				api.parseTapmode();
+			}else{
+				if(page == 1){
+				}else{
+					page-=1;
+				}
+				
+			}
+			
+			
+		});
+	}
+	function pagePost(id,types){
+		pages = 1;
+		postAui(id,types);
+	}
+	function postAui(id,types) {
+		if(types == 1){
+			listData[id] = Array();
+			$("#indexGallery1").html('');
+		}
+		if(id){
+			galleryId = id;
+		}
+		type = 2;
+		$cjy.ajax({
+			url: configIndex.indexGallery,
+			method: 'post',
+			data: {
+				'lottery_id': lottery_id,
+				'id': galleryId,
+				'page':pages
+			}
+		}, function(ret) {
+			if(ret.data.length > 0){
+				var list = {};
+				list.img_url = img_url;
+				list.data = pages != 1 ? listData[galleryId].concat(ret.data) : ret.data;
+				listData[galleryId] = list.data;
+				var text = template('gallery-list1', list);
+				$('#indexGallery1').html(text);
+				api.parseTapmode();
+			}else{
+				if(pages == 1){
+				}else{
+					pages-=1;
+				}
+				
+			}
+			// ret.img_url = img_url;
+			// $("#indexGallery1").empty();
+			// var text = template('gallery-list1', ret);
+			// $api.html($api.byId('indexGallery1'), text);
+			// api.parseTapmode();
+		});
+	}
+
+	//获取广告轮播图片
+	function indexAdvertising() {
+		$cjy.ajax({
+			url: configIndex.indexAdvertising,
+			method: 'post',
+		}, function(ret) {
+			ret.img_url = img_url;
+			var html = template('swiper-wrapper-list', ret);
+			$api.html($api.byId('swiper-wrapper'), html);
+			api.parseTapmode();
+			swiperStart();
+		});
+	}
+
+	//获取最新开奖数据
+	function indexWnData() {
+		$cjy.ajax({
+			url: configIndex.indexWnData,
+			method: 'post',
+			data: {
+				'lottery_id': lottery_id,
+			}
+		}, function(ret) {
+			var data = ret.data;
+			var number = ret.data.getWnData.numbers;
+			if(number){
+				var shengxiao = wnDataLoad(number);
+				data.shengxiao = shengxiao;
+			}else{
+				var shengxiao = number;
+				data.shengxiao = shengxiao;
+			}
+			var html = template('wnData-list', data);
+			$api.html($api.byId('indexWnData'), html);
+			api.parseTapmode();
+			setTimeout('indexWnData()',3000);
+		});
+	}
+
+	//实例化主题
+	function skinFunc(skinName) {
+		return new auiSkin({
+			name: skinName,
+			skinPath: '../../../css/' + skinName + '.css',
+			default: true
+		});
+	};
+
+	function shengxiao(num) {
+		var theChinesezodiac;
+		var lunar = calendar.solar2lunar();
+		var year = lunar.lYear;
+		//十二生肖：是由十一种源于自然界的动物即鼠、牛、虎、兔、蛇、马、羊、猴、鸡、狗、猪以及传说中的龙所组成，用于纪年，
+		//顺序排列为子鼠、丑牛、寅虎、卯兔、辰龙、巳蛇、午马、未羊、申猴、酉鸡、戌狗、亥猪。
+		num = Number(num) % 12;
+		var ssc = Math.abs(Number(year) - 2007 - num) % 12; //设定2008为初始年份,再减一，数组key从0开始
+		var ssyear = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
+		return ssyear[ssc];
+	};
+
+	function lhcbose(num, type) {
+		var color = '';
+		switch (num) {
+			case '01':
+			case '02':
+			case '07':
+			case '08':
+			case '12':
+			case '13':
+			case '18':
+			case '19':
+			case '23':
+			case '24':
+			case '29':
+			case '30':
+			case '34':
+			case '35':
+			case '40':
+			case '45':
+			case '46':
+				if (type == 1) {
+					color = 'lhc-hongbo';
+				} else if (type == 2) {
+					color = 'red';
+				} else if (type == 3) {
+					color = '红波';
+				}
+				break;
+			case '03':
+			case '04':
+			case '09':
+			case '10':
+			case '14':
+			case '15':
+			case '20':
+			case '25':
+			case '26':
+			case '31':
+			case '36':
+			case '37':
+			case '41':
+			case '42':
+			case '47':
+			case '48':
+				if (type == 1) {
+					color = 'lhc-lanbo';
+				} else if (type == 2) {
+					color = 'blue';
+				} else if (type == 3) {
+					color = '蓝波';
+				}
+				break;
+			case '05':
+			case '06':
+			case '11':
+			case '16':
+			case '17':
+			case '21':
+			case '22':
+			case '27':
+			case '28':
+			case '32':
+			case '33':
+			case '38':
+			case '39':
+			case '43':
+			case '44':
+			case '49':
+				if (type == 1) {
+					color = 'lhc-lvbo';
+				} else if (type == 2) {
+					color = 'green';
+				} else if (type == 3) {
+					color = '绿波';
+				}
+				break;
+			default:
+				if (type == 2) {
+					color = 'wubose';
+				}
+				break;
+		}
+		return color;
+	}
+
+	function wnDataLoad(number) {
+		var that = this;
+		var shengxiao = [];
+		var numbers = [];
+		var numbers = number.split(',');
+		for (var i = 0; i < numbers.length; i++) {
+			var wndata = {};
+			wndata.num = numbers[i];
+			wndata.shengxiao = that.shengxiao(numbers[i]);
+			wndata.attributes = that.wuxing(numbers[i]);
+			wndata.color = that.lhcbose(numbers[i], 2);
+			shengxiao[i] = wndata;
+		}
+		return shengxiao;
+	};
+
+	function swiperStart() {
+		var mySwiper = new Swiper('.swiper-container', { 
+			loop: true,
+			autoplay: 3000,
+			speed: 1000,
+			pagination: '.swiper-pagination',
+			prevButton: '.swiper-button-prev',
+			paginationClickable: true,
+			grabCursor: true,
+			parallax: true,
+			autoplayDisableOnInteraction: false,
+		});
+	};
+
+	function wuxing(num) {
+		var attributes = '';
+		switch (num) {
+			case '06':
+			case '07':
+			case '20':
+			case '21':
+			case '28':
+			case '29':
+			case '36':
+			case '37':
+				attributes = '金';
+				break;
+			case '02':
+			case '03':
+			case '10':
+			case '11':
+			case '18':
+			case '19':
+			case '32':
+			case '33':
+			case '40':
+			case '41':
+			case '48':
+			case '49':
+				attributes = '木';
+				break;
+			case '08':
+			case '09':
+			case '16':
+			case '17':
+			case '24':
+			case '25':
+			case '38':
+			case '39':
+			case '46':
+			case '47':
+				attributes = '水';
+				break;
+			case '04':
+			case '05':
+			case '12':
+			case '13':
+			case '26':
+			case '27':
+			case '34':
+			case '35':
+			case '42':
+			case '43':
+				attributes = '火';
+				break;
+			case '01':
+			case '14':
+			case '15':
+			case '22':
+			case '23':
+			case '30':
+			case '31':
+			case '44':
+			case '45':
+				attributes = '土';
+				break;
+			default:
+				break;
+		}
+		return attributes;
+	}
+
+	function toSearch(year)
+	{
+		//跳转页面
+		openWin('widget://app/home/html/search_win',{lottery_id:lottery_id,year:year});
+	}
+
+</script>

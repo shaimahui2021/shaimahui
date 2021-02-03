@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/derby.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-fff">
+		<div class="aui-content aui-padded-15">
+			<textarea class="aui-font-size-14 textarea" rows="6" placeholder="此时此刻,想和大家说点什么~" id="content"></textarea>
+			<div class="aui-row aui-padded-t-15 aui-padded-b-15" id="add-images">
+				<div id="img1" class="uploadImgList">
+					<!-- <div style="background: url(../../../image/l1.jpg) no-repeat;background-size: cover;"></div> -->
+					<!-- <div style="background: url(../../../image/l1.jpg) no-repeat;background-size: cover;"></div> -->
+					<div id="publishAdd" class="publish-add" tapmode onclick="getPictureP()" style="background: url(../img/publish-add.png) no-repeat;background-size: cover;"></div>
+				</div>
+				<div id="myVideoControls2" style="display: none;" onclick="openVideo();">
+					<img id="uploaderFiles" src="" / tapmode>
+					<div id="videoBtn"></div>
+					<i class="del-icon" tapmode onclick="delVideo()"></i>
+				</div>
+			</div>
+		</div>
+		<!-- 此处隐藏，但保留它在布局中的位置 -->
+		<header class="aui-bar aui-bar-nav" id="aui-header" style="visibility: hidden;">
+			<a class="aui-btn aui-pull-left" tapmode onclick="openDialog()">
+				<span class="aui-iconfont aui-icon-left"></span>
+			</a>
+			<a class="aui-btn aui-pull-right">
+				<span class="color-primary" tapmode onclick="friend()">发送</span>
+			</a>
+		</header>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript">
+	var lottery_id;
+	var video_path;
+	var images = new Array(),
+		UIMediaScanner;
+	var video_images;
+	var video_imageStrorage;
+	var image = $api.getStorage('images');
+	var contents = $api.getStorage('content');
+	var videoStorage = $api.getStorage('video');
+	var videoScreenshots, videoPlayer, UILoading, UILoadingId;
+	if (image != '' && image != undefined) {
+		storageImage(image);
+		if (contents) {
+			$('#content').val(contents)
+		}
+	} else if (videoStorage != '' && videoStorage != undefined) {
+		$('#publishAdd').remove();
+		$('#img1').css('display', 'none');
+		$('#myVideoControls2').css('display', 'block');
+		$('#uploaderFiles').attr('src', videoStorage);
+		video_path = $api.getStorage('video_path')
+		if (contents) {
+			$('#content').val(contents);
+		}
+	}
+	var dialog = new auiDialog();
+	apiready = function() {
+		lottery_id = $api.getStorage('lottery_id');
+		UIMediaScanner = api.require('UIMediaScanner');
+		api.parseTapmode();
+		UIPhotoViewer = api.require('UIPhotoViewer');
+		videoPlayer = api.require('videoPlayer');
+		videoScreenshots = api.require('videoScreenshots');
+		UILoading = api.require('UILoading');
+		// openDialog();
+
+		// 监听 返回键
+		api.addEventListener({
+			name: 'keyback'
+		}, function(ret, err) {
+			console.log($api.jsonToStr(ret));
+			console.log($api.jsonToStr(err));
+
+			console.log("saddasdsadasdasdsad");
+		});
+
+	};
+
+	function openDialog() {
+		dialog.alert({
+			title: "提示",
+			msg: '将此次编辑保留？',
+			buttons: ['不保留', '保留']
+		}, function(ret) {
+			if (ret.buttonIndex == 1) {
+				$api.setStorage('images', '');
+				$api.setStorage('video', '');
+				$api.setStorage('video_path', '');
+				$api.setStorage('content', '');
+				api.closeWin();
+			} else {
+				var content = $('#content').val()
+				var display = $('#myVideoControls2').css('display');
+				if (display == 'none') {
+					$api.setStorage('content', content);
+					$api.setStorage('images', images);
+				} else {
+					$api.setStorage('content', content);
+					$api.setStorage('video', video_imageStrorage);
+					$api.setStorage('video_path', video_path);
+				}
+				api.closeWin();
+			}
+		});
+	};
+
+	function storageImage() {
+		for (var j = 0; j < image.length; j++) {
+			addPhotograph(image[j], 0, j);
+		}
+	};
+
+	function getPictureP() {
+		api.actionSheet({
+			cancelTitle: '取消',
+			buttons: ['从相册选择图片', '从相册选择视频', '拍照', '录像 ']
+		}, function(ret, err) {
+			var index = ret.buttonIndex;
+			switch (index) {
+				case 1:
+					publishCircleOfFriendsPhotoalbum();
+					break;
+				case 2:
+					publishCircleOfFriendsPhotoalbum2();
+					break;
+				case 3:
+					publishCircleOfFriendsJpg();
+					break;
+				case 4:
+					publishCircleOfFriendsMp4();
+					break;
+			}
+		});
+	}
+	// 获取图片路径 
+	function publishCircleOfFriendsPhotoalbum() {
+		var max = 9 - images.length;
+		UIMediaScanner.open({
+			type: 'picture',
+			column: 4,
+			classify: true,
+			max: max,
+			sort: {
+				key: 'time',
+				order: 'desc'
+			},
+			texts: {
+				stateText: '已选择*项',
+				cancelText: '取消',
+				selectedMaxText: '最多只能*个',
+				finishText: '完成'
+			},
+			styles: {
+				bg: '#fff',
+				mark: {
+					icon: '',
+					position: 'bottom_left',
+					size: 20
+				},
+				nav: {
+					bg: '#eee',
+					stateColor: '#000',
+					stateSize: 18,
+					cancelBg: 'rgba(0,0,0,0)',
+					cancelColor: '#000',
+					cancelSize: 18,
+					finishBg: 'rgba(0,0,0,0)',
+					finishColor: '#000',
+					finishSize: 18
+				}
+			},
+			scrollToBottom: {
+				intervalTime: -1,
+				anim: true
+			},
+			exchange: true,
+			rotation: true
+		}, function(ret) {
+			if (ret) {
+				if (ret.eventType == 'confirm') {
+					if (ret.list[0].suffix == 'mp4') {
+						console.log("选择视频");
+
+					} else {
+						var systemType = api.systemType;
+						if (systemType == 'ios') {
+							for (var j = 0; j < ret.list.length; j++) {
+								convertPath(ret.list[j].path, function(img_path) {
+									addPhotograph(img_path, 0, j);
+								});
+							}
+						} else { //安卓平台
+							for (var j = 0; j < ret.list.length; j++) {
+								addPhotograph(ret.list[j].path, 0, j);
+							}
+						}
+					}
+				} else if (ret.eventType == 'cancel') {
+					UIPhotoViewer.close();
+				}
+			}
+		});
+	};
+
+	// 获取视频的
+	function publishCircleOfFriendsPhotoalbum2() {
+		UIMediaScanner.open({
+			type: 'video',
+			column: 4,
+			classify: true,
+			max: 1,
+			sort: {
+				key: 'time',
+				order: 'desc'
+			},
+			texts: {
+				stateText: '已选择*项',
+				cancelText: '取消',
+				selectedMaxText: '最多只能*个',
+				finishText: '完成'
+			},
+			styles: {
+				bg: '#fff',
+				mark: {
+					icon: '',
+					position: 'bottom_left',
+					size: 20
+				},
+				nav: {
+					bg: '#eee',
+					stateColor: '#000',
+					stateSize: 18,
+					cancelBg: 'rgba(0,0,0,0)',
+					cancelColor: '#000',
+					cancelSize: 18,
+					finishBg: 'rgba(0,0,0,0)',
+					finishColor: '#000',
+					finishSize: 18
+				}
+			},
+			scrollToBottom: {
+				intervalTime: -1,
+				anim: true
+			},
+			exchange: true,
+			rotation: true
+		}, function(ret) {
+			if (ret) {
+				if (ret.eventType == 'confirm') {
+					if (ret.list[0]['size'] > '52428800') {
+						toast1('视频文件过大');
+						return false;
+					}
+					console.log(JSON.stringify(ret));
+					video_path = ret.list[0]['path'];
+					sendVideo(ret.list[0]['path']);
+				} else if (ret.eventType == 'cancel') {
+					UIPhotoViewer.close();
+				}
+			}
+		});
+	};
+
+
+	var granted = '';
+	//拍照多媒体
+	function publishCircleOfFriendsJpg() {
+		var resultList = api.hasPermission({
+			list: ['camera']
+		});
+		if (resultList[0].granted === false) {
+			api.requestPermission({
+				list: ['camera'],
+				code: 1
+			}, function(ret, err) {
+				granted = ret.list[0]['granted'];
+				if (granted === false) {
+					return;
+				}
+			});
+		}
+
+		api.getPicture({
+			sourceType: 'camera',
+			encodingType: 'jpg',
+			mediaValue: 'pic',
+			allowEdit: false,
+			destinationType: 'url',
+			quality: 90,
+			targetWidth: 750,
+			targetHeight: 750,
+			saveToPhotoAlbum: true
+		}, function(ret, err) {
+			console.log(JSON.stringify(ret));
+			console.log(JSON.stringify(err));
+			if (ret.data != "") {
+				addPhotograph(ret.data, 0, 1);
+			}
+
+
+		});
+	}
+
+	function publishCircleOfFriendsMp4() {
+		var resultList = api.hasPermission({
+			list: ['camera']
+		});
+		if (resultList[0].granted === false) {
+			api.requestPermission({
+				list: ['camera'],
+				code: 1
+			}, function(ret, err) {
+				granted = ret.list[0]['granted'];
+				if (granted === false) {
+					return;
+				}
+			});
+		}
+		api.getPicture({
+			sourceType: 'camera',
+			encodingType: 'jpg',
+			mediaValue: 'video',
+			allowEdit: false,
+			destinationType: 'url',
+			videoQuality: 'high',
+			quality: 90,
+			targetWidth: 750,
+			targetHeight: 750,
+			saveToPhotoAlbum: true
+		}, function(ret, err) {
+			if (ret == undefined) {
+				return false;
+			}
+			if (ret.duration > 20) {
+				toast1('视频文件过大');
+				return false;
+			}
+			video_path = ret.data;
+			sendVideo(ret.data);
+		});
+	}
+
+	function sendVideo(video) {
+		var image_name = $api.getStorage('userInfo').member_id + '' + Math.round(Math.random() * 999);
+		//视频截图
+		videoScreenshots.screenshots({
+			videoUrl: video,
+			time: 1,
+			name: image_name
+		}, function(ret) {
+			if (ret.status) {
+				$cjy.ajax({
+					url: configIndex.upload,
+					method: 'post',
+					showProgress: "发送中……",
+					files: {
+						'file[]': ret.path,
+					}
+				}, function(ret1, err) {
+					video_images = ret1.data.path;
+					video_imageStrorage = ret.path;
+					addPhotograph(ret.path, 1, 1)
+				})
+			} else {
+				console.log('视频截图失败');
+			}
+		});
+	}
+
+	function friend() {
+		var content = $('#content').html();
+		console.log("friend->：" + JSON.stringify(images));
+		$cjy.ajax({
+			url: configIndex.upload,
+			showProgress: "发送中……",
+			method: 'post',
+			files: {
+				'file[]': images,
+				'video': video_path
+			}
+		}, function(ret, err) {
+			console.log("err：" + JSON.stringify(ret));
+			console.log("err：" + JSON.stringify(err));
+			console.log("本地图片地址" + JSON.stringify(images));
+			if (ret.code == 0) {
+				if (ret.data.type == 1) {
+					$cjy.ajax({
+						url: configIndex.uploadPost,
+						showProgress: "发送中……",
+						method: 'post',
+						data: {
+							'head_path': video_images,
+							'content': $('#content').val(),
+							'lottery_id': lottery_id,
+							'video': ret.data.path
+						}
+					}, function(ret) {
+						console.log("uploadPost1", JSON.stringify(ret));
+						if (ret) {
+							toast1(ret.msg);
+							api.closeWin();
+						} else {
+							toast1(err);
+						}
+					}, function(err) {
+						console.log(JSON.stringify(err));
+					});
+				} else {
+					if (ret.data.path == '未选择文件') {
+						var imgPaths
+					} else {
+						var imgPaths = ret.data.path;
+					}
+					if (ret.data.path == '上传失败') {
+						toast1('上传失败!');
+						return false;
+					}
+					console.log("图片地址" + JSON.stringify(imgPaths));
+					$cjy.ajax({
+						url: configIndex.uploadPost,
+						showProgress: "发送中……",
+						method: 'post',
+						data: {
+							'head_path': imgPaths,
+							'content': $('#content').val(),
+							'lottery_id': lottery_id,
+						}
+					}, function(ret) {
+						console.log("uploadPost2", JSON.stringify(ret));
+						if (ret) {
+							toast1(ret.msg);
+							$api.setStorage('images', '');
+							$api.setStorage('video', '');
+							$api.setStorage('video_path', '');
+							$api.setStorage('content', '');
+							api.closeWin();
+						} else {
+							toast1(err);
+						}
+					}, function(err) {
+						toast1(err.msg);
+						console.log(JSON.stringify(err));
+					});
+				}
+			} else {}
+		})
+	};
+	//组装图片
+	function addPhotograph(photograph, type, index) {
+		console.log("index===>", index);
+		if (images.length >= 10) {
+			return;
+		}
+		if (type == 1) {
+			$('#publishAdd').remove();
+			$('#myVideoControls2').css('display', 'block');
+			$('#img1').css('display', 'none');
+			$('#uploaderFiles').attr('src', photograph);
+		} else {
+			//将照片存进数组
+			images[images.length] = photograph;
+			//照片大于等于9张 删除添加框
+			//			var num  = "images" + images.length;
+			var num = photograph.replace(
+				/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
+			$('#publishAdd').remove();
+			$('#img1').css('display', 'block');
+			$('#img1').append('<div style="background: url(' + photograph + ') no-repeat; background-size: cover;" data-src=' +
+				photograph + '  id=' + num + ' tapmode onclick="openP(this,' + index + ')"></div>');
+			$('#add-images').append(
+				'<div id="publishAdd" class="publish-add" tapmode onclick="getPictureP()" style="background: url(../img/publish-add.png) no-repeat;background-size: cover;"></div>'
+			);
+			if (images.length >= 9) {
+				$('#publishAdd').remove();
+
+			}
+		}
+	};
+	//视频未播放时提示加载中
+	function openUILoading() {
+		UILoading.flower({
+			center: {
+				x: api.winWidth / 2.0,
+				y: api.winHeight / 2.0
+			},
+			size: 30,
+			fixed: true
+		}, function(ret) {
+			UILoadingId = ret.id;
+		});
+	};
+
+	function closeUILoading() {
+		// alert(UILoadingId)
+		UILoading.closeFlower({
+			id: UILoadingId,
+			isGradual: false
+		});
+	}
+
+	function openVideo() {
+		video_image = $('#uploaderFiles').attr('src').replace('/', '');
+		//打开一个frame用于专门播放短视频模块依附
+		var currentTime = Math.round(new Date() / 1000);
+		var imgIP = '';
+		api.download({
+			url: video_image,
+			savePath: 'fs://' + currentTime + 'img.jpg',
+			report: true,
+			cache: true,
+			allowResume: true
+		}, function(ret, err) {
+			if (ret.state == 2) {
+				imgIP = ret['savePath'];
+				api.saveMediaToAlbum({
+					path: 'fs://' + currentTime + 'img.jpg'
+				}, function(ret, err) {
+
+				});
+				//打开一个frame用于专门播放短视频模块依附
+				api.openFrame({
+					name: 'video_fra',
+					url: 'video_fra.html',
+					rect: {
+						x: 0,
+						y: 0,
+						w: 'auto',
+						h: 'auto'
+					},
+				});
+				openUILoading();
+				videoPlayer.open({
+					rect: {
+						x: 0,
+						y: 0,
+						w: api.winWidth,
+						h: api.winHeight
+					},
+					bg: '#000',
+					// coverImg: 'fs://' + imgIP + '',
+					path: video_path,
+					fixedOn: 'video_fra',
+					loop: true,
+				}, function(ret, err) {
+					if (ret.eventType == 'playing') {
+						closeUILoading();
+					}
+					if (ret.status) {
+						//监听单击播放器
+						videoPlayer.addEventListener({
+							name: 'click'
+						}, function(ret, err) {
+							if (ret) {
+								videoPlayer.close();
+								api.closeFrame({
+									name: 'video_fra'
+								});
+							} else {
+								toast('退出失败');
+								api.closeFrame({
+									name: 'video_fra'
+								});
+							}
+						});
+					} else {
+						toast('播放失败');
+						api.closeFrame({
+							name: 'video_fra'
+						});
+					}
+				});
+			} else {
+
+			}
+		});
+	};
+	// 关闭视频
+	function closeVideo() {
+		videoPlayer.close();
+		api.closeFrame({
+			name: 'video_fra'
+		});
+	};
+	//ios平台图片路径解析回调
+	function convertPath(path, imageDynamicPath) {
+		UIMediaScanner.transPath({
+			path: path,
+			scale: {
+				untreated: true,
+			}
+		}, function(ret, err) {
+			if (ret.status) {
+				return imageDynamicPath(ret.path);
+			}
+		});
+	}
+	//预览图片
+	function openP(obj, activeIndex) {
+
+		var photoItem = [];
+		for (var i = 0; i < images.length; i++) {
+			photoItem[i] = images[i];
+		}
+		UIPhotoViewer.open({
+			images: photoItem,
+			zoomEnabled: true,
+			gestureClose: true,
+			bgColor: '#000',
+			// activeIndex: idx - 1
+			activeIndex: activeIndex
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'change') {
+					api.sendEvent({
+						name: 'previewPage',
+						extra: {
+							key1: ret.index + 1,
+							key2: images.length
+						}
+					});
+				} else if (ret.eventType == 'click') {
+					UIPhotoViewer.close();
+					api.closeFrame({
+						name: 'photoView_fra'
+					});
+				} else if (ret.eventType == 'gestureColse') {
+					api.sendEvent({
+						name: 'gestureColse'
+					});
+				}
+			}
+		});
+		setTimeout(function() {
+			var tabHeight = $api.offset($api.dom('#aui-header')).h; //tab切换栏高度
+			console.log(tabHeight);
+			api.openFrame({
+				name: 'photoView_fra',
+				url: './photoView_fra.html',
+				rect: {
+					x: 0,
+					y: 0,
+					w: 'auto',
+					h: tabHeight
+				},
+				pageParam: {
+					name: 'test'
+				},
+				bounces: false,
+				bgColor: 'rgba(0,0,0,0)',
+				vScrollBarEnabled: true,
+				hScrollBarEnabled: true
+			});
+		}, 800);
+	};
+	//关闭预览
+	function closeView() {
+		UIPhotoViewer.close();
+	};
+	//删除图片
+	function getIndexU() {
+		UIPhotoViewer.getIndex(function(ret, err) {
+			if (ret) {
+				for (var i = 0; i < images.length; i++) {
+					if (i == ret.index) {
+						path = images[i];
+						images.splice(images.indexOf(path), 1);
+					}
+				}
+				if (images.length < 1) {
+					UIPhotoViewer.close();
+					$('#img1').css('display', 'none')
+				}
+				var num = path.replace(
+					/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
+
+				$('#' + num).remove();
+				if (images.length < 9 && !$('#publishAdd').length) {
+					//插入添加框
+					$('#add-images').append(
+						'<div id="publishAdd" class="publish-add" tapmode onclick="getPictureP()" style="background: url(../img/publish-add.png) no-repeat;background-size: cover;"></div>'
+					);
+				}
+				UIPhotoViewer.deleteImage({
+					index: ret.index
+				})
+			}
+		});
+		closeView();
+	};
+
+	function delVideo() {
+		$('#add-images').append(
+			'<div id="publishAdd" class="publish-add" tapmode onclick="getPictureP()" style="background: url(../img/publish-add.png) no-repeat;background-size: cover;"></div>'
+		);
+		$('#myVideoControls2').css('display', 'none');
+		video_image = '';
+		video_path = '';
+	}
+</script>

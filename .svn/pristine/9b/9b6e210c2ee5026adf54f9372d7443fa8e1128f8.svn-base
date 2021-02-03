@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+	</head>
+	<body>
+		<header class="aui-bar aui-bar-nav" id="aui-header" style="overflow-y: hidden !important;">
+			<a class="aui-btn aui-pull-left" tapmode onclick="fnBack()">
+				<span class="aui-iconfont aui-icon-left"></span>
+			</a>
+			<div id="paget" class="aui-title"></div>
+			<a class="aui-btn aui-pull-right" tapmode onclick="fnDel()">
+				<span class="color-black">删除</span>
+			</a>
+		</header>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();  
+		var paget = null;
+		paget = $api.byId('paget'); 
+		api.addEventListener({
+			name: 'previewPage'
+		}, function(ret, err) { 
+			if (ret) {
+				var page = ret.value.key1;
+				var size = ret.value.key2;
+				// alert(page+ ' , '+ size)
+				$api.html(paget, page+' / '+size);
+			} else {
+				alert(JSON.stringify(err));
+			}
+		});
+		api.addEventListener({
+			name: 'gestureColse'
+		}, function(ret, err) { 
+			if (ret) {
+				api.closeFrame();
+			} else {
+				alert(JSON.stringify(err));
+			}
+		});
+	};
+
+	function fnBack() {
+		api.execScript({
+			frameName: 'publish',
+			script: 'closeView()'
+		});
+		api.closeFrame();
+	};
+
+	function fnDel() {
+		api.execScript({
+			frameName: 'publish',
+			script: 'getIndexU()'
+		});
+		api.closeFrame();
+	};
+</script>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/swiper-3.4.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<link type="text/css" rel="stylesheet" href="../../../script/amplification/Amplification.css">
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<style>
+			html, body {
+			  position: relative;
+			  height: 100%;
+			}
+			.swiper-container {
+			  width: 100%;
+			  height: 100%;
+			}
+			.swiper-slide {
+			  text-align: center;
+			  font-size: 18px;
+			  background: #fff;
+
+			  /* Center slide text vertically */
+			  display: -webkit-box;
+			  display: -ms-flexbox;
+			  display: -webkit-flex;
+			  display: flex;
+			  -webkit-box-pack: center;
+			  -ms-flex-pack: center;
+			  -webkit-justify-content: center;
+			  justify-content: center;
+			  -webkit-box-align: center;
+			  -ms-flex-align: flex-start;
+			  -webkit-align-items: flex-start;
+			  align-items: flex-start;
+			}
+			.swiper-pagination{
+				display: none;
+			}
+			.bg-gray {
+			    background-color: #F2F2F2 !important;
+			}
+		</style>
+		<style>
+			.ms-bd-img {
+					    min-height: 6rem;
+			}
+			.ms-bd-img .image{
+				width: 100%;
+				height: 100%;
+			}
+			.ms-bd-img .image img{
+				object-fit: fill;
+			}
+			.swiper-slide .aui-card-list-footer{
+				position: fixed;
+				left: 10%;
+				bottom: 0;
+				width: 80%;
+			}
+		</style>
+	</head>
+	<body class="bg-fff">
+		<!-- Swiper -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper" id="photodetail-tpl">
+				<!-- <div class="swiper-slide bg-gray" >
+					<div class="aui-card-list aui-padded-t-5 aui-margin-b-0 bg-gray w-100">
+						<div class="aui-card-list-header aui-card-list-user">
+							<div>第50期</div>
+							<div class="aui-card-list-user-name">
+								<div>跑马图</div> 
+								<small>10-15&nbsp;14:20</small>
+							</div>
+						</div>
+						<div class="aui-card-list-content-padded aui-padded-t-0">
+						    <div class="aui-col-xs-12">
+							   <div class="ms-bd-img">
+								  <div class="image">
+									<img src="../../../image/l1.jpg">
+								  </div>
+							   </div>
+							</div>
+						</div>
+					    <div class="aui-card-list-footer">
+					        <div class="operate-list2">
+					        	<div class="operate">
+					        		<i id="operatePraiseIcon" class="operate-icon operate-praise-icon" tapmode></i> 
+					        		200
+					        	</div>
+					        	<div class="operate operate-gift" tapmode>
+					        		<i id="operateGiftIcon" class="operate-icon operate-gift-icon" tapmode></i>
+					        		200
+					        	</div>
+					        	<div class="operate operate-msg" tapmode onclick="openDialog('widget://app/dialog/dialog-msg')">
+					        		<i class="operate-icon operate-msg-icon" tapmode></i>
+					        		200
+					        	</div>
+					        	<div class="operate operate-forward" tapmode onclick="openWin('widget://app/derby/html/forward_win')">
+					        		<i class="operate-icon operate-forward-icon" tapmode></i>
+					        		200
+					        	</div>
+					        </div>
+					    </div>
+					</div> 
+				</div> -->
+				<!-- <div class="swiper-slide bg-gray">Slide 10</div> -->
+			</div>
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
+		</div>
+		<div class="big_img">
+		  <div class="swiper-container2">
+		    <div class="swiper-wrapper"> </div>
+		  </div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../script/calendar.js"></script>
+<script type="text/javascript" src="../../../script/calendar.min.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/template" id="photodetail-list">
+	<% for(var i=0; i<data.length; i++) {%>
+		<div class="swiper-slide bg-gray">
+			<div class="aui-card-list aui-padded-t-5 aui-margin-b-0 bg-gray  w-100">
+				<div class="aui-card-list-header aui-card-list-user">
+				    <div>第<%=data[i]['periods']%>期</div>
+					<div class="aui-card-list-user-name">
+						<div><%=data[i]['title']%></div>
+						<small><%=data[i]['create_time']%></small>
+					</div>
+				</div>
+				<div class="aui-card-list-content-padded aui-padded-t-0">
+					<div class="aui-row aui-row-padded"> 
+					   <div class="aui-col-xs-12">
+					       <div class="ms-bd-img"  >
+						      <div class="image">
+							     <img  src="<%=img_url + data[i]['head_path']%>" tapmode onclick="bigImage(this)"/>
+						      </div>
+					       </div> 
+					    </div>
+						<div class="aui-col-xs-12">
+							<%=data[i]['content']%>
+						</div>
+					</div>
+				</div>
+				<div class="aui-card-list-footer">
+				    <% if(is_free == 1) {%>
+				    <div class="operate-list2">
+				    	<div class="operate">
+				    		<% if(data[i]['isLike'] ==0) {%>
+				    		<i id="operatePraiseIcon<%=data[i]['id']%>" class="operate-icon operate-praise-icon" tapmode onclick="openDialog('widget://app/dialog/dialog')"></i>
+				    		<% }else{ %>
+				    		<i id="operatePraiseIcon<%=data[i]['id']%>" class="operate-icon operate-praise-icon active" tapmode onclick="openDialog('widget://app/dialog/dialog')"></i>
+				    		<% } %>
+				    		<p id="postLike<%=data[i]['id']%>"><%=data[i]['like']%></p>
+				    	</div>
+				    	<div class="operate operate-gift" tapmode onclick="openDialog('widget://app/dialog/dialog')">
+				    		<i id="operateGiftIcon<%=data[i]['id']%>" class="operate-icon operate-gift-icon" tapmode></i>
+				    		<p id="growthValue<%=data[i]['id']%>"><%=data[i]['money']%></p>
+				    	</div>
+				    	<div class="operate operate-msg" tapmode onclick="openDialog('widget://app/dialog/dialog')">
+				    		<i class="operate-icon operate-msg-icon" tapmode></i>
+				    		<p id="galleryComment<%=data[i]['id']%>"><%=data[i]['comment_sum']%></p>
+				    	</div>
+				    	<div class="operate operate-forward" tapmode onclick="openDialog('widget://app/dialog/dialog')">
+				    		<i class="operate-icon operate-forward-icon" tapmode></i>
+				    		<p id="forwarding<%=data[i]['id']%>"><%=data[i]['forwarding']%></p>
+				    	</div>
+				    </div>
+				    <% }else {%>
+				    <div class="operate-list2">
+				    	<div class="operate">
+				    		<% if(data[i]['isLike'] ==0) {%>
+				    		<i id="operatePraiseIcon<%=data[i]['id']%>" class="operate-icon operate-praise-icon" tapmode onclick="postLike(<%=data[i]['id']%>)"></i>
+				    		<% }else{ %>
+				    		<i id="operatePraiseIcon<%=data[i]['id']%>" class="operate-icon operate-praise-icon active" tapmode onclick="postLike(<%=data[i]['id']%>)"></i>
+				    		<% } %>
+				    		<p id="postLike<%=data[i]['id']%>"><%=data[i]['like']%></p>
+				    	</div>
+				    	<div class="operate operate-gift" tapmode onclick="moneyWindow(<%=data[i]['id']%>)">
+				    		<i id="operateGiftIcon<%=data[i]['id']%>" class="operate-icon operate-gift-icon" tapmode></i>
+				    		<p id="growthValue<%=data[i]['id']%>"><%=data[i]['money']%></p>
+				    	</div>
+				    	<div class="operate operate-msg" tapmode onclick="openDialog('widget://app/dialog/dialog-msg',{post_id:<%=data[i]['id']%>})">
+				    		<i class="operate-icon operate-msg-icon" tapmode></i>
+				    		<p id="galleryComment<%=data[i]['id']%>"><%=data[i]['comment_sum']%></p>
+				    	</div>
+				    	<div class="operate operate-forward" tapmode onclick="openWin('widget://app/derby/html/forward_win',{content:'<%=data[i]['title']%>',post_id:<%=data[i]['id']%>,gt_id:<%=data[i]['gt_id']%>,lottery_id:<%=data[i]['lottery_id']%>,type:1})">
+				    		<i class="operate-icon operate-forward-icon" tapmode></i>
+				    		<p id="forwarding<%=data[i]['id']%>"><%=data[i]['forwarding']%></p>
+				    	</div>
+				    </div>
+				    <% } %>
+				</div>
+			</div> 
+		</div> 
+	<% } %>
+</script>
+<script type="text/javascript">
+
+  	
+  	var is_free;
+	var id;
+	var page = 1;
+	var postId;
+	apiready = function() {
+		api.parseTapmode();
+		var userInfo = $api.getStorage('userInfo');
+		is_free = userInfo.is_free;
+		api.setFrameAttr({
+			name: 'photodetail',
+			bounces: false
+		});
+		// chatBoxOpen();
+		pageParam = api.pageParam[1];
+		pageParam.post_id ? postId = pageParam.post_id : '';
+		id = pageParam.id;
+		galleryDetails(id);
+		api.addEventListener({
+			name: 'scrolltobottom',
+			extra: {
+				threshold: 10
+			}
+		}, function(ret, err) {
+			//页码+1，继续请求数据
+			page += 1;
+		});
+	};
+	
+	function bigImage(e){
+		var url = $(e)[0].src;
+		var UIPhotoViewer = api.require('UIPhotoViewer');
+		UIPhotoViewer.open({
+		    images: [
+		       url
+		    ],
+		    placeholderImg: 'widget://res/img/apicloud.png',
+		    bgColor: '#000'
+		}, function(ret, err) {
+			console.log(JSON.stringify(ret));
+//			if(ret.eventType=="show"){
+//				UIPhotoViewer.show();
+//			}
+			if(ret.eventType=="click"){
+				UIPhotoViewer.close();
+			}
+//		    if (ret) {
+//		        alert(JSON.stringify(ret));
+//		    } else {
+//		        alert(JSON.stringify(err));
+//		    }
+		});
+	}
+	
+	//获取图库详情
+	function galleryDetails() {
+		console.log("id=========>"+id);
+		$cjy.ajax({
+			url: configIndex.galleryDetails,
+			method: 'post',
+			data: {
+				id: id,
+				page: page
+			}
+		}, function(ret) {
+			if (ret.code == 0) {
+				ret.img_url = img_url;
+				ret.is_free = is_free;
+				var text = template('photodetail-list', ret);
+				$api.html($api.byId('photodetail-tpl'), text);
+				api.parseTapmode();
+				swipertpl(ret.data);
+			}
+		},function(err){
+		console.log(JSON.stringify(err));
+		});
+	};
+
+	function postLike(id) {
+		var like = $("#postLike" + id).text();
+		var className = $('#operatePraiseIcon' + id).attr('class');
+		if (className == 'operate-icon operate-praise-icon') {
+			like = Number(like) + 1;
+			$('#postLike' + id).text(like);
+			$('#operatePraiseIcon' + id).attr('class', 'operate-icon operate-praise-icon active')
+		} else {
+			like = Number(like) - 1;
+			$('#postLike' + id).text(like);
+			$('#operatePraiseIcon' + id).attr('class', 'operate-icon operate-praise-icon')
+		}
+		console.log("帖子ID===>"+id);
+		$cjy.ajax({
+			url: configIndex.like,
+			method: 'post',
+			data: {
+				post_id: id,
+				type: 3,
+				a_member_id:0
+			}
+		}, function(ret) {
+			console.log(JSON.stringify(ret));
+		},function(err){
+			console.log(JSON.stringify(err));
+			toast1('操作失败请重试~!');
+		});
+	};
+
+	function galleryComment() {
+		var galleryComment = $api.getStorage('galleryComment');
+		var num = $('#galleryComment' + galleryComment).text();
+		num = Number(num) + 1;
+		$('#galleryComment' + galleryComment).text(num);
+	}
+
+	function moneyWindow(post_id) {
+		$api.addEvt($api.byId('operateGiftIcon' + post_id), 'click', function() {
+			$api.toggleCls($api.byId('operateGiftIcon'), 'active');
+			openDialog('widget://app/dialog/dialog-reward', {
+				post_id: post_id
+			});
+		});
+	}
+
+	function rewardMoney() {
+		var list = $api.getStorage('reward_growth_value');
+		var money = $('#growthValue' + list.post_id).text();
+		money = Number(money) + Number(list.growth_value);
+		$('#growthValue' + list.post_id).text(money);
+	}
+
+	function forwarding() {
+		var forwarding = $api.getStorage('forwarding');
+		var num = $('#forwarding' + forwarding.post_id).text();
+		num = Number(num) + 1;
+		$('#forwarding' + forwarding.post_id).text(num);
+		toast1('转发成功');
+	}
+
+	function swipertpl(data) {
+		var swiper = new Swiper('.swiper-container', {
+			direction: 'vertical',
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+		});
+
+		if (postId) {
+			for (var i = 0; i < data.length; i++) {
+				if (data[i]['id'] == postId) {
+					swiper.slideTo(i);
+				}
+			}
+		}
+
+	};
+
+	function bottom() {
+		api.addEventListener({
+			name: 'scrlootobottom',
+			extra: {
+				threshold: 10
+			}
+		}, function(ret) {
+		});
+	}
+
+	// api.addEventListener({
+	//     name: 'scrolltobottom',
+	//     extra: {
+	//         threshold: 10
+	//     }
+	// }, function(ret, err) {
+	//     //页码+1，继续请求数据
+	//     page += 1;
+	//     fnInitData();
+	// });
+</script>

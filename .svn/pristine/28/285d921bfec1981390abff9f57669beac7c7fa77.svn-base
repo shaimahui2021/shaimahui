@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/login.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-fff">
+		<section class="aui-content">
+			<ul class="aui-list aui-list-in aui-form-list aui-list-noborder aui-padded-15  aui-padded-l-0 aui-margin-t-15">
+				<li class="aui-list-item  aui-padded-t-15">
+					<div class="aui-list-item-inner sm-round-border">
+						<div class="aui-list-item-label-icon">
+							<img class="username-icon" src="../img/username-icon.png" />
+						</div>
+						<div class="aui-list-item-input">
+							<input id="username" type="text" placeholder="请输入用户名">
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item  aui-padded-t-15">
+					<div class="aui-list-item-inner sm-round-border">
+						<div class="aui-list-item-label-icon">
+							<img class="pwd-icon" src="../img/pwd-icon.png" />
+						</div>
+						<div class="aui-list-item-input">
+							<input id="password" type="password" placeholder="请输入6位数以上的字母与数字组合密码">
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item  aui-padded-t-15">
+					<div class="aui-list-item-inner sm-round-border">
+						<div class="aui-list-item-label-icon">
+							<img class="pwd-icon" src="../img/confirmpwd-icon.png" />
+						</div>
+						<div class="aui-list-item-input">
+							<input id="check-password" type="password" placeholder="请再次输入密码">
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item  aui-padded-t-15">
+					<div class="aui-list-item-inner sm-round-border">
+						<div class="aui-list-item-label-icon">
+							<img class="answer-icon" src="../img/question-icon.png" />
+						</div>
+						<div class="aui-list-item-input aui-padded-r-0" style="position: relative;" tapmode onclick="openDialog('widget://app/dialog/dialog-question')">
+							<input id="problem" type="text" placeholder="选择密保问题" readonly="readonly">
+							<i class="aui-iconfont aui-icon-down down-btn"></i>
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item  aui-padded-t-15">
+					<div class="aui-list-item-inner sm-round-border">
+						<div class="aui-list-item-label-icon">
+							<img class="answer-icon" src="../img/answer-icon.png" />
+						</div>
+						<div class="aui-list-item-input">
+							<input id="answer" type="text" placeholder="请输入问题答案">
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item getcode-item aui-padded-t-15">
+					<div class="aui-list-item-inner sm-round-border">
+						<div class="aui-list-item-label-icon">
+							<img class="yzm-icon" src="../img/yzm-icon.png" />
+						</div>
+						<div class="aui-list-item-input">
+							<input id="smsCode" type="text" placeholder="请输入验证码">
+						</div>
+						<div class="smsCode" id="zknight-h5imagecaptcha-show">
+							<!--<img onclick="smsCode(this)" id="smsCodecool" src="http://81.68.127.150/index.php/api/Test/userLogins" />-->
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<p class="aui-text-left">登录注册即代表同意&nbsp;<span class="color-blue">用户协议</span>&nbsp;和&nbsp;<span class="color-blue">隐私政策</span></p>
+					</div>
+				</li>
+				<li class="aui-list-item aui-margin-t-15">
+					<div class="aui-list-item-inner aui-list-item-btn aui-padded-r-0">
+						<div class="aui-btn aui-btn-block btn-red" onclick="register()">注 册</div>
+					</div>
+				</li>
+			</ul>
+		</section> 
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>.
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../script/h5imagecaptcha/zknight_h5imagecaptcha_common.js"></script>
+<script type="text/javascript">
+var zknightCode = null;
+		window.onload = function(){
+			//zknightH5imagecaptcha方法接受参数
+			//{ 
+			//	id: "", //容器Id
+			//	canvasId: "zknightH5imageCaptcha", //canvas的ID
+			//	width: "100", //默认canvas宽度
+			//	height: "30", //默认canvas高度
+			//	type: "blend" //图形验证码默认类型blend:数字字母混合类型、number:纯数字、letter:纯字母
+			//}
+			//传入展示图形验证码位置的ID,若只传ID，则其他参数使用默认值
+			zknightCode = new zknightH5imagecaptcha("zknight-h5imagecaptcha-show");
+		};
+		/**
+		 * 验证 
+		 */
+		function zknightVerification(){
+			//文本框输入的验证码
+			var zknightInputCode = document.getElementById("zknight-h5imagecaptcha-inputcode").value;
+			//传入输入的验证码，返回验证结果
+			var result = zknightCode.validate(zknightInputCode);
+			if(result){
+				alert("success");
+			}else{
+				alert("error");
+			}
+		}
+	apiready = function() {
+		api.parseTapmode();
+		//监听选择的问题
+		api.addEventListener({
+		   	name: 'selectQus'
+		},function(ret,err){
+			if(ret){ 
+			     $api.val($api.byId('problem'),ret.value.question);  
+			}
+		});
+	};
+
+	function smsCode(attr) {
+		attr.src = 'https://server.xsls666.com/index.php/api/Test/userLogins?' + Math.random();
+	}
+
+	function register() {
+		var username = $('#username').val();
+		var problem = $('#problem').val();
+		var answer = $('#answer').val();
+		var smsCode = $('#smsCode').val();
+		var password = $('#password').val();
+		var passwords = $('#check-password').val();
+		if(password != passwords){
+			toast1("密码输入不一致");
+			return;
+		}
+		if(smsCode ==  ''){
+		}else{
+			var result = zknightCode.validate(smsCode);
+			if(!result){
+				toast1("验证码错误!");
+				return;
+			}
+		}	
+//			var zknightInputCode = document.getElementById("zknight-h5imagecaptcha-inputcode").value;
+			//传入输入的验证码，返回验证结果
+			
+	
+		$cjy.ajax({
+			url: index_url + 'api/Login/register',
+			method: 'post',
+			data: {
+				'username': username,
+				'smsCode': smsCode,
+				'password': password,
+				'problem': problem,
+				'answer': answer
+			}
+		}, function(ret) {
+			toast1(ret.msg);
+			if (ret.code == 0) {
+				$('#username').val('');
+				$('#problem').val('');
+				$('#answer').val('');
+				$('#smsCode').val('');
+				$('#password').val('');
+				$('#check-password').val('');
+				closeWin();
+				// $('#smsCodecool').attr("src", 'http://81.68.127.150/index.php/api/Test/userLogins?' + Math.random());
+				// openWin('widget://app/login/html/login_win', {
+				// 	username: username
+				// })
+			}else{
+				$('#smsCodecool').attr("src", 'https://server.xsls666.com/index.php/api/Test/userLogins?' + Math.random());
+			}
+
+			console.log(JSON.stringify(ret));
+		},function(err){
+			toast1(err.msg);
+			console.log(JSON.stringify(err));
+		});
+	}
+</script>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-fff">
+		<section class="aui-content">
+			<div class="aui-card-list aui-margin-b-0 border-b bg-gray" id="post-kpl">
+				<!-- <div class="aui-card-list-header aui-card-list-user" >
+					<div class="aui-card-list-user-name">
+						<div>跑马图</div>
+						<small>10-15&nbsp;14:20</small>
+					</div>
+				</div>
+				<div class="aui-card-list-content-padded aui-padded-t-0">
+					<div class="aui-row aui-row-padded">
+						<div class="aui-col-xs-12">
+							<img src="../../../image/l1.jpg" />
+						</div>
+					</div>
+				</div>
+				<div class="aui-card-list-footer aui-padded-t-0">
+					<div class="aui-info w-100">
+						<div class="aui-info-item"><img class="aui-margin-r-5 praise-icon" src="../../../image/praise-active.png" /> 200</div>
+						<div class="aui-info-item"><img class="aui-margin-r-5 msg-icon" src="../../../image/msg.png" /> 200</div>
+						<div class="aui-info-item"  tapmode onclick="openWin('widget://app/derby/html/forward_win')"><img class="aui-margin-r-5 forward-icon" src="../../../image/forward.png" /> 200</div>
+						<div class="aui-info-item"><img class="aui-margin-r-5 gift-icon" src="../../../image/gift.png" /> 200</div>
+					</div>
+				</div> -->
+			</div>
+			<!-- 评论 -->
+			<ul class="aui-list aui-list-in aui-media-list aui-list-noborder aui-padded-10">
+				<li class="aui-list-header aui-font-size-16 bg-fff border-b">热门评论</li>
+				<li class="aui-list-item aui-list-item-middle">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3rem;">
+							<img src="../../../image/empty-head.png" class="aui-img-round">
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title aui-font-size-14 aui-ellipsis-1 nickName">木村拓哉</div>
+								<div class="aui-list-item-right">
+									<div class="aui-info aui-padded-t-0 aui-padded-b-0">
+										<div class="aui-info-item">
+											<img class="aui-margin-r-15 godcomment-icon" src="../../../image/godcomment.png" />
+											<img class="aui-margin-r-10 praise-icon" src="../../../image/praise.png" />
+											42
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="aui-list-item-text aui-font-size-12">
+								08-15 08:00
+							</div>
+						</div>
+					</div>
+					<div class="aui-padded-r-15" style="padding-left: 3rem;">
+						<div class="aui-ellipsis-1">这可太准了，老预测员老预测员老预测员老预测员老预测员</div>
+						<div class="aui-row  aui-padded-t-10 aui-padded-b-10">
+							<div class="aui-col-xs-12">
+								<img src="../../../image/img-1.jpg" />
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<!--输入框占位 注意要跟聊天内容同级为兄弟关系#F4F8FC-->
+		<div id="j-bottom" style="height: 3.2rem;background: #F4F8FC;bottom:0;"></div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script> 
+<script type="text/javascript" src="../../../script/calendar.js"></script> 
+<script type="text/javascript" src="../../../script/calendar.min.js"></script> 
+<script type="text/javascript" src="../../../res/api-index.js"></script> 
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="post-list">
+	<div class="aui-card-list-header aui-card-list-user" >
+		<div class="aui-card-list-user-name">
+			<div><%=details['title']%></div>
+			<small><%=details['create_time']%></small>
+		</div>
+	</div>
+	<div class="aui-card-list-content-padded aui-padded-t-0">
+		<div class="aui-row aui-row-padded">
+			<div class="aui-col-xs-12">
+				<img src="../../../image/l1.jpg" />
+			</div>
+		</div>
+	</div>
+	<div class="aui-card-list-footer aui-padded-t-0">
+		<div class="aui-info w-100">
+			<% if(details['isPostLike']) {%>
+			<div class="aui-info-item"><img class="aui-margin-r-5 praise-icon" src="../../../image/praise-active.png" /><%=details['like']%></div>
+			<% }else{ %>
+			<div class="aui-info-item"><img class="aui-margin-r-5 praise-icon" src="../../../image/praise-.png" /><%=details['like']%></div>
+			<% } %>
+			<div class="aui-info-item"><img class="aui-margin-r-5 msg-icon" src="../../../image/msg.png" /> <%=details['comment_sum']%></div>
+			<div class="aui-info-item"  tapmode onclick="openWin('widget://app/derby/html/forward_win')"><img class="aui-margin-r-5 forward-icon" src="../../../image/forward.png" /> <%=details['forwarding']%></div>
+			<div class="aui-info-item"><img class="aui-margin-r-5 gift-icon" src="../../../image/gift.png" /> <%=details['money']%></div>
+		</div>
+	</div>
+</script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+		UIChatBox = api.require('UIChatBox');
+		// 监听 inputBar 输入框把内容顶上去
+		UIChatBox.addEventListener({
+			target: 'inputBar',
+			name: 'move'
+		}, function(ret, err) {
+			if (ret) {
+				if (api.systemType == 'ios') {
+					api.setFrameAttr({
+						name: api.frameName,
+						rect: {
+							marginBottom: ret.panelHeight
+						}
+					});
+				}
+				if (api.systemType == 'android') { //键盘上顶的
+					if (api.winHeight > (ret.inputBarHeight + ret.panelHeight)) {
+
+						api.setFrameAttr({
+							name: api.frameName,
+							rect: {
+								h: winH - (ret.inputBarHeight + ret.panelHeight) - 40
+							}
+						});
+					}
+				}
+				scrollToEnd();
+			}
+		});
+		chatBoxOpen();
+		pageParam = api.pageParam[1]; 
+		var postId = pageParam.id;
+		galleryDetails(postId)
+	};
+	//获取图库详情
+	function galleryDetails(postId){
+		$cjy.ajax({
+			url: configIndex.galleryDetails,
+			method: 'post',
+			data : {
+				id:postId,
+			}
+		}, function(ret) {
+			var html = template('post-list',ret.data.details);
+			$api.html($api.byId('post-kpl'), html);
+			var text = template('comment-list',ret.data.comment);
+			$api.html($api.byId('comment-kpl'), text);
+			api.parseTapmode();
+		});
+	};
+	//打开聊天窗口
+	function chatBoxOpen() {
+		var UIChatBox = api.require('UIChatBox');
+		UIChatBox.open({
+			placeholder: '发送聊天信息~',
+			autoFocus: false,
+			maxRows: 4,
+			emotionPath: 'widget://image/keyboard/emotion',
+			texts: {
+				recordBtn: {
+					normalTitle: '按住说话',
+					activeTitle: '松开结束'
+				},
+				sendBtn: {
+					title: '发送'
+				}
+			},
+
+			styles: {
+				topDivider: {
+					width: 1,
+					color: '#d2d2d2'
+				},
+				inputBar: {
+					bgColor: '#fff',
+					textMarginLeft: 10
+				},
+				inputBox: {
+					borderColor: '#F4F8FC',
+					topMargin: 5
+				},
+				sendBtn: {
+					titleColor: '#fff',
+					bg: '#FF3952',
+					activeBg: '#FF3952',
+					titleSize: 14
+				}, 
+				// emotionBtn: {
+				// 	normalImg: 'widget://image/keyboard/face1.png'
+				// },
+				// extrasBtn: {
+				// 	normalImg: 'widget://image/keyboard/add1.png'
+				// }, 
+				// speechBtn: { 
+				// 	normalImg: 'widget://image/keyboard/voice.png', 
+				// 	activeImg:'widget://image/keyboard/key1.png'     ,
+				// },
+			},
+			extras: {
+				titleSize: 12,
+				titleColor: '#a3a3a3',
+				isAdaptScreenSize: false,
+				btns: [{
+					title: '照片',
+					normalImg: 'widget://image/keyboard/photo.png',
+				}, {
+					title: '拍照',
+					normalImg: 'widget://image/keyboard/shoot.png',
+				}]
+			}
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'send') {
+
+				}
+				if (ret.eventType == "clickExtras") {
+					if (ret.index == 0) {}
+				}
+				scrollToEnd();
+			}
+		});
+	};
+	//滚到底部
+	function scrollToEnd() {
+		setTimeout(function() {
+			$("html,body").finish().animate({
+				"scrollTop": $('#j-bottom').offset().top
+			}, 150);
+		}, 200);
+	};
+</script>

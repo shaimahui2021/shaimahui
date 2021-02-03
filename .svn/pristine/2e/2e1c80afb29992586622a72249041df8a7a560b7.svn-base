@@ -1,0 +1,136 @@
+.aui-tab-item.aui-active span:after {
+	width: 4rem;
+	margin-left: -2rem;
+}
+
+.drawdetail-list {
+	background-color: #fff;
+	border: 1px solid #AAAAAA;
+	border-bottom: none;
+}
+
+.drawdetail-item:nth-child(2n-1) {
+	border-right: 1px solid #AAAAAA;
+}
+
+.drawdetail-item {
+	border-bottom: 1px solid #AAAAAA;
+}
+
+.drawdetail-item {
+	font-size: .7rem;
+	padding: .5rem;
+}
+
+.indexed-list-number {
+	position: absolute;
+	right: 3rem;
+	color: #999;
+	font-size: .6rem;
+}
+
+.indexed-list-number label {
+	background: #f2f2f2;
+	padding: 0 0.1rem;
+	border-radius: .2rem;
+}
+
+.laydate-theme-calendar .layui-laydate-header i.laydate-prev-y,
+.laydate-theme-calendar .layui-laydate-header i.laydate-prev-m,
+.laydate-theme-calendar .layui-laydate-header i.laydate-next-m,
+.laydate-theme-calendar .layui-laydate-header i.laydate-next-y {
+	display: none !important;
+}
+
+.laydate-theme-calendar .laydate-set-ym span:nth-child(1) {
+	pointer-events: none;
+}
+
+.laydate-theme-calendar .laydate-day-mark {
+	color: #666 !important;
+	background: url(../../../image/ball-red.png) no-repeat !important;
+	background-size: 1.5rem 1.5rem !important;
+	background-position: 50% 50% !important;
+}
+
+.laydate-theme-calendar .laydate-day-mark::after {
+	background-color: transparent !important;
+}
+
+.laydate-theme-calendar.layui-laydate .layui-this {
+	background-color: transparent !important;
+	color: #666 !important;
+}
+
+.laydate-theme-calendar,
+.laydate-theme-calendar .layui-laydate-main,
+.laydate-theme-calendar .layui-laydate-content table {
+	width: 100%;
+}
+
+.laydate-theme-calendar .layui-laydate-header {
+	color: #fff;
+	font-size: 18px;
+	background-color: #FF492B;
+}
+
+.operate-list {
+	position: absolute;
+	bottom: 1rem;
+	right: 1.5rem;
+	width: auto;
+	z-index: 99;
+}
+.operate-list2{
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+}
+/* .operate {
+	margin-bottom: .75rem;
+} */
+
+.operate-icon {
+	display: block; 
+	margin: auto;
+	margin-bottom: .1rem;
+}
+
+.operate-praise-icon {
+	width: 1.3rem;
+	height: 1.4rem;
+	background: url(../img/praise.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-praise-icon.active {
+	background: url(../img/praise-active.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-gift-icon {
+	width: 1.35rem;
+	height: 1.375rem;
+	background: url(../img/gift.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-gift-icon.active {
+	background: url(../img/gift-active.png) no-repeat;
+	background-size: 100% 100%;
+}
+.operate-msg-icon{
+	width: 1.325rem;
+	height: 1.125rem;
+	background: url(../img/msg.png) no-repeat;
+	background-size: 100% 100%;
+} 
+.operate-forward-icon{
+	width: 1.225rem;
+	height: 1.275rem;
+	background: url(../img/forward.png) no-repeat;
+	background-size: 100% 100%;
+} 

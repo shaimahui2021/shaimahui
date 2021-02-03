@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-gray">
+		<section class="aui-content aui-padded-t-10 aui-padded-b-10" id="wndataTail">
+			<!-- <div class="lotteryhis-list aui-padded-10 aui-padded-b-0">
+				<div class="lotteryhis-item">
+					<div class="aui-info lotteryhis-latest">
+						<div class="aui-info-item">
+							<div>第<span class="lotteryhis-qihao">008</span>期最新开奖结果:</div>
+						</div>
+						<div class="aui-info-item">
+							<span class="lotteryhis-txt">开奖记录</span>
+						</div>
+					</div>
+					<div class="aui-flex-col lotteryhis-num ">
+						<div class="flex-1 aui-flex-row aui-flex-center aui-flex-middle">
+							<div class="ball ball-blue">47</div>
+							<div class="ball-txt">虎/水</div>
+						</div>
+						<div class="flex-1 aui-flex-row aui-flex-center aui-flex-middle">
+							<div class="ball ball-green">43</div>
+							<div class="ball-txt">虎/金</div>
+						</div>
+						<div class="flex-1 aui-flex-row aui-flex-center aui-flex-middle">
+							<div class="ball ball-green">43</div>
+							<div class="ball-txt">虎/水</div>
+						</div>
+						<div class="flex-1 aui-flex-row aui-flex-center aui-flex-middle">
+							<div class="ball ball-red">30</div>
+							<div class="ball-txt">猴/金</div>
+						</div>
+						<div class="flex-1 aui-flex-row aui-flex-center aui-flex-middle">
+							<div class="ball ball-blue">47</div>
+							<div class="ball-txt">虎/水</div>
+						</div>
+						<div class="flex-1 aui-flex-row aui-flex-center aui-flex-middle">
+							<div class="ball ball-blue">47</div>
+							<div class="ball-txt">虎/水</div>
+						</div>
+						<div class="aui-flex-row aui-flex-right">
+							<div class="ball ball-red">30</div>
+							<div class="ball-txt">猴/金</div>
+						</div>
+					</div>
+					<div class="lotteryhis-datetime">
+						第<span class="aui-margin-l-5 aui-margin-r-5">009</span>期:&nbsp;<span>07</span>月<span>21</span>日&nbsp;<span class="aui-margin-l-5 aui-margin-r-5">星期二</span><span>21</span>点<span>32</span>分
+					</div>
+				</div>
+			</div>
+			<div class="aui-row drawdetail-list aui-margin-l-10 aui-margin-r-10">
+				<div class="aui-col-xs-6 drawdetail-item">特码单双:<span class="aui-margin-l-5 color-red">单</span></div>
+				<div class="aui-col-xs-6 drawdetail-item">特码大小:<span class="aui-margin-l-5 color-red">大</span></div>
+				<div class="aui-col-xs-6 drawdetail-item">总和单双:<span class="aui-margin-l-5 color-red">单</span></div>
+				<div class="aui-col-xs-6 drawdetail-item">总和大小:<span class="aui-margin-l-5 color-red">大</span></div>
+			</div> -->
+		</section> 
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/aui-skin.js"></script> 
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script> 
+<script type="text/javascript" src="../../../script/calendar.js"></script> 
+<script type="text/javascript" src="../../../script/calendar.min.js"></script> 
+<script type="text/javascript" src="../../../res/api-index.js"></script> 
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="list-kpl">
+	<div class="lotteryhis-list aui-padded-10 aui-padded-b-0">
+		<div class="lotteryhis-item">
+			<div class="aui-info lotteryhis-latest">
+				<div class="aui-info-item">
+					<div>第<span class="lotteryhis-qihao"><%=data['qihao']%></span>期开奖结果:</div>
+				</div>
+			</div>
+			<div class="aui-flex-col lotteryhis-num ">
+				<%for(var i=0;i<7;i++){%>
+				<% if (shengxiao[i]) {%>
+				<div>
+					<div class="ball ball-<%=shengxiao[i]['color']%>"><%=shengxiao[i]['num']%></div>
+					<div class="ball-txt"><%=shengxiao[i]['shengxiao']%>/<%=shengxiao[i]['attributes']%></div>
+				</div> 
+				<% } else {%>
+				<div>
+					<div class="ball ball-gray">?</div>
+				</div> 
+				<% } %>
+				<% } %>
+			</div>
+			<div class="lotteryhis-datetime">
+				<span class="aui-margin-l-5 aui-margin-r-5">开奖时间</span>:&nbsp;<span><%=data['m']%></span>月<span><%=data['d']%></span>日&nbsp;<span class="aui-margin-l-5 aui-margin-r-5"><%=data['week']%></span><span><%=data['h']%></span>点<span><%=data['i']%></span>分
+			</div>
+		</div>
+	</div>
+	<div class="aui-row drawdetail-list aui-margin-l-10 aui-margin-r-10">
+		<div class="aui-col-xs-6 drawdetail-item">特码单双:<span class="aui-margin-l-5 color-red"><%=data['ds']%></span></div>
+		<div class="aui-col-xs-6 drawdetail-item">特码大小:<span class="aui-margin-l-5 color-red"><%=data['dx']%></span></div>
+		<div class="aui-col-xs-6 drawdetail-item">总和单双:<span class="aui-margin-l-5 color-red"><%=data['zhds']%></span></div>
+		<div class="aui-col-xs-6 drawdetail-item">总和大小:<span class="aui-margin-l-5 color-red"><%=data['zhdx']%></span></div>
+	</div>
+</script>
+<script type="text/javascript">
+	var lotteryOpenType= 1;
+	apiready = function() {
+		api.parseTapmode();
+		// 彩种类别
+		lotteryOpenType = api.pageParam[1];
+		var lottery_id = lotteryOpenType.lottery_id;
+		var qihao = lotteryOpenType.qihao;
+		wnDataTail(lottery_id,qihao)
+		//设置主题
+		if(lottery_id == 1){
+			var skin = skinFunc('skin-red'); 
+		}else if(lottery_id == 2){
+			var skin = skinFunc('skin-green'); 
+		}else if(lottery_id == 3){
+			var skin = skinFunc('skin-blue'); 
+		}   
+	};
+	//实例化主题
+	function skinFunc(skinName) {
+		return new auiSkin({
+			name: skinName,
+			skinPath: '../../../css/' + skinName + '.css',
+			default: true
+		});
+	};
+	
+	function wnDataTail(lottery_id,qihao) {
+		$cjy.ajax({
+		url: configIndex.wnDataTail,
+		method: 'post',
+		data : {
+			'lottery_id': lottery_id,
+			'qihao': qihao,
+		}
+	}, function(ret) {
+		var data = ret;
+		var shengxiao = wnDataLoad(ret.data.numbers);
+		data.shengxiao = shengxiao;
+		var html = template('list-kpl',data);
+		$api.html($api.byId('wndataTail'), html);
+		api.parseTapmode();
+	},function(err){
+		console.log(JSON.stringify(err));
+	});
+	};
+	function shengxiao(num){
+	 	var theChinesezodiac;
+	 	var lunar = calendar.solar2lunar();
+	 	var year=lunar.lYear;
+	 	//十二生肖：是由十一种源于自然界的动物即鼠、牛、虎、兔、蛇、马、羊、猴、鸡、狗、猪以及传说中的龙所组成，用于纪年，
+	 	//顺序排列为子鼠、丑牛、寅虎、卯兔、辰龙、巳蛇、午马、未羊、申猴、酉鸡、戌狗、亥猪。
+	 	num=Number(num)%12;
+	 	var ssc=Math.abs(Number(year)-2007-num)%12;//设定2008为初始年份,再减一，数组key从0开始
+	 	var ssyear=["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"];
+	 	return ssyear[ssc];
+	};
+	function lhcbose(num, type) {
+	 	var color = '';
+	 	switch(num) {
+	 		case '01':
+	 		case '02':
+	 		case '07':
+	 		case '08':
+	 		case '12':
+	 		case '13':
+	 		case '18':
+	 		case '19':
+	 		case '23':
+	 		case '24':
+	 		case '29':
+	 		case '30':
+	 		case '34':
+	 		case '35':
+	 		case '40':
+	 		case '45':
+	 		case '46':
+	 			if(type == 1) {
+	 				color = 'lhc-hongbo';
+	 			} else if(type == 2) {
+	 				color = 'red';
+	 			} else if(type == 3) {
+	 				color = '红波';
+	 			}
+	 			break;
+	 		case '03':
+	 		case '04':
+	 		case '09':
+	 		case '10':
+	 		case '14':
+	 		case '15':
+	 		case '20':
+	 		case '25':
+	 		case '26':
+	 		case '31':
+	 		case '36':
+	 		case '37':
+	 		case '41':
+	 		case '42':
+	 		case '47':
+	 		case '48':
+	 			if(type == 1) {
+	 				color = 'lhc-lanbo';
+	 			} else if(type == 2) {
+	 				color = 'blue';
+	 			} else if(type == 3) {
+	 				color = '蓝波';
+	 			}
+	 			break;
+	 		case '05':
+	 		case '06':
+	 		case '11':
+	 		case '16':
+	 		case '17':
+	 		case '21':
+	 		case '22':
+	 		case '27':
+	 		case '28':
+	 		case '32':
+	 		case '33':
+	 		case '38':
+	 		case '39':
+	 		case '43':
+	 		case '44':
+	 		case '49':
+	 			if(type == 1) {
+	 				color = 'lhc-lvbo';
+	 			} else if(type == 2) {
+	 				color = 'green';
+	 			} else if(type == 3) {
+	 				color = '绿波';
+	 			}
+	 			break;
+	 		default:
+	 			if(type == 2) {
+	 				color = 'wubose';
+	 			}
+	 			break;
+	 	}
+	 	return color;
+	}
+	function wnDataLoad(number){
+		var that = this;
+		var shengxiao = [];
+		var numbers = [];
+		var numbers = number.split(',');
+		for (var i = 0; i < numbers.length; i++) {
+			var wndata ={};
+			wndata.num = numbers[i];
+			wndata.shengxiao = that.shengxiao(numbers[i]);
+			wndata.attributes = that.wuxing(numbers[i]);
+			wndata.color = that.lhcbose(numbers[i],2);
+			shengxiao[i] = wndata;
+		}
+		return shengxiao;
+	};
+	function wuxing(num){
+		var attributes = '';
+		switch(num) {
+			case '06':
+			case '07':
+			case '20':
+			case '21':
+			case '28':
+			case '29':
+			case '36':
+			case '37':
+				attributes = '金';
+				break;
+			case '02':
+			case '03':
+			case '10':
+			case '11':
+			case '18':
+			case '19':
+			case '32':
+			case '33':
+			case '40':
+			case '41':
+			case '48':
+			case '49':
+				attributes = '木';
+				break;
+			case '08':
+			case '09':
+			case '16':
+			case '17':
+			case '24':
+			case '25':
+			case '38':
+			case '39':
+			case '46':
+			case '47':
+				attributes = '水';
+				break;
+			case '04':
+			case '05':
+			case '12':
+			case '13':
+			case '26':
+			case '27':
+			case '34':
+			case '35':
+			case '42':
+			case '43':
+				attributes = '火';
+				break;
+			case '01':
+			case '14':
+			case '15':
+			case '22':
+			case '23':
+			case '30':
+			case '31':
+			case '44':
+			case '45':
+				attributes = '土';
+				break;		
+			default:
+				break;
+		}
+		return attributes;
+	}
+</script>

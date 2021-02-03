@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>消息</title> 
+	</head>
+	<body class="bg-gray">
+		<!-- <div class="aui-flex-col aui-flex-center aui-flex-middle" style="width: 100%;height: 100%;background-color: #F5F5F5;">4</div> -->
+		<header class="aui-bar aui-bar-nav header-nobg header-nobg-red" id="aui-header">
+			<div class="color-black">消息</div>
+		</header>
+		<section class="aui-content aui-tab aui-margin-b-15" id="tab">
+			<div class="aui-tab-item aui-margin-r-15 aui-active"><span>点赞<span id="like"></span></span></div>
+			<div class="aui-tab-item aui-margin-r-15"><span>评论<span id="comments"></span></span></div>
+			<div class="aui-tab-item aui-margin-r-15"><span>系统消息<span id="notice"></span></span></div>
+		</section>
+		<!-- 点赞 -->
+		<section id="praise" class="aui-content bg-fff">
+			<ul class="aui-list aui-list-in aui-list-noborder aui-media-list" id="praiseListData" style="text-align:center">
+				<!-- <li class="aui-list-item aui-list-item-middle aui-padded-15">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3rem;">
+							<img src="../../../image/empty-head.png" class="aui-img-round aui-list-img-sm">
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis aui-text-left">木村拓哉</div>
+								<div class="aui-list-item-right aui-text-right" style="width: 6rem;">09-09 08:00</div>
+							</div>
+							<div class="aui-list-item-text">
+								赞了这条帖子
+							</div>
+						</div>
+					</div>
+					<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray">
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-ellipsis-2 aui-text-left">
+									<span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+									号外号外!神预测出现,速来!http://t.cn.A42345B1
+								</div>
+							</div>
+						</div>
+						<div class="aui-list-item-media">
+							<div class="img-container" style="background: url(../../../image/l1.jpg) no-repeat;background-size: cover;"></div> 
+						</div>
+					</div>
+				</li> -->
+				<!--<li class="aui-list-item aui-list-item-middle aui-padded-15">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3rem;">
+							<img src="../../../image/empty-head.png" class="aui-img-round aui-list-img-sm">
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis aui-text-left">木村拓哉</div>
+								<div class="aui-list-item-right aui-text-right" style="width: 6rem;">09-09 08:00</div>
+							</div>
+							<div class="aui-list-item-text">
+								赞了这条帖子
+							</div>
+						</div>
+					</div>
+					<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray">
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-ellipsis-2 aui-text-left">
+									<span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+									号外号外!神预测出现,速来!http://t.cn.A42345B1
+								</div>
+							</div>
+						</div>
+						<div class="aui-list-item-media">
+							<div class="img-container" style="background: url(../../../image/l1.jpg) no-repeat;background-size: cover;"></div>
+						</div>
+					</div>
+				</li> -->
+			</ul>
+		</section>
+		<!-- 评论 -->
+		<section id="comment" class="aui-content bg-fff" style="display: none;">
+			<ul class="aui-list aui-list-in aui-list-noborder aui-media-list" id="commentListData" style="text-align:center">
+				<!-- <li class="aui-list-item aui-list-item-middle aui-padded-15">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3rem;">
+							<img src="../../../image/empty-head.png" class="aui-img-round aui-list-img-sm">
+						</div>
+						<div class="aui-list-item-inner aui-padded-r-0">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis aui-text-left">木村拓哉木村拓哉木村拓哉木村拓哉木村拓哉木村拓哉木村拓哉</div>
+								<div class="aui-list-item-right aui-text-right" style="width: 6rem;">2020-09-09 08:00:59</div>
+							</div>
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title flex-1 aui-font-size-14 aui-ellipsis aui-text-left">太难了!!!!!太难了!!!!!太难了!!!!!太难了!!!!!太难了!!!!!太难了!!!!!</div>
+								<div class="aui-list-item-right aui-text-right" style="width: 6rem;">
+									<div class="aui-info aui-padded-0 w-100 justify-end">
+										<div class="aui-info-item" tapmode onclick="openWin('widget://app/derby/html/forward_win')">
+											<img class="aui-margin-r-5 reply-icon" src="../../../image/reply.png" /><span class="aui-font-size-14 color-more">回复</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-inner aui-padded-0" style="padding-left: 3rem !important;">
+							<div class="aui-list-item-text">
+								<div class="comment-div w-100 aui-margin-t-0">
+									<p class="aui-text-left"><span class="comment-man">木村拓哉</span>: 好的我记住了</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray">
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-ellipsis-2 aui-text-left">
+									<span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+									号外号外!神预测出现,速来!http://t.cn.A42345B1
+								</div>
+							</div>
+						</div>
+						<div class="aui-list-item-media">
+							<div class="img-container" style="background: url(../../../image/l1.jpg) no-repeat;background-size: cover;"></div>
+						</div>
+					</div>
+				</li> -->
+				<!-- <li class="aui-list-item aui-list-item-middle aui-padded-15">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3rem;">
+							<img src="../../../image/empty-head.png" class="aui-img-round aui-list-img-sm">
+						</div>
+						<div class="aui-list-item-inner aui-padded-r-0">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis">木村拓哉木村拓哉木村拓哉木村拓哉木村拓哉木村拓哉木村拓哉</div>
+								<div class="aui-list-item-right aui-text-right" style="width: 6rem;">09-09 08:00</div>
+							</div>
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title flex-1 aui-font-size-14 aui-ellipsis">太难了!!!!!太难了!!!!!太难了!!!!!太难了!!!!!太难了!!!!!太难了!!!!!</div>
+								<div class="aui-list-item-right aui-text-right" style="width: 6rem;">
+									<div class="aui-info aui-padded-0 w-100 justify-end">
+										<div class="aui-info-item" tapmode onclick="openWin('widget://app/derby/html/forward_win')">
+											<img class="aui-margin-r-5 reply-icon" src="../../../image/reply.png" /><span class="aui-font-size-14 color-more">回复</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray">
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-ellipsis-2 aui-text-left">
+									<span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+									号外号外!神预测出现,速来!http://t.cn.A42345B1
+								</div>
+							</div>
+						</div>
+						<div class="aui-list-item-media">
+							<div class="img-container" style="background: url(../../../image/l1.jpg) no-repeat;background-size: cover;"></div>
+						</div>
+					</div>
+				 </li> -->
+			</ul>
+		</section>
+		<!-- 系统消息 -->
+		<section id="sysmsg" class="aui-content bg-fff"  style="display: none;">
+			<ul class="aui-list aui-media-list aui-list-in aui-list-noborder aui-padded-t-10 aui-padded-b-10" id="messageListData" style="text-align:center">
+				<!-- <li class="aui-list-item aui-padded-b-10" tapmode onclick="openWin('widget://app/message/html/sysmsg_win')">
+					<div class="aui-media-list-item-inner aui-list-item-arrow">
+						<div class="aui-list-item-media align-center" style="width: 2.2rem;">
+							<img class="msgnotice-icon" src="../../../image/msg-notice.png">
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">系统更新提示<span class="aui-font-size-12 aui-margin-l-5 color-gray">08-15</span></div>
+							</div>
+							<div class="aui-list-item-text">
+								<div class=" aui-ellipsis">
+									关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!
+								</div>
+							</div>
+						</div>
+					</div>
+				</li> -->
+				<!-- <li class="aui-list-item aui-padded-b-10" tapmode onclick="openWin('widget://app/message/html/sysmsg_win')">
+					<div class="aui-media-list-item-inner  aui-list-item-arrow">
+						<div class="aui-list-item-media align-center" style="width: 2.2rem;">
+							<img class="msgnotice-icon" src="../../../image/msg-notice.png">
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">系统更新提示<span class="aui-font-size-12 aui-margin-l-5 color-gray">08-15</span></div>
+							</div>
+							<div class="aui-list-item-text">
+								<div class=" aui-ellipsis">
+									关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!
+								</div>
+							</div>
+						</div>
+					</div>
+				</li> -->
+			</ul>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/template.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="Data-list-praise">
+	<% for(var i = 0; i<listData.length; i++){ %>
+	<% if(listData[i]['post_id'] != null) {%>
+		<% if (listData[i]['post_id'] != 0){%>
+		<li class="aui-list-item aui-list-item-middle aui-padded-15" tapmode onclick="openWin('widget://app/derby/html/mainbody_win',{post_id:<%=listData[i]['post_id']%>,member_id:<%=listData[i]['post_member_id']%>})">
+			<div class="aui-media-list-item-inner">
+				<div class="aui-list-item-media" style="width: 3rem;">
+					<img src="<%=index_url.replace('/index.php/', '') +listData[i]['head_path']%>"  class="aui-img-round aui-list-img-sm">
+				</div>
+				<div class="aui-list-item-inner">
+					<div class="aui-list-item-text">
+						<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis aui-text-left"><%=listData[i]['nickname']%></div>
+						<div class="aui-list-item-right aui-text-right" style="width: 6rem;"><%=listData[i]['create_time']%></div>
+					</div>
+					<div class="aui-list-item-text">
+						赞了这条帖子
+					</div>
+				</div>
+			</div>
+			<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray">
+				<div class="aui-list-item-inner">
+					<div class="aui-list-item-text">
+						<div class="aui-ellipsis-2 aui-text-left">
+							<!-- <span class="aui-margin-r-5 color-blue"></span> -->
+							<!-- 号外号外!神预测出现,速来!http://t.cn.A42345B1 -->
+							<%=listData[i]['content']%>
+						</div>
+					</div>
+				</div>
+				<div class="aui-list-item-media">
+					<div class="img-container" style="background: url(<%=head_path + listData[i]['picture_path'][0]%>) no-repeat;background-size: cover;"></div> 
+				</div>
+			</div>
+		</li>
+		<% }else {%>
+		<li class="aui-list-item aui-list-item-middle aui-padded-15">
+			<div class="aui-media-list-item-inner">
+				<div class="aui-list-item-media" style="width: 3rem;">
+					<img src="<%=index_url.replace('/index.php/', '') +listData[i]['head_path']%>"  class="aui-img-round aui-list-img-sm">
+				</div>
+				<div class="aui-list-item-inner">
+					<div class="aui-list-item-text">
+						<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis aui-text-left"><%=listData[i]['nickname']%></div>
+						<div class="aui-list-item-right aui-text-right" style="width: 6rem;"><%=listData[i]['create_time']%></div>
+					</div>
+					<div class="aui-list-item-text">
+						赞了这条评论
+					</div>
+				</div>
+			</div>
+			<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray">
+				<div class="aui-list-item-inner">
+					<div class="aui-list-item-text">
+						<div class="aui-ellipsis-2 aui-text-left">
+							<!-- <span class="aui-margin-r-5 color-blue"></span> -->
+							<!-- 号外号外!神预测出现,速来!http://t.cn.A42345B1 -->
+							<% if(listData[i]['post_id'] != null) {%>
+							<%=listData[i]['commentContent']%>
+							<% }else { %>
+							该帖子已删除
+							<% } %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+		<% } %>
+		<% } %>
+	<% } %>
+</script>
+<script type="text/template" id="Data-list-comment">
+	<% for(var i = 0; i<listData.length; i++){ %>
+	<% if(listData[i]['post_id'] != null) {%>
+		<li class="aui-list-item aui-list-item-middle aui-padded-15" >
+			<div class="aui-media-list-item-inner">
+				<div class="aui-list-item-media" style="width: 3rem;">
+					<img src="<%=index_url.replace('/index.php/', '') +listData[i]['head_path']%>" class="aui-img-round aui-list-img-sm">
+				</div>
+				<div class="aui-list-item-inner aui-padded-r-0">
+					<div class="aui-list-item-text">
+						<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis aui-text-left"><%=listData[i]['nickname']%></div>
+						<div class="aui-list-item-right aui-text-right" style="width: 6rem;"><%=listData[i]['create_time']%></div>
+					</div>
+					<div class="aui-list-item-text">
+						<div class="aui-list-item-title flex-1 aui-font-size-14 aui-ellipsis aui-text-left"><%=listData[i]['content']%></div>
+						<div class="aui-list-item-right aui-text-right" style="width: 6rem;">
+							<div class="aui-info aui-padded-0 w-100 justify-end">
+								<div class="aui-info-item" tapmode onclick="openDialog('widget://app/dialog/dialog-reply');getReplyData(<%=listData[i]['id']%>,<%=listData[i]['member_id']%>,<%=listData[i]['post_id']%>);">
+									<img class="aui-margin-r-5 reply-icon" src="../../../image/reply.png" /><span class="aui-font-size-14 color-more">回复</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%if (listData[i]['sub'].length > 0){ %>
+				<div class="aui-media-list-item-inner">
+					<div class="aui-list-item-inner aui-padded-0" style="padding-left: 3rem !important;">
+						<div class="aui-list-item-text">
+							<div class="comment-div w-100 aui-margin-t-0">
+								<% for(var j = 0; j<listData[i]['sub'].length; j++){ %>
+								<p class="aui-text-left"><span class="comment-man">回复</span>: <%=listData[i]['sub'][j]['content']%></p>
+								<% } %>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% } %>
+			<% if( listData[i]['gallery_title_id'] == 0 ) {%>
+				<% if( listData[i]['a_member_id'] == 0){%>
+				<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray" tapmode onclick="openWin('widget://app/derby/html/mainbody_win',{post_id:<%=listData[i]['post_id']%>,member_id:<%=listData[i]['comment_member_id']%>})">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-text">
+							
+							<div class="aui-ellipsis-2 aui-text-left">
+								<!-- <span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+								号外号外!神预测出现,速来!http://t.cn.A42345B1 -->
+									<%=listData[i]['p_content']%>
+							</div>
+						</div>
+					</div>
+					<div class="aui-list-item-media">
+						<div class="img-container" style="background: url(<%=head_path+listData[i]['picture_path'][0]%>) no-repeat;background-size: cover;"></div>
+					</div>
+				</div>
+				<% }else {%>
+				<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray" tapmode onclick="openWin('widget://app/derby/html/mainbody_win',{post_id:<%=listData[i]['post_id']%>,member_id:<%=listData[i]['a_member_id']%>})">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-text">
+							
+							<div class="aui-ellipsis-2 aui-text-left">
+								<!-- <span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+								号外号外!神预测出现,速来!http://t.cn.A42345B1 -->
+									<%=listData[i]['p_content']%>
+							</div>
+						</div>
+					</div>
+					<div class="aui-list-item-media">
+						<div class="img-container" style="background: url(<%=head_path+listData[i]['picture_path'][0]%>) no-repeat;background-size: cover;"></div>
+					</div>
+				</div>
+				<% } %>
+			<% }else {%>
+			<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray" tapmode 
+			data-post_id="<%=listData[i]['post_id']%>" 
+			data-gallery_title_id="<%=listData[i]['gallery_title_id']%>"
+			data-content="<%=listData[i]['p_content']%>"
+			data-lottery_id="<%=listData[i]['lottery_id']%>"
+			data-years="<%=listData[i]['years']%>"
+			onclick="toDetail(this)">
+				<div class="aui-list-item-inner">
+					<div class="aui-list-item-text">
+						
+						<div class="aui-ellipsis-2 aui-text-left">
+							<!-- <span class="aui-margin-r-5 color-blue">@超级预测员:</span>
+							号外号外!神预测出现,速来!http://t.cn.A42345B1 -->
+								<%=listData[i]['p_content']%>
+						</div>
+					</div>
+				</div>
+				<div class="aui-list-item-media">
+					<div class="img-container" style="background: url(<%=head_path+listData[i]['picture_path'][0]%>) no-repeat;background-size: cover;"></div>
+				</div>
+			</div>
+			<% } %>
+		</li>
+		<% } %>
+	<% } %>
+</script>
+<script type="text/template" id="Data-list-message">
+	<% for(var i = 0; i<listData.length; i++){ %>
+		<li class="aui-list-item aui-padded-b-10" tapmode onclick="openWin('widget://app/message/html/sysmsg_win',{id:<%=listData[i]['id']%>})">
+			<div class="aui-media-list-item-inner aui-list-item-arrow">
+				<div class="aui-list-item-media align-center" style="width: 2.2rem;">
+					<img class="msgnotice-icon" src="../../../image/msg-notice.png">
+				</div>
+				<div class="aui-list-item-inner">
+					<div class="aui-list-item-text">
+						<div class="aui-list-item-title"><%=listData[i]['title']%><span class="aui-font-size-12 aui-margin-l-5 color-gray"><%=listData[i]['create_time']%></span></div>
+					</div>
+					<!-- <div class="aui-list-item-text">
+						<div class=" aui-ellipsis" >
+							<%=#listData[i]['content']%>
+							<!-- 关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解!关于系统版本更新，如有问题敬请谅解! -->
+						<!-- </div> -->
+					<!-- </div> -->
+				</div>
+			</div>
+		</li>
+	<% } %>
+</script>
+<script type="text/javascript">
+	var currentPageNum1 =1;
+	var currentPageNum2 =1;
+	var currentPageNum3 =1;
+	var listData1 = new Array();
+	var listData2 = new Array();
+	var listData3 = new Array();
+	var replyData = {};
+	var type = 1;//1.点赞 2.评论 3.系统消息
+	var dialog = new auiDialog();
+	apiready = function() {
+		var userInfo = $api.getStorage('userInfo');
+		var is_free = userInfo.is_free;
+		if(is_free == 1){
+			openDialog2('widget://app/dialog/dialog');
+		}
+		api.addEventListener({
+				name: 'refreshIndex4'
+			}, function(ret, err) {
+				var userInfo = $api.getStorage('userInfo');
+				var is_free = userInfo.is_free;
+				if(is_free == 1){
+					openDialog2('widget://app/dialog/dialog');
+					return;
+				}
+				console.log("刷新了页面~~~~");
+				window.location.reload();
+		});
+		var newestNum = $api.getStorage('newestNum');
+		if(newestNum['notice'] == 'undefined' || newestNum['notice']==null){
+			getMessage();
+			getMessageNum();
+		}
+		$("#notice").html("["+newestNum['notice']+"]");
+		$("#comments").html("["+newestNum['comment']+"]");
+		$("#like").html("["+newestNum['like']+"]");
+		api.parseTapmode();
+		var tab = new auiTab({
+			element: document.getElementById("tab"),
+		}, function(ret) {
+			console.log(ret.index);
+			if(ret.index==1){
+				$('#praiseListData').html("");
+				$('#praise').show();
+				$('#comment').hide();
+				$('#sysmsg').hide();
+				$("#like").html("[0]");
+				type = 1;
+				currentPageNum1=1;
+			}else if(ret.index==2){
+				
+				$('#commentListData').html("");
+				$('#praise').hide();
+				$('#comment').show();
+				$('#sysmsg').hide();
+				$("#like").html("[0]");
+				$("#comments").html("[0]");
+				type = 2;
+				currentPageNum2=1;
+			}else if(ret.index==3){
+				$('#messageListData').html("");
+				$('#praise').hide();
+				$('#comment').hide();
+				$('#sysmsg').show();
+				type = 3;
+				currentPageNum3=1;
+				$("#notice").html("[0]");
+				$("#like").html("[0]");
+			}
+			init(type);
+		});
+
+		api.addEventListener({
+				name : 'scrolltobottom',
+				extra : {threshold : 50 }//设置距离底部多少距离时触发，默认值为0，数字类型
+		}, function(ret, err) {
+				if(type == 1){
+					currentPageNum1 += 1;
+					getPraise(currentPageNum1);
+				}else if(type == 2){
+					currentPageNum2 += 1;
+					getComment(currentPageNum2);
+				}else if(type ==3){
+					currentPageNum3 += 1;
+					getNotice(currentPageNum3);
+				}
+		});
+
+		api.setRefreshHeaderInfo({
+		    loadingImg : 'widget://image/refresh.png',
+		    bgColor : '#ccc',
+		    textColor : '#fff',
+		    textDown : '下拉刷新...',
+		    textUp : '松开刷新...'
+		}, function(ret, err) {
+		    	currentPageNum1 = 1;
+				currentPageNum2 = 1;
+				currentPageNum3 = 1; 
+				if(type == 1){
+					getPraise(currentPageNum1);
+				}else if(type == 2){
+					getComment(currentPageNum2);
+				}else{
+					getNotice(currentPageNum3);
+				}
+		    // 恢复下拉
+		    api.refreshHeaderLoadDone()
+		});
+		init(type);
+		// openDialog('widget://app/dialog/dialog-reply');
+	};
+
+	function init(type){
+		if(type == 1){
+			getPraise(currentPageNum1);
+		}else if(type == 2){
+			getComment(currentPageNum2);
+		}else{
+			getNotice(currentPageNum3);
+		}
+	}
+
+	//获取系统消息
+	function getNotice(page){
+		$cjy.ajax({
+			url: index_url+'api/News/platformMessage',
+			method: 'post',
+			// showProgress: "努力加载中...",
+			data:{
+			'page':page
+			}
+		}, function(ret) {
+			if(ret.code == 0){
+				if(ret.data.length > 0){
+					if(currentPageNum3==1){
+						upMessageData(ret.data[0]['id'],"notice");
+					}
+					var data = {};
+					data.listData = currentPageNum3 != 1 ? listData3.concat(ret.data) : ret.data;
+					listData3 = data.listData;
+					var html = template('Data-list-message',data);
+					$api.html($api.byId('messageListData'), html);
+				}else{
+					if(currentPageNum3 == 1){
+						$api.html($api.byId('messageListData'), '暂无数据~~~~');
+					}else{
+						currentPageNum3-=1;
+					}
+					
+				}
+			}
+		},function(err){
+		console.log(JSON.stringify(err));
+		});
+	}
+
+	//获取点赞列表
+	function getPraise(page){
+		$cjy.ajax({
+			url: index_url+'api/News/likeAll',
+			method: 'post',
+			data:{'page':page}
+		}, function(ret) {
+			 console.log(JSON.stringify(ret));
+			if(ret.code == 0){
+				if(ret.data.length > 0){
+					if(currentPageNum1==1){
+						upMessageData(ret.data[0]['id'],"like");
+					}
+					var data = {};
+					data.listData = currentPageNum1 != 1 ? listData1.concat(ret.data) : ret.data;
+					data.index_url = index_url;
+					data.head_path = head_path;
+					listData1 = data.listData;
+					console.log($api.jsonToStr(data));
+					var html = template('Data-list-praise',data);
+					$api.html($api.byId('praiseListData'), html);
+				}else{
+						if(currentPageNum1 == 1){
+							$api.html($api.byId('praiseListData'), '暂无数据~~~~');
+						}else{
+							currentPageNum1-=1;
+							toast1('没有更多了！');
+						}
+				}
+			}
+		});
+	}
+
+	//获取评论列表
+	function getComment(page){
+		$cjy.ajax({
+			url: index_url+'api/News/commentList',
+			method: 'post',
+			data:{'page':page}
+		}, function(ret) {
+			 console.log(JSON.stringify(ret.data));
+			if(ret.code == 0){
+				if(ret.data.length > 0){
+					if(currentPageNum2==1){
+						upMessageData(ret.data[0]['id'],"comment");
+					}
+					var data = {};
+					data.listData = page != 1 ? listData2.concat(ret.data) : ret.data;
+					data.index_url = index_url;
+					data.head_path = head_path;
+					data.nickname = $api.getStorage('userInfo').nickname;
+					listData2 = data.listData;
+					var html = template('Data-list-comment',data);
+					$api.html($api.byId('commentListData'), html);
+				}else{
+					if(currentPageNum2 == 1){
+						$api.html($api.byId('commentListData'), '暂无数据~~~~');
+					}else{
+						currentPageNum2-=1;
+						toast1('没有更多了！');
+					}
+				}
+			}
+		});
+	}
+
+	//保存点击获得的信息
+	function getReplyData(id,a_member_id,post_id){
+		replyData = {
+			'id':id,
+			'a_member_id':a_member_id,
+			'post_id':post_id,
+			'member_id':$api.getStorage('userInfo').id
+		}
+	}
+
+	function saveReplyData(content){
+		replyData.content = content;
+		// console.log(JSON.stringify(replyData));
+		$cjy.ajax({
+			url: index_url+'api/News/reply',
+			method: 'post',
+			data:replyData
+		}, function(ret) {
+			toast1(ret.msg);
+			if(ret.code == 0){
+				init(type);
+			}
+		});
+	}
+	
+	function upMessageData(id,type){
+		console.log("type==>"+type+",id===>"+id);
+		//更新 数据
+		var newestId = $api.getStorage('newestId');
+		newestId[type] = id;
+	 	$api.setStorage('newestId', newestId);
+		api.writeFile({
+			path: 'fs://33'+$api.getStorage('userId')+'.txt',
+			data: JSON.stringify(newestId)
+		}, function(ret, err) {
+					
+		}); 
+	}
+	
+	//获取三个消息的ID值
+	function getMessage(){
+			$cjy.ajax({
+				url: index_url+'api/News/getMessageId',
+				method: 'post',
+				data:{}
+			}, function(ret) {
+				var messageData = ret.data;
+	//			console.log(JSON.stringify(ret));
+				//将消息保存到  本地文件里 不然退出登入就没了
+				//异步返回结果：
+				api.readFile({
+					path: 'fs://33'+$api.getStorage('userId')+'.txt'
+				}, function(ret, err) {
+					if (ret.status) {
+						var data = ret.data;
+						var obj = JSON.parse(data);
+						$api.setStorage('newestId', obj);
+					} else {
+					//否则就写文件
+					$api.setStorage('newestId', messageData);
+					api.writeFile({
+							path: 'fs://33'+$api.getStorage('userId')+'.txt',
+							data: JSON.stringify(messageData)
+						}, function(ret, err) {
+							if (ret.status) {
+								//成功
+	//					        console.log("成功写入文件");
+							} else {
+						
+							}
+						}); 
+					}
+				});
+		});
+
+	}
+	//获取未读消息的数量
+	function getMessageNum(){
+	//	console.log("-----getMessageNum-----");
+		var newestId = $api.getStorage('newestId');
+		if(newestId){
+			$cjy.ajax({
+				url: index_url+'api/News/getMessageNum',
+				method: 'post',
+				data:{
+					"like":newestId['like'],
+					"comment":newestId['comment'],
+					"notice":newestId['notice'],
+				}
+			}, function(ret) {
+				$api.setStorage('newestNum', ret.data);
+	//			console.log("getMessageNum=======>"+JSON.stringify(ret));	
+				var num = ret.data.like + ret.data.comment + ret.data.notice;
+				if(num>0){
+				$("#message").html("["+num+"]");
+				}else{
+				$("#message").html("");
+				}
+			},function(err){
+	//			console.log("getMessageNum=======>"+JSON.stringify(err));	
+			});
+			
+		}else{
+			getMessage();
+		}
+		setTimeout("getMessageNum()",2000);
+		
+	}
+	
+	function toDetail(_this){
+		let post_id = $(_this).data('post_id');
+		let gallery_title_id = $(_this).data('gallery_title_id');
+		let content = $(_this).data('content');
+		let years = $(_this).data('years');
+		let lottery_id = $(_this).data('lottery_id');
+		// console.log(`进入详情页post_id:${post_id},years:${year},gallery_title_id:${gallery_title_id},lottery_id:${lottery_id},content:${content}`);return
+		openWin('widget://app/home/html/photodetail_win',{post_id:post_id,gallery_title_id:gallery_title_id,years:years,lottery_id:lottery_id,content:content})
+	}
+	
+
+
+</script>

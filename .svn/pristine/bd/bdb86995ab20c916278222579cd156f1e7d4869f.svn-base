@@ -1,0 +1,50 @@
+.home-header,
+.home-header .aui-tab {
+	background-color: #FF492B;
+}
+.banner {
+	background-color: #FF492B;
+}
+.banner .occupied-top{
+	background-color: #FF492B; 
+}
+.notice {
+	background: url(../image/notice-red.png) no-repeat;
+	background-size: .8rem 100%;
+	background-position: .5rem 0;
+} 
+.search-type-list .search-type-item.active:after {
+	background-color: #F82E08;
+}
+.search-type-list2 .search-type-item2.active span {
+	background: url(../img/type-red.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.lotteryhis-item {
+	background: url(../image/lotteryhis-red.png) no-repeat;
+	background-size: 100% 100%;
+}
+.lotteryhis-item .lotteryhis-txt {
+	color: #F82B06;
+}
+.lotteryhis-item .lotteryhis-txt:after {
+	border-left: 1px solid #F82B06;
+	border-bottom: 1px solid #F82B06;
+} 
+.color {
+	color: #F82B06;
+}
+.header-nobg-red .aui-tab .aui-tab-item.aui-active span {
+	color: #FF492B;
+} 
+.header-nobg-red .aui-tab .aui-tab-item.aui-active span:after {
+	background-color: #FF492B;
+} 
+.aui-tab-item.aui-active span:after{
+	background-color: #FF492B;
+}
+.search-type-list2 .search-type-item2.active span{
+	background: url(../app/index/img/type-red.png);
+	background-size: 100% 100%;
+}

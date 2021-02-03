@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<script type="text/javascript" src="../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script> 
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+			}
+		</style>
+	</head>
+	<body>
+
+	</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/utils.js"></script>
+<script type="text/javascript" src="../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../script/aui-dialog.js"></script>
+<script type="text/javascript">
+	var dialog = new auiDialog();
+	apiready = function() {
+		if($api.getStorage('dialog') != 1){
+			$api.setStorage('dialog', 1);
+			api.parseTapmode();
+			// $(document.body).on('touchend', function(e) {
+			// 	var dialog = $("#dialog")[0];
+			// 	if (!$.contains(dialog, e.target)) {
+			// 		setTimeout(function() {
+			// 			api.closeFrame();
+			// 		}, 200);
+			// 	}
+			// });
+			dialog.alert({
+				title: "弹出提示",
+				msg: '您还未登陆',
+				buttons: ['取消','去登陆/注册']
+			}, function(ret) {
+				if(ret.buttonIndex == 1){
+					openWin('widget://app/index/html/index');
+				}else{
+					openWin('widget://app/login/html/login_win');
+				} 
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			})
+
+		}else{
+			
+			$api.setStorage('dialog', 0);
+			api.closeFrame();
+		}
+		
+
+		
+	};
+</script>

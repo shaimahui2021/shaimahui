@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<script type="text/javascript" src="../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>图库详情里的评论--点击输入框</title>
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="dialog" class="aui-content dialog dialog-input"> 
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/utils.js"></script>
+<script type="text/javascript" src="../../script/jquery-2.1.4.js"></script> 
+<script type="text/javascript">
+	var UIChatBox;
+	apiready = function() {
+		api.parseTapmode();
+		$(document.body).on('touchend', function(e) {
+			var dialog = $("#dialog")[0];
+			if (!$.contains(dialog, e.target)) {
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			}
+		});
+		UIChatBox = api.require('UIChatBox');
+		// 监听 inputBar 输入框把内容顶上去
+		UIChatBox.addEventListener({
+			target: 'inputBar',
+			name: 'move'
+		}, function(ret, err) {
+			if (ret) {
+				if (api.systemType == 'ios') {
+					api.setFrameAttr({
+						name: api.frameName,
+						rect: {
+							marginBottom: ret.panelHeight
+						}
+					});
+				}
+				if (api.systemType == 'android') { //键盘上顶的
+					if (api.winHeight > (ret.inputBarHeight + ret.panelHeight)) {
+
+						api.setFrameAttr({
+							name: api.frameName,
+							rect: {
+								h: winH - (ret.inputBarHeight + ret.panelHeight) - 40
+							}
+						});
+					}
+				}
+				scrollToEnd();
+			}
+		});
+		chatBoxOpen();
+	};
+	//打开聊天窗口
+	function chatBoxOpen() {
+		var UIChatBox = api.require('UIChatBox'); 
+		UIChatBox.open({
+			placeholder: '说点啥好呢~',
+			autoFocus: true,
+			maxRows: 4,
+			emotionPath: 'widget://image/keyboard/emotion',
+			texts: {
+				recordBtn: {
+					normalTitle: '按住说话',
+					activeTitle: '松开结束'
+				},
+				sendBtn: {
+					title: '发送'
+				}
+			},
+
+			styles: {
+				topDivider: {
+					width: 1,
+					color: '#d2d2d2'
+				},
+				inputBar: {
+					bgColor: '#fff',
+					textMarginLeft: 10
+				},
+				inputBox: {
+					borderColor: '#F4F8FC',
+					topMargin: 5
+				},
+				sendBtn: {
+					titleColor: '#fff',
+					bg: '#FF3952',
+					activeBg: '#FF3952',
+					titleSize: 14
+				},
+			},
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'send') { 
+				}
+				if (ret.eventType == "clickExtras") { 
+				} 
+			}
+		});
+	};
+</script>

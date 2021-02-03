@@ -1,0 +1,255 @@
+.aui-tab-item.aui-active span:after {
+	width: 4rem;
+	margin-left: -2rem;
+}
+
+.drawdetail-list {
+	background-color: #fff;
+	border: 1px solid #AAAAAA;
+	border-bottom: none;
+}
+
+.drawdetail-item:nth-child(2n-1) {
+	border-right: 1px solid #AAAAAA;
+}
+
+.drawdetail-item {
+	border-bottom: 1px solid #AAAAAA;
+}
+
+.drawdetail-item {
+	font-size: .7rem;
+	padding: .5rem;
+}
+
+.indexed-list-number {
+	position: absolute;
+	right: 3rem;
+	color: #999;
+	font-size: .6rem;
+}
+
+.indexed-list-number label {
+	background: #f2f2f2;
+	padding: 0 0.1rem;
+	border-radius: .2rem;
+}
+
+.laydate-theme-calendar .layui-laydate-header i.laydate-prev-y,
+.laydate-theme-calendar .layui-laydate-header i.laydate-prev-m,
+.laydate-theme-calendar .layui-laydate-header i.laydate-next-m,
+.laydate-theme-calendar .layui-laydate-header i.laydate-next-y {
+	display: none !important;
+}
+
+.laydate-theme-calendar .laydate-set-ym span:nth-child(1) {
+	pointer-events: none;
+}
+
+.laydate-theme-calendar .laydate-day-mark {
+	color: #666 !important;
+	background: url(../../../image/ball-red.png) no-repeat !important;
+	background-size: 1.5rem 1.5rem !important;
+	background-position: 50% 50% !important;
+}
+
+.laydate-theme-calendar .laydate-day-mark::after {
+	background-color: transparent !important;
+}
+
+.laydate-theme-calendar.layui-laydate .layui-this {
+	background-color: transparent !important;
+	color: #666 !important;
+}
+
+.laydate-theme-calendar,
+.laydate-theme-calendar .layui-laydate-main,
+.laydate-theme-calendar .layui-laydate-content table {
+	width: 100%;
+}
+
+.laydate-theme-calendar .layui-laydate-header {
+	color: #fff;
+	font-size: 18px;
+	background-color: #FF492B;
+}
+
+.operate-list {
+	position: absolute;
+	bottom: 1rem;
+	right: 1.5rem;
+	width: auto;
+	z-index: 99;
+}
+
+.operate-list2 {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+}
+
+/* .operate {
+	margin-bottom: .75rem;
+} */
+
+.operate-icon {
+	width: 1.2rem;
+	height: 1.2rem;
+	display: block;
+	margin: auto;
+}
+
+.operate-praise-icon {
+	background: url(../img/praise.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-praise-icon.active {
+	background: url(../img/praise-active.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-gift-icon {
+	background: url(../img/gift.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-gift-icon.active {
+	background: url(../img/gift-active.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-msg-icon {
+	background: url(../img/msg.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-forward-icon {
+	background: url(../img/forward.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.operate-list2 .operate {
+	flex: 1;
+	position: relative;
+}
+
+.operate-list2 .operate small {
+	font-size: .6rem;
+	display: block;
+	line-height: .6rem;
+}
+
+.operate-list2 .operate:after {
+	content: '';
+	display: block;
+	width: 1px;
+	height: 1rem;
+	background: #b6b9ba;
+	position: absolute;
+	top: .6rem;
+}
+
+.operate-list2 .operate:nth-child(1):after {
+	display: none;
+}
+
+/* 图库详情 start */
+.tab-list {
+	display: flex;
+	flex-direction: row;
+	overflow-x: auto;
+}
+
+.tab-list .tab-item {
+	flex-basis: 25%;
+	flex-shrink: 0;
+	white-space: nowrap;
+	text-align: center;
+	font-size: .7rem;
+	color: #000;
+	height: 2.2rem;
+	line-height: 2.2rem;
+}
+
+.tab-list .tab-item.active {
+	color: #EF541E;
+}
+
+.tab-list.year .tab-item {
+	font-size: .75rem;
+}
+
+.dropdown-menu {
+	text-align: center;
+	font-size: .7rem;
+	line-height: 2.2rem;
+	/* height: 2.4rem; */
+	box-shadow: 0 .1rem .6rem #dcdcdc;
+}
+
+.dropdown-menu-title {
+	position: relative;
+	display: inline-block;
+	color: #EF541E;
+}
+
+.dropdown-menu-title:after {
+	position: absolute;
+	top: 50%;
+	right: -.5rem;
+	margin-top: -.25rem;
+	border: 3px solid;
+	border-color: transparent transparent #dcdee0 #dcdee0;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	opacity: .8;
+	content: "";
+}
+
+.image-bd {
+	padding-top: 4.4rem;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+}
+
+.fixed-tab-list {
+	position: fixed;
+	width: 100%;
+	background-color: #fff;
+	z-index: 999;
+}
+
+.topNav {
+	width: 100%;
+	overflow: hidden;
+	font-size: 14px;
+	border-bottom: 1px solid #f8f8f8;
+}
+
+.topNav .swiper-slide {
+	padding: 0 5px;
+	width: 66px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+}
+
+.topNav .swiper-slide span {
+
+	transition: all .3s ease;
+	display: block;
+}
+
+.topNav .active span {
+	transform: scale(1.1);
+	color: #EF541E;
+}
+
+/* 图库详情 end */

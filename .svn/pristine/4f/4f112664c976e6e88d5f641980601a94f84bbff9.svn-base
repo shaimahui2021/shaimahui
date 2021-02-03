@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="aui-content aui-padded-t-15">
+			<ul class="aui-list aui-media-list aui-list-noborder bg-gray" id="listData" style="text-align:center">
+				<!-- <li class="aui-list-item aui-padded-15 aui-margin-b-15 bg-fff">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3.5rem;">
+							<img src="../../../image/empty-head.png" />
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-title font-bold aui-ellipsis">超级预测员</div>
+							<div class="aui-info aui-padded-0 aui-padded-t-5">
+								<div class="aui-info-item">
+									<div class="aui-margin-r-5 sex sex-nan"></div><span class="aui-font-size-16 color-black">男</span>
+								</div>
+							</div>
+						</div>
+						<div class="aui-list-item-media align-center" style="width: 5.75rem;">
+                            <div class="focus-icon cancelfocus-icon"></div>
+						</div>
+					</div>
+				</li> -->
+				<!-- <li class="aui-list-item aui-padded-15 aui-margin-b-15 bg-fff">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3.5rem;">
+							<img src="../../../image/empty-head.png" />
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-title font-bold aui-ellipsis">超级预测员</div>
+							<div class="aui-info aui-padded-0 aui-padded-t-5">
+								<div class="aui-info-item">
+									<div class="aui-margin-r-5 sex sex-nv"></div><span class="aui-font-size-16 color-black">女</span>
+								</div>
+							</div>
+						</div>
+						<div class="aui-list-item-media align-center" style="width: 5.75rem;">
+							 <div class="focus-icon cancelfocus-icon"></div>
+						</div>
+					</div>
+				</li> -->
+			</ul>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="Data-list">
+	<% for(var i = 0; i<listData.length; i++){ %>
+	<li class="aui-list-item aui-padded-15 aui-margin-b-15 bg-fff">
+		<div class="aui-media-list-item-inner">
+			<div class="aui-list-item-media" style="width: 3.5rem;">
+				<img src="<%=index_url.replace('/index.php/', '') +listData[i]['head_path']%>" />
+			</div>
+			<div class="aui-list-item-inner">
+				<div class="aui-list-item-title font-bold aui-ellipsis"><%=listData[i]['nickname']%></div>
+				<div class="aui-info aui-padded-0 aui-padded-t-5">
+					<div class="aui-info-item">
+						<div class="aui-margin-r-5 sex <%=listData[i]['sex']==1?'sex-nan':'sex-nv';%>"></div><span class="aui-font-size-16 color-black"><%=listData[i]['sex']==1?'男':'女';%></span>
+					</div>
+				</div>
+			</div>
+			<%if (display==true){ %>
+			<div class="aui-list-item-media align-center" style="width: 5.75rem;" onclick="cancel(<%=listData[i]['id']%>)">
+											<div class="focus-icon cancelfocus-icon"></div>
+			</div>
+			<% } %>
+		</div>
+	</li>
+	<% } %>
+</script>
+<script type="text/javascript">
+	var type;
+	var member_id;
+	apiready = function() {
+		if(api.pageParam[1] !== undefined){
+			lotteryOpenType = api.pageParam[1];
+			type = lotteryOpenType.type;
+			member_id = lotteryOpenType.member_id;
+		}
+		init();
+		api.parseTapmode();
+	};
+
+	function init(){
+		if(type == 1){
+			var userId = member_id;
+		}else{
+			var userId = $api.getStorage('userId');
+		}
+		$cjy.ajax({
+			url: index_url+'api/Member/watchList',
+			method: 'post',
+			data:{'id':userId}
+		}, function(ret) {
+			if(ret.code == 0){
+				var data = {};
+				data.listData = ret.data.attention;
+				data.display = ret.data.display;
+				data.index_url= index_url;
+				if(data.listData.length > 0){
+					var html = template('Data-list',data);
+					$api.html($api.byId('listData'), html);
+				}else{
+						$api.html($api.byId('listData'), '暂无数据~~~~');
+				}
+			}
+		});
+
+		api.addEventListener({
+			name: 'viewappear'
+		}, function(ret, err) {
+			init();//初始化一下页面，重新加载一下数据
+		});
+	}
+
+	function cancel(id){
+		$cjy.ajax({
+			url: index_url+'api/Member/watchListDel',
+			method: 'post',
+			data:{'id':id}
+		}, function(ret) {
+			if(ret.code == 0){
+				toast1('取消成功！');
+				var userInfo = $api.getStorage('userInfo');
+				if(userInfo.attention>0){
+					userInfo.attention = userInfo.attention-1;
+				  $api.setStorage('userInfo', userInfo);
+				}
+				init();
+			}
+		});
+	}
+</script>

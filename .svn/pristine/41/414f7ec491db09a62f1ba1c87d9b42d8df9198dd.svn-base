@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<link rel="stylesheet" type="text/css" href="../../derby/css/derby.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body>
+		<section class="aui-content" id="listData">
+			<!-- <div class="aui-card-list aui-padded-t-10 aui-margin-t-10 aui-margin-b-10">
+				<div class="aui-card-list-header aui-card-list-user">
+					<div class="aui-card-list-user-avatar">
+						<img src="../../../image/empty-head.png" class="aui-img-round">
+					</div>
+					<div class="aui-card-list-user-name">
+						小李子的晒码
+						<i class="aui-iconfont aui-icon-down"></i>
+					</div>
+					<div class="aui-card-list-user-info  aui-font-size-12">
+						08-15&nbsp;14:20
+					</div>
+				</div>
+				<div class="aui-card-list-content-padded aui-padded-t-5">
+					<div class="aui-ellipsis-3">
+						号外号外!神预测出现,速来!
+					</div>
+					<div class="aui-row aui-row-padded aui-padded-t-5">  
+						<div class="aui-col-xs-12">
+							<img src="../../../image/l1.jpg" />
+						</div>
+						<div class="aui-col-xs-6">
+							<img class="img-round-sm" src="../../../image/l1.jpg">
+						</div>
+						<div class="aui-col-xs-6">
+							<img class="img-round-sm" src="../../../image/l1.jpg">
+						</div>
+						<div class="aui-col-xs-6">
+							<img class="img-round-sm" src="../../chat/img/l1.png">
+						</div>
+						<div class="aui-col-xs-6">
+							<img class="img-round-sm" src="../../chat/img/l1.png">
+						</div>
+					</div>
+				</div>
+				<div class="aui-card-list-footer aui-padded-t-0">
+					<div class="aui-info w-100">
+						<div class="aui-info-item"><img class="aui-margin-r-5 praise-icon" src="../../../image/praise-active.png" /> 200</div>
+						<div class="aui-info-item"><img class="aui-margin-r-5 msg-icon" src="../../../image/msg.png" /> 200</div>
+						<div class="aui-info-item" tapmode onclick="openWin('widget://app/derby/html/forward_win')"><img class="aui-margin-r-5 forward-icon"
+							 src="../../../image/forward.png" /> 200</div>
+						<div class="aui-info-item"><img class="aui-margin-r-5 gift-icon" src="../../../image/gift-active.png" /> 200</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- 	<ul class="aui-list aui-list-in aui-list-noborder aui-media-list">
+				<li class="aui-list-item aui-list-item-middle aui-padded-15">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3rem;">
+							<img src="../../../image/empty-head.png" class="aui-img-round aui-list-img-sm">
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis">木村拓哉</div>
+								<div class="aui-list-item-right aui-text-right" style="width: 6rem;">2020-09-09 14:52:34</div>
+							</div>
+							<div class="aui-list-item-text">
+								我转发了视频
+							</div>
+						</div>
+					</div>
+					<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray"  tapmode onclick="openWin('widget://app/derby/html/mainbody_win',{post_id:<%=listData[i]['forward_id']%>,member_id:<%=listData[i]['member_id']%>})">
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-ellipsis-2">
+									<span class="aui-margin-r-5 color-blue">@我:</span>
+									那我也转发
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</li>
+				<div class="bg-gray" style="height: 0.5rem;"></div> 
+			</ul> -->
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../script/aui-dialog.js"></script>
+<script type="text/template" id="Data-list">
+
+	<%if (listData.length>0){ %>
+		<% for(var i = 0; i<listData.length; i++){ %>
+		<% if(listData[i]['forward_id']){%>  
+		<ul class="aui-list aui-list-in aui-list-noborder aui-media-list">
+			<li class="aui-list-item aui-list-item-middle aui-padded-15">
+				<div class="aui-media-list-item-inner align-start">
+					<div class="aui-list-item-media" style="width: 3rem;"  tapmode onclick="openWin('widget://app/derby/html/perscenter_win',{member_id:<%=listData[i]['member_id']%>})">
+						<img src="<%= index_url.replace('/index.php/', '') +listData[i]['t_head_path'] %>" class="aui-img-round aui-list-img-sm">
+					</div>
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-text">
+							<div class="aui-list-item-title flex-1 aui-font-size-16 font-bold aui-ellipsis"><%=listData[i]['nickname']%></div> 
+						</div>
+						<div class="aui-list-item-text">
+							<div class="aui-font-size-12 aui-ellipsis">
+								<%= nickname %>的转发
+							</div>
+						</div>
+						<div class="aui-list-item-text">
+							<%=listData[i]['create_time']%>
+						</div> 
+						<div class="aui-list-item-text">
+							<%=listData[i]['forward']%>  
+						</div> 
+					</div>
+					<div class="aui-list-item-media aui-flex-col aui-flex-right justify-end aui-padded-r-0">
+					    <i class="addfocus-icon delfocus-icon"  tapmode onclick="deleteRecord(<%=listData[i]['id']%>)"></i>
+					</div> 
+				</div>
+				<% if(listData[i]['gallery_title_id'] == 0) {%>
+				<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray"  tapmode onclick="openWin('widget://app/derby/html/mainbody_win',{post_id:<%=listData[i]['forward_id']%>,member_id:<%=listData[i]['member_id']%>})">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-text">
+							<div class="flex flex-row">
+								<div class="flex-none color-blue aui-margin-r-5">@<%=listData[i]['forward_nickname']%>:</div>
+								<div class="aui-text-left"><%=listData[i]['content']%></div> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<% }else { %>
+				<div class="aui-media-list-item-inner align-start aui-padded-l-15 aui-padded-t-5 aui-padded-b-5 img-round-sm bg-gray"  tapmode onclick="openWin('widget://app/home/html/photodetail_win',{'id':<%=listData[i]['gallery_title_id']%>,post_id:<%=listData[i]['forward_id']%>})">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-text">
+							<div class="flex flex-row">
+								<div class="flex-none color-blue aui-margin-r-5">@<%=listData[i]['forward_nickname']%>:</div>
+								<div class="aui-text-left"><%=listData[i]['content']%></div> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<% } %>
+			</li>
+			<div class="bg-gray" style="height: 0.5rem;"></div> 
+		</ul>
+		<% } else { %>
+		<div class="aui-card-list aui-padded-t-10 aui-margin-b-10">
+			<div class="aui-card-list-header aui-card-list-user">
+				<div class="aui-card-list-user-avatar">
+					<img src="<%= index_url.replace('/index.php/', '') +listData[i]['t_head_path'] %>" class="aui-img-round">
+				</div>
+				<div class="aui-card-list-user-name">
+					<div><%= nickname %>的晒码</div>
+					<i class="addfocus-icon delfocus-icon" tapmode onclick="deleteRecord(<%=listData[i]['id']%>)"></i>
+				</div>
+				<div class="aui-card-list-user-info  aui-font-size-12">
+					<%= listData[i]['create_time'] %> 
+				</div> 
+			</div>
+			<div class="aui-card-list-content-padded aui-padded-t-5">
+				<div class="aui-ellipsis-3" tapmode onclick="openWin('widget://app/derby/html/mainbody_win',{post_id:<%=listData[i]['id']%>,member_id:<%=listData[i]['member_id']%>})">
+					
+					<span style="white-space: pre-line"><%= listData[i]['content'] %></span>
+				</div>
+				<% if(listData[i]['head_path']) {%>
+				<% if(listData[i]['video_path'] != 0) {%>
+				<div id="myVideoControls"  tapmode onclick="openVideo('<%=listData[i]['video_path']%>');" class="videoList aui-padded-t-5">
+					<div class="videoListItem">
+					    <% for(var j = 0; j<listData[i]['head_path'].length; j++) {%> 
+					    <div id="uploaderFiles" data-src="<%=head_path + listData[i]['head_path'][j]%>" style="background: url('<%=head_path + listData[i]['head_path'][j]%>') no-repeat;background-size: cover;"class="videoListItemImg"></div>
+					    <% } %>
+					    <div id="videoBtn"></div>
+					</div>
+				</div>
+				<% }else{  %>
+				<div class="aui-row aui-row-padded aui-padded-t-5">
+					<div class="aui-col-xs-12 uploadImgList">
+						<% if(listData[i]['head_path']!="未选择文件") {%>
+						<%for(var j = 0; j<listData[i]['head_path'].length; j++) {%>
+					    <div class="img-round-sm" style="background: url(<%=head_path + listData[i]['head_path'][j]%>) no-repeat;background-size: cover;" data-src="<%=head_path + listData[i]['head_path'][j]%>" tapmode onclick="openP(this,<%=j%>)"></div>
+					    <% } %>
+					<% } %>
+					</div>
+				</div>
+				<% } %>
+				<% } %>
+			</div> 
+		</div>
+		<% } %>
+		<% } %>
+		<% }else{ %>
+			暂无数据~~~~~~~~
+		<% } %> 
+</script>
+<script type="text/javascript">
+	var videoScreenshots, videoPlayer, UIPhotoViewer, UILoading, UILoadingId;
+	var dialog = new auiDialog();
+	apiready = function() {
+		api.addEventListener({
+			name: 'viewappear'
+		}, function(ret, err) {
+			init(); //初始化一下页面，重新加载一下数据
+		});
+		api.parseTapmode();
+		videoPlayer = api.require('videoPlayer');
+		videoScreenshots = api.require('videoScreenshots');
+		UIPhotoViewer = api.require('UIPhotoViewer');
+		UILoading = api.require('UILoading');
+	};
+
+	function init() {
+		var userId = $api.getStorage('userId');
+		var userInfo = $api.getStorage('userInfo');
+		console.log(userId);
+		$cjy.ajax({
+			url: index_url + 'api/Member/showMa',
+			method: 'post',
+			data: {
+				'id': userId
+			}
+		}, function(ret) {
+
+			console.log($api.jsonToStr(ret));
+
+			if (ret.code == 0) {
+				var data = {};
+				data.listData = ret.data;
+				data.nickname = userInfo.nickname;
+				data.index_url = index_url;
+				data.head_path = head_path;
+				var html = template('Data-list', data);
+				$api.html($api.byId('listData'), html);
+			}
+		});
+
+		api.parseTapmode();
+	};
+
+	function deleteRecord(post_id) {
+		dialog.alert({
+			title: "提示",
+			msg: '确认删除?',
+			buttons: ['取消', '确定']
+		}, function(ret) {
+			if (ret.buttonIndex == 2) {
+				$cjy.ajax({
+					url: configIndex.delPost,
+					method: 'post',
+					data: {
+						'record_id': post_id
+					}
+				}, function(ret) {
+					toast1(ret.msg);
+
+					init();
+				}, function(err) {
+					toast1("删除失败");
+				});
+			}
+		})
+	};
+	//视频未播放时提示加载中
+	function openUILoading() {
+		UILoading.flower({
+			center: {
+				x: api.winWidth / 2.0,
+				y: api.winHeight / 2.0
+			},
+			size: 30,
+			fixed: true
+		}, function(ret) {
+			UILoadingId = ret.id;
+		});
+	};
+
+	function closeUILoading() {
+		// alert(UILoadingId)
+		UILoading.closeFlower({
+			id: UILoadingId,
+			isGradual: false
+		});
+	}
+	//视频播放
+	function openVideo(video_path) {
+		video_image = $('#uploaderFiles').attr('data-src').replace('/', '');
+		//打开一个frame用于专门播放短视频模块依附
+		var currentTime = Math.round(new Date() / 1000);
+		var imgIP = '';
+		api.download({
+			url: video_image,
+			savePath: 'fs://' + currentTime + 'img.jpg',
+			report: true,
+			cache: true,
+			allowResume: true
+		}, function(ret, err) {
+			if (ret.state == 1) {
+				imgIP = ret['savePath'];
+				api.saveMediaToAlbum({
+					path: 'fs://' + currentTime + 'img.jpg'
+				}, function(ret, err) {
+
+				});
+				//打开一个frame用于专门播放短视频模块依附
+				api.openFrame({
+					name: 'video_fra',
+					url: 'video_fra.html',
+					rect: {
+						x: 0,
+						y: 0,
+						w: 'auto',
+						h: 'auto'
+					},
+				});
+				openUILoading();
+				videoPlayer.open({
+					rect: {
+						x: 0,
+						y: 0,
+						w: api.winWidth,
+						h: api.winHeight
+					},
+					bg: '#000',
+					// coverImg: 'fs://' + imgIP + '',
+					path: video + video_path,
+					fixedOn: 'video_fra',
+					loop: true,
+				}, function(ret, err) {
+					if (ret.eventType == 'playing') {
+						closeUILoading();
+					}
+					if (ret.status) {
+						//监听单击播放器
+						videoPlayer.addEventListener({
+							name: 'click'
+						}, function(ret, err) {
+							if (ret) {
+								videoPlayer.close();
+								api.closeFrame({
+									name: 'video_fra'
+								});
+							} else {
+								toast('退出失败');
+								api.closeFrame({
+									name: 'video_fra'
+								});
+							}
+						});
+					} else {
+						toast('播放失败');
+						api.closeFrame({
+							name: 'video_fra'
+						});
+					}
+				});
+			} else {
+
+			}
+		});
+	};
+	// 关闭视频
+	function closeVideo() {
+		videoPlayer.close();
+		api.closeFrame({
+			name: 'video_fra'
+		});
+	};
+	//预览图片
+	function openP(obj, activeIndex) {
+		var photoItem = [];
+		var photoList = $(obj).parent().children();
+		for (var i = 0; i < photoList.length; i++) {
+			photoItem[i] = photoList.eq(i).attr("data-src");
+		}
+		UIPhotoViewer.open({
+			images: photoItem,
+			zoomEnabled: true,
+			gestureClose: true,
+			bgColor: '#000',
+			activeIndex: activeIndex
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'change') {
+					api.sendEvent({
+						name: 'previewPage',
+						extra: {
+							key1: ret.index + 1,
+							key2: photoList.length
+						}
+					});
+				} else if (ret.eventType == 'click') {
+					UIPhotoViewer.close();
+					api.closeFrame({
+						name: 'photoView2_fra'
+					});
+				} else if (ret.eventType == 'gestureColse') {
+					api.sendEvent({
+						name: 'gestureColse'
+					});
+				}
+			}
+		});
+		setTimeout(function() {
+			// var tabHeight = $api.offset($api.dom('#aui-header')).h; //tab切换栏高度
+			api.openFrame({
+				name: 'photoView2_fra',
+				url: 'widget://app/derby/html/photoView2_fra.html',
+				rect: {
+					x: 0,
+					y: 0,
+					w: 'auto',
+					h: 70
+				},
+				pageParam: {
+					name: 'test'
+				},
+				bounces: false,
+				bgColor: 'rgba(0,0,0,0)',
+				vScrollBarEnabled: true,
+				hScrollBarEnabled: true
+			});
+		}, 800);
+	};
+	//关闭预览
+	function closeView() {
+		UIPhotoViewer.close();
+	};
+</script>

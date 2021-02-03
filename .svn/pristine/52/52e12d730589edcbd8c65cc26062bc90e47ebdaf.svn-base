@@ -1,0 +1,270 @@
+html,
+body {
+	/*font-size:14px;*/
+	height: 100%;
+	background-color: #f5f5f5;
+}
+
+/* index start */
+#wrap {
+	height: 100%;
+}
+
+#wrap {
+	max-width: 1024px;
+	margin: 0 auto;
+}
+
+.flex-wrap {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.flex-con {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+.flex-vertical {
+	-webkit-box-orient: vertical;
+	-webkit-flex-flow: column;
+	flex-flow: column;
+}
+
+.aui-bar-tab {
+	position: relative;
+	left: auto;
+	top: auto;
+}
+
+#footer {
+	border-top: 1px solid #F2F2F2;
+	min-height: 50px;
+}
+
+.aui-bar-tab .aui-bar-tab-label {
+	font-size: .6rem;
+	top: .7rem;
+}
+
+.aui-bar-tab .aui-active .aui-bar-tab-label {
+	color: #EF541E;
+}
+
+.aui-bar-tab-item:nth-child(1) {
+	background: url(../img/home.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item.aui-active:nth-child(1) {
+	background: url(../img/home-active.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item:nth-child(2) {
+	background: url(../img/found.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item.aui-active:nth-child(2) {
+	background: url(../img/found-active.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item:nth-child(3) {
+	background: url(../img/derby.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item.aui-active:nth-child(3) {
+	background: url(../img/derby-active.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item:nth-child(4) {
+	background: url(../img/message.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item.aui-active:nth-child(4) {
+	background: url(../img/message-active.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item:nth-child(5) {
+	background: url(../img/mine.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+.aui-bar-tab-item.aui-active:nth-child(5) {
+	background: url(../img/mine-active.png) no-repeat;
+	background-size: 1rem 1rem;
+	background-position: 50% .35rem;
+}
+
+/* index end */
+
+.home-header {
+	color: #fff;
+}
+
+.home-header .aui-tab .aui-tab-item.aui-active span:after {
+	content: '';
+	width: 1rem;
+	height: .1rem;
+	background-color: #fff;
+	display: block;
+	position: absolute;
+	left: 50%;
+	margin-left: -.6rem;
+	/* top: 50%; */
+	/* margin-top: .5rem; */
+}
+
+.home-header .aui-tab .aui-tab-item span {
+	white-space: nowrap;
+	display: block;
+	color: #fff;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+
+.banner {
+	position: relative;
+	width: 100%;
+	padding: 0 .5rem;
+	height: 8rem;
+	margin-bottom: .75rem;
+} 
+.banner .swiper-container {  
+	top: .5rem; 
+}  
+.banner .swiper-container img{
+	width: 100%;
+	border-radius: .25rem;
+}
+.banner .occupied-top{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: .5rem;  
+}
+.banner .occupied-bottom{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1rem;
+	background-color: #fff;
+}
+.notice {
+	color: #999999;
+	font-size: .6rem;
+	width: 100%;
+	height: .864rem;
+	line-height: .9rem;
+	padding-left: 1.6rem;
+	margin-bottom: .125rem;
+}
+
+.search-type-list {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.search-type-item {
+	padding: 0 .25rem;
+}
+
+.search-type-item:first-child {
+	padding-left: 0.5rem;
+}
+
+.search-type-item:last-child {
+	padding-right: 0.5rem;
+}
+
+.search-type-item:after {
+	content: '';
+	display: block;
+	width: 2rem;
+	height: .2rem;
+	background-color: #fff;
+}
+
+.search-type-item-img {
+	width: 2.1rem;
+	height: 2.1rem;
+}
+
+.search-type-item-txt {
+	font-size: .7rem;
+	font-weight: bold;
+	margin-top: .25rem;
+	margin-bottom: .25rem;
+	white-space: nowrap;
+}
+
+/* 晒码汇 start*/
+.search-bar-rbtn {
+	position: relative;
+	padding-right: 3.5rem !important;
+}
+
+.search-bar-rbtn .rbtn {
+	position: absolute;
+	right: 1rem;
+	top: .45rem;
+	width: 1.5rem;
+	height: 1.255rem;
+}
+
+/* 晒码汇 end*/
+/* 查询列表 start */
+.search-type-list2 .search-type-item2 {
+	width: 20% !important;
+	text-align: center;
+	line-height: 1.575rem;
+}
+
+.search-type-list2 .search-type-item2:nth-child(1):after {
+	display: none;
+}
+
+.search-type-list2 .search-type-item2:after {
+	content: '';
+	display: block;
+	width: .05rem;
+	height: 1rem;
+	position: absolute;
+	top: .3rem;
+	background-color: #BBBBBB;
+}
+
+.search-type-list2 .search-type-item2.active span {
+	display: block;
+	color: #fff;
+	width: 2.825rem;
+	height: 1.575rem;
+	line-height: 1.575rem;
+	margin: auto;
+}
+
+/* 查询列表 end */
+.img-container{
+	width: 3.75rem;
+	height: 3.75rem;
+	background-size: cover;
+}

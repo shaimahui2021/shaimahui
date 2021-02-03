@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body>
+		<section class="aui-content">
+			<div class="aui-info aui-padded-15 bg-fff aui-margin-t-10">
+				<div class="aui-info-item aui-padded-t-10  aui-padded-b-10">
+					<img class="aui-margin-r-10 creditbig-icon" src="../img/creditbig-icon.png" />
+					<span class="aui-font-size-20 color-black growth-value"></span>
+				</div>
+				<div class="aui-info-item" tapmode onclick="openWin('widget://app/mine/html/creditstore_win')">
+					<img class="focus-icon" src="../img/exchange-icon.png" />
+				</div>
+			</div>
+			<div class="aui-padded-15 bg-fff aui-margin-t-10">
+				<h3 class="aui-text-center aui-padded-t-10 credit-title">
+					<img class="credittitle-icon ml-auto mr-auto" src="../img/credittitle-icon.png" />
+				</h3>
+				<div class="credit-item">
+					<h3 class="credit-item-title">*日常登录+1</h3>
+					<p class="credit-item-txt">新用户注册+10</p>
+				</div>
+				<div class="credit-item">
+					<h3 class="credit-item-title">*签到+1</h3>
+					<p class="credit-item-txt">连续签到1星期+10(签到几天得几分)</p>
+				</div>
+				<div class="credit-item">
+					<h3 class="credit-item-title">*关注+1,取消-1</h3>
+				</div>
+				<div class="credit-item">
+					<h3 class="credit-item-title">*帖子评论数</h3>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1~100</span><span class="aui-margin-l-15">+5</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">100~500</span><span class="aui-margin-l-15">+10</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">500~1000</span><span class="aui-margin-l-15">+20</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1000以上</span><span class="aui-margin-l-15">+50</span></p>
+				</div>
+				<div class="credit-item">
+					<h3 class="credit-item-title">*帖子点赞数</h3>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1~100</span><span class="aui-margin-l-15">+5</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">100~500</span><span class="aui-margin-l-15">+10</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">500~1000</span><span class="aui-margin-l-15">+20</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1000以上</span><span class="aui-margin-l-15">+50</span></p>
+				</div>
+				<div class="credit-item">
+					<h3 class="credit-item-title">*帖子评论回复数</h3>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1~100</span><span class="aui-margin-l-15">+5</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">100~500</span><span class="aui-margin-l-15">+10</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">500~1000</span><span class="aui-margin-l-15">+20</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1000以上</span><span class="aui-margin-l-15">+50</span></p>
+				</div>
+				<div class="credit-item">
+					<h3 class="credit-item-title">*评论点赞数</h3>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1~100</span><span class="aui-margin-l-15">+5</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">100~500</span><span class="aui-margin-l-15">+10</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">500~1000</span><span class="aui-margin-l-15">+20</span></p>
+					<p class="credit-item-txt"><span class="aui-margin-r-15">1000以上</span><span class="aui-margin-l-15">+50</span></p>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		var userInfo = $api.getStorage('userInfo');
+		$('.growth-value').html(userInfo.growth_value+'积分')
+		api.parseTapmode();
+	};
+</script>

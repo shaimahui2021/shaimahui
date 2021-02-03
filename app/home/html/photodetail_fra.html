@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/swiper-3.4.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<style>
+			::-webkit-scrollbar{
+			    display:none;
+			}  
+		</style> 
+	</head>
+	<body>
+		<div class="aui-content">
+			<section class="bg-fff">
+				<div class="fixed-tab-list">
+					<!-- 年份 -->
+					<div class="aui-row border-b">
+						<div class="aui-col-xs-9">
+							<div class="tab-list year" id='years-list'>
+								<script type="text/template" id="years-list1">
+									<% for(var i = 0; i<years.length; i++){ %> 
+												<div class="tab-item" id="years<%=years[i]['years']%>" onclick="yeartab(<%=years[i]['years']%>)">
+														<%=years[i]['years']%>年
+												</div>
+										<% } %>
+									</script>
+								<!-- <div class="tab-item active">
+									2021年
+								</div>
+								<div class="tab-item">
+									2020年
+								</div> -->
+							</div>
+						</div>
+					</div>
+					<!-- 年份对应的期号 -->
+					<div class="aui-row">
+						<div class="aui-col-xs-9">
+							<div class="swiper-container topNav" id='qihao-list'>
+								<div class="swiper-wrapper">
+									<script type="text/template" id="qihao-list1">
+										<% for(var i = 0; i<qishu.length; i++){ %> 
+												<div class="swiper-slide" id="qishu<%=qishu[i]['post_id']%>" data-postid="<%=qishu[i]['post_id']%>" data-index="<%=i%>">
+														<span><%=qishu[i]['title']%></span>
+												</div>
+										<% } %>
+									</script>
+									<!-- <div class="swiper-slide active"><span>第8期</span></div>
+									<div class="swiper-slide"><span>第7期</span></div>
+									<div class="swiper-slide"><span>第6期</span></div>
+									<div class="swiper-slide"><span>第5期</span></div>
+									<div class="swiper-slide"><span>第4期</span></div>
+									<div class="swiper-slide"><span>第3期</span></div>
+									<div class="swiper-slide"><span>第2期</span></div>
+									<div class="swiper-slide"><span>第1期</span></div> -->
+								</div>
+							</div>
+						</div>
+						<div class="aui-col-xs-3">
+							<div class="dropdown-menu" tapmode onclick="openDialog('widget://app/dialog/dialog-qihao')">
+								<div class="dropdown-menu-title" id='dqqs'>
+									<!-- 第8期 -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 图片 -->
+				<!-- <div class="image"  style="background: url(../../../image/img-3.jpg) no-repeat;background-size: 100%;" tapmode onclick="bigImage(this)"></div> -->
+				<div class="image-bd">
+					<img src=""  data-src="" tapmode onclick="openP(this,0)"/>
+				</div>
+				<!-- 操作 -->
+				<div class="aui-info w-100 aui-padded-l-15 aui-padded-r-15">
+					<div class="aui-info-item" tapmode onclick="postLike()"><i class="aui-margin-r-5 praise-icon" id='is_like'></i>
+						<span id="dianzan">1</span></div>
+					<div class="aui-info-item" tapmode onclick="pl()"><i class="aui-margin-r-5 msg-icon"></i> <span id="pinglun">1</span></div>
+					<div class="aui-info-item" tapmode onclick="fx()"><i class="aui-margin-r-5 forward-icon"></i> <span id="fenxiang">1</span></div>
+					<div class="aui-info-item" tapmode onclick="moneyWindow()"><i class="aui-margin-r-5 gift-icon"></i> <span id="dashang">1</span></div>
+				</div>
+			</section>
+			<section class="bg-fff">
+				<ul class="aui-list aui-list-in aui-media-list aui-list-noborder aui-margin-t-10 aui-padded-10">
+					<li class="aui-list-header aui-font-size-16 bg-fff border-b aui-padded-l-0">热门评论</li>
+					<div id="comment-tpl" style="text-align:center">
+						<!-- <li class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-5 aui-padded-t-5">
+							<div class="aui-media-list-item-inner align-start">
+								<div class="aui-list-item-media" style="width: 2.5rem;">
+									<img src="../../../image/empty-head.png" class="aui-img-round">
+								</div>
+								<div class="aui-list-item-inner">
+									<div class="aui-list-item-text">
+										<div class="aui-font-size-12 aui-ellipsis-1">木村拓哉</div>
+										<div class="aui-list-item-right">
+											<div class="aui-info aui-padded-t-0 aui-padded-b-0">
+												<div class="aui-info-item">
+													<img class="aui-margin-r-10 praise-icon" src="../../../image/praise.png" />
+													42
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+										<div class="aui-font-size-14 color-black">在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊</div>
+										<div class="aui-font-size-12 aui-padded-t-5">昨天 13:04<span class="aui-margin-l-10">回复</span></div>
+									</div>
+									<div class="aui-list-item-text justify-start aui-text-left">
+										<span class="aui-margin-r-5">---</span>展开更多回复<i class="aui-margin-l-5 down-arrow"></i>
+									</div>
+									<div class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-0">
+										<div class="aui-media-list-item-inner align-start">
+											<div class="aui-list-item-media" style="width: 2.25rem;">
+												<img src="../../../image/empty-head.png" class="aui-img-round">
+											</div>
+											<div class="aui-list-item-inner">
+												<div class="aui-list-item-text">
+													<div class="aui-font-size-12 aui-ellipsis-1">木村拓哉</div>
+												</div>
+												<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+													<div class="aui-font-size-14  color-black">在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊</div>
+													<div class="aui-font-size-12 aui-padded-t-5">昨天 13:04<span class="aui-margin-l-10">回复</span></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li> -->
+					</div>
+				</ul>
+			</section>
+			<script type="text/template" id="comment-tpl1">
+				<% for(var i = 0; i<data.length; i++){ %> 
+					<li class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-5 aui-padded-t-5">
+						<div class="aui-media-list-item-inner align-start">
+							<div class="aui-list-item-media" style="width: 2.5rem;">
+								<img src="<%=head_path + data[i]['head_path']%>" class="aui-img-round">
+							</div>
+							<div class="aui-list-item-inner">
+								<div class="aui-list-item-text">
+									<div class="aui-font-size-12 aui-ellipsis-1"><%=data[i]['nickname']%></div>
+									<div class="aui-list-item-right">
+										<div class="aui-info aui-padded-t-0 aui-padded-b-0">
+											<!-- <img class="aui-margin-r-10 praise-icon" src="../../../image/praise.png" /> -->
+											<% if(data[i]['isLike'] == 0){ %>
+												<div class="aui-info-item" onclick="commentLike(<%=data[i]['id']%>,<%=data[i]['member_id']%>)">
+													<img  id="comment<%=data[i]['id']%>" class="aui-margin-r-10 praise-icon" src="../../../image/praise.png" />
+													<p id="conmentnum<%=data[i]['id']%>"><%=data[i]['like']%></p>
+												</div>
+												<% }else {%>
+												<div class="aui-info-item" onclick="commentLike(<%=data[i]['id']%>,<%=data[i]['member_id']%>)">
+													<img  id="comment<%=data[i]['id']%>" class="aui-margin-r-10 praise-icon" src="../../../image/praise-active.png" />
+													<p id="conmentnum<%=data[i]['id']%>"><%=data[i]['like']%></p>
+												</div>
+											<% } %>	
+										</div>
+									</div>
+								</div>
+								<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+									<div class="aui-font-size-14 color-black"><%=data[i]['content']%></div>
+									<div class="aui-font-size-12 aui-padded-t-5"><%=data[i]['create_time']%><span class="aui-margin-l-10" onclick="chatBoxOpenRelpy(<%=data[i]['post_id']%>,<%=data[i]['member_id']%>,<%=data[i]['id']%>,'<%=data[i]['nickname']%>',<%=data[i]['reply']%>)">回复</span></div>
+								</div>
+								<% if(data[i]['reply'] > 0){%>
+								<div class="aui-list-item-text justify-start aui-text-left aui-padded-t-10" id="reply-more<%=data[i]['id']%>" onclick="relpy(<%=data[i]['id']%>,1,<%=data[i]['reply']%>)">
+									<span class="aui-margin-r-5">---</span>展开更多回复<i class="aui-margin-l-5 down-arrow"></i>
+								</div>
+								<div class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-0" id="zhankai<%=data[i]['id']%>"
+								style="display: none;">
+									<!-- <div class="aui-media-list-item-inner align-start">
+										<div class="aui-list-item-media" style="width: 2.25rem;">
+											<img src="../../../image/empty-head.png" class="aui-img-round">
+										</div>
+										<div class="aui-list-item-inner">
+											<div class="aui-list-item-text">
+												<div class="aui-font-size-12 aui-ellipsis-1">木村拓哉</div>
+											</div>
+											<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+												<div class="aui-font-size-14  color-black">在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊</div>
+												<div class="aui-font-size-12 aui-padded-t-5">昨天 13:04<span class="aui-margin-l-10">回复</span></div>
+											</div>
+										</div>
+									</div> -->
+								</div>
+								<div class="aui-media-list-item-inner" id="reply-retract<%=data[i]['id']%>"  onclick="retract(<%=data[i]['id']%>)" style="display:none"> 
+									<div class="aui-list-item-inner">
+										<div class="aui-list-item-text justify-start">——收回<i class="aui-margin-l-5 top-arrow"></i></div>
+									</div>
+								</div>
+								<% } %>
+							</div>
+						</div>
+					</li>
+				<% } %>
+			</script>
+			<script type="text/template" id="zhankai1">
+				<% for(var i = 0; i < data.length; i++) {%>
+				<% if(member_id == data[i]['member_id']) {%>
+					<div class="aui-media-list-item-inner align-start">
+						<div class="aui-list-item-media" style="width: 2.25rem;">
+							<img src="<%=head_path + data[i]['head_path']%>" class="aui-img-round">
+						</div>
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-font-size-12 aui-ellipsis-1"><%=data[i]['nickname']%></div>
+							</div>
+							<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+								<div class="aui-font-size-14  color-black"><%=data[i]['content']%></div>
+								<div class="aui-font-size-12 aui-padded-t-5"><%=data[i]['create_time']%><span class="aui-margin-l-10" onclick="chatBoxOpenRelpy(<%=data[i]['post_id']%>,<%=data[i]['member_id']%>,<%=data[i]['c_id']%>,'<%=data[i]['nickname']%>')">回复</span></div>
+							</div>
+						</div>
+					</div>
+				<% }else {%>
+				<div class="aui-media-list-item-inner align-start">
+					<div class="aui-list-item-media" style="width: 2.25rem;">
+						<img src="<%=head_path + data[i]['head_path']%>" class="aui-img-round">
+					</div>
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-text justify-start">
+							<div class="aui-font-size-12 aui-ellipsis-1"><%=data[i]['nickname']%></div>
+							<span class="aui-padded-l-5 aui-padded-r-5 aui-font-size-12">回复</span>
+							<div class="aui-list-item-right nickName"><%=data[i]['replyNickname']%></div>
+						</div>
+						<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+							<div class="aui-font-size-14  color-black"><%=data[i]['content']%></div>
+							<div class="aui-font-size-12 aui-padded-t-5"><%=data[i]['create_time']%><span class="aui-margin-l-10" onclick="chatBoxOpenRelpy(<%=data[i]['post_id']%>,<%=data[i]['member_id']%>,<%=data[i]['c_id']%>,'<%=data[i]['nickname']%>')">回复</span></div>
+						</div>
+					</div>
+				</div>
+				<% } %>
+				<% } %>
+			</script>
+			<!--输入框占位 注意要跟聊天内容同级为兄弟关系#F4F8FC-->
+			<div id="j-bottom" style="height: 3.2rem;background: #F4F8FC;bottom:0;"></div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript">
+	var mySwiper;
+	function swiperStart() {
+		mySwiper = new Swiper('#qihao-list', {
+			freeMode: true,
+			freeModeMomentumRatio: 0.5,
+			slidesPerView: 'auto', 
+		});
+		swiperWidth = mySwiper.container[0].clientWidth;
+		maxTranslate = mySwiper.maxTranslate();
+		maxWidth = -maxTranslate + swiperWidth / 2;
+		mySwiper.on('tap', function(swiper, event) {  
+			swiperTap(swiper.clickedIndex);
+		});
+	};  
+	function swiperTap(clickedIndex){
+		slide = mySwiper.slides[clickedIndex]; 
+		qishutab($(slide).attr('data-postid'));
+		slideLeft = slide.offsetLeft;
+		slideWidth = slide.clientWidth;
+		slideCenter = slideLeft + slideWidth / 2;
+		// 被点击slide的中心点
+		
+		mySwiper.setWrapperTransition(300); 
+		if (slideCenter < swiperWidth / 2) { 
+			mySwiper.setWrapperTranslate(0); 
+		} else if (slideCenter > maxWidth) { 
+			mySwiper.setWrapperTranslate(maxTranslate); 
+		} else { 
+			nowTlanslate = slideCenter - swiperWidth / 2; 
+			mySwiper.setWrapperTranslate(-nowTlanslate);
+		} 
+		$(".topNav  .swiper-slide").removeClass('active');
+		$(".topNav .swiper-slide").eq(clickedIndex).addClass('active'); 
+	};
+	$(".swiper-container").on('touchstart', function(e) {
+		e.preventDefault()
+	});
+</script> 
+<script type="text/javascript">
+	var UIChatBox;
+	var is_free, dain = 0;
+	var postId;
+	var lotteryId;
+	var years;
+	var galleryTitleId;
+	var content, isLike;
+	var dianzan = 0,
+		pinglun = 0,
+		fenxiang = 0,
+		dashang = 0;
+	var page = 1,
+		replyPage = 1,
+		replyNum = 0;
+	var pageArray = new Array(),
+		commentData = new Array();
+	var replyData = new Array();
+	var post_id, replyMember_id, postComment_id, nickName;
+	var UIPhotoViewer;
+	apiready = function() {
+		api.parseTapmode();
+		api.setFrameAttr({
+			name: api.frameName,
+			bounces: false
+		});
+		UIPhotoViewer = api.require('UIPhotoViewer');
+		var userInfo = $api.getStorage('userInfo');
+		is_free = userInfo.is_free;
+		UIChatBox = api.require('UIChatBox');
+		pageParam = api.pageParam[1];
+		//console.log(JSON.stringify(pageParam));
+		postId = pageParam.post_id;
+		lotteryId = pageParam.lottery_id;
+		years = pageParam.years;
+		content = pageParam.content;
+		galleryTitleId = pageParam.gallery_title_id;
+		//console.log(img_url);
+		getYears();
+		qishu();
+		CommentList();
+		api.addEventListener({
+			name: 'dialogQihao'
+		}, function(ret, err) { 
+			// console.log(ret.value.qishu);
+			// console.log(ret.value.clickedIndex);  
+			swiperTap(ret.value.clickedIndex);
+		});
+		chatBoxOpen();
+		// 监听 inputBar 输入框把内容顶上去 
+		UIChatBox.addEventListener({
+			target: 'inputBar',
+			name: 'move'
+		}, function(ret, err) {
+			if (ret) {
+				if (api.systemType == 'ios') {
+					api.setFrameAttr({
+						name: api.frameName,
+						rect: {
+							//                          h: api.winHeight-(ret.inputBarHeight + ret.panelHeight)
+							marginBottom: ret.panelHeight
+						}
+					});
+				} else if (api.systemType == 'android') {
+					// console.log('api.winHeight:'+api.winHeight);
+					// console.log($api.jsonToStr(ret));
+					// console.log(api.winHeight - (ret.inputBarHeight + ret.panelHeight));
+					// if (api.winHeight > (ret.inputBarHeight + ret.panelHeight)) {
+					// 	api.setFrameAttr({
+					// 		name: api.frameName,
+					// 		rect: {
+					// 			// h: api.winHeight - (ret.inputBarHeight + ret.panelHeight)
+					// 			marginBottom: ret.panelHeight
+					// 		}
+					// 	});
+					// }
+				}
+				scrollToEnd();
+			}
+		});
+	};
+	//打开聊天窗口
+	// function chatBoxOpen() {
+	// 	var UIChatBox = api.require('UIChatBox');
+	// 	UIChatBox.open({
+	// 		placeholder: '说点啥好呢~',
+	// 		autoFocus: false,
+	// 		maxRows: 4,
+	// 		emotionPath: 'widget://image/keyboard/emotion',
+	// 		texts: {
+	// 			recordBtn: {
+	// 				normalTitle: '按住说话',
+	// 				activeTitle: '松开结束'
+	// 			},
+	// 			sendBtn: {
+	// 				title: '发送'
+	// 			}
+	// 		},
+
+	// 		styles: {
+	// 			topDivider: {
+	// 				width: 1,
+	// 				color: '#d2d2d2'
+	// 			},
+	// 			inputBar: {
+	// 				bgColor: '#fff',
+	// 				textMarginLeft: 10
+	// 			},
+	// 			inputBox: {
+	// 				borderColor: '#F4F8FC',
+	// 				topMargin: 5
+	// 			},
+	// 			sendBtn: {
+	// 				titleColor: '#fff',
+	// 				bg: '#FF3952',
+	// 				activeBg: '#FF3952',
+	// 				titleSize: 14
+	// 			},
+	// 		},
+	// 	}, function(ret, err) {
+	// 		if (ret) {
+	// 			if (ret.eventType == 'send') {}
+	// 			if (ret.eventType == "clickExtras") {}
+	// 		}
+	// 	});
+	// };
+
+	//获取年份数据
+	function getYears() {
+		//console.log(3331);
+		//console.log(configIndex.yearsInfo);
+		$cjy.ajax({
+			url: configIndex.yearsInfo,
+			method: 'post',
+			data: {}
+		}, function(ret) {
+			if (ret.code == 0) {
+				var text = template('years-list1', ret.data);
+				$('#years-list').html(text);
+				ret.data.years.forEach(function(item, index) {
+					if (item.years == years) {
+						$('#years' + item.years).addClass('active');
+					}
+				});
+			}
+			// console.log(JSON.stringify(ret));
+		});
+	};
+	//获取期数
+	function qishu() {
+		$cjy.ajax({
+			url: configIndex.qishu,
+			method: 'post',
+			data: {
+				'years': years,
+				'lotteryId': lotteryId,
+				'content': content
+			}
+		}, function(ret) {
+			// console.log(JSON.stringify(ret));
+			$api.setStorage('qishuDialog', ret);
+			if (ret.code == 0) {
+				if (ret.data.qishu.length < 1) {
+					$('.aui-col-xs-3').hide();
+				} else {
+					$('.aui-col-xs-3').show();
+				}
+				$('#dqqs').html('');
+				//$('#qihao-list').empty();
+				var text = template('qihao-list1', ret.data);
+				$('#qihao-list .swiper-wrapper').html(text);
+				swiperStart();
+				var num = 0;
+				ret.data.qishu.forEach(function(item, index) {
+					if (item.post_id == postId) {
+						$('#qishu' + item.post_id).addClass('active');
+						$('#dqqs').html(item.title);
+						if (item.img_type == 0) {
+							$('.image-bd img').attr('src', img_url + item.head_path);
+							$('.image-bd img').attr('data-src', img_url + item.head_path);
+						} else {
+							$('.image-bd img').attr('src', item.head_path);
+							$('.image-bd img').attr('data-src', item.head_path);
+						}
+						dianzan = item.like;
+						isLike = item.isLike;
+						pinglun = item.comment_sum;
+						fenxiang = item.forwarding;
+						dashang = item.money;
+						$('#dianzan').html(dianzan);
+						$('#pinglun').html(pinglun);
+						$('#fenxiang').html(fenxiang);
+						$('#dashang').html(dashang);
+						if (isLike == 0) {
+							dian = 0;
+							$('#is_like').removeClass('active');
+						} else {
+							dian = 1;
+							$('#is_like').addClass('active');
+						}
+						num = 1;
+					} else {
+						//$('#qishu'+item.post_id).removeClass('active');
+						num = 0;
+					}
+				});
+				//点击年份默认最新一期
+				if (num == 0) { 
+					$('.tab-list.qihao .tab-item').removeClass('active');
+					$('#qishu' + ret.data.qishu[0].post_id).addClass('active');
+					$('#dqqs').html(ret.data.qishu[0].title);
+					if (ret.data.qishu[0].img_type == 0) {
+						$('.image-bd img').attr('src', img_url + ret.data.qishu[0].head_path);
+						$('.image-bd img').attr('data-src', img_url + ret.data.qishu[0].head_path);
+					} else {
+						$('.image-bd img').attr('src', ret.data.qishu[0].head_path);
+						$('.image-bd img').attr('data-src', ret.data.qishu[0].head_path);
+					}
+					dianzan = ret.data.qishu[0].like;
+					isLike = ret.data.qishu[0].isLike;
+					pinglun = ret.data.qishu[0].comment_sum;
+					fenxiang = ret.data.qishu[0].forwarding;
+					dashang = ret.data.qishu[0].money;
+					postId = ret.data.qishu[0].post_id;
+					$('#dianzan').html(dianzan);
+					$('#pinglun').html(pinglun);
+					$('#fenxiang').html(fenxiang);
+					$('#dashang').html(dashang);
+					if (isLike == 0) {
+						dian = 0;
+						$('#is_like').removeClass('active');
+					} else {
+						dian = 1;
+						$('#is_like').addClass('active');
+					}
+					CommentList();
+				}
+			}
+
+		});
+	};
+	//获取详情信息
+	function getDetails() {
+		$cjy.ajax({
+			url: configIndex.DetailsInfo,
+			method: 'post',
+			data: {
+				'postId': postId
+			}
+		}, function(ret) {
+			if (ret.code == 0) {
+
+			}
+
+		});
+	};
+
+	// 年份
+	// $('.tab-list.year .tab-item').click(function() {
+	// 	$('.tab-list.year .tab-item').removeClass('active');
+	// 	$(this).addClass('active');
+	// });
+	function yeartab(index) {
+		UIChatBox.closeKeyboard();
+		UIChatBox.close();
+		chatBoxOpen();
+		mySwiper.setWrapperTranslate(0);
+		console.log(index);
+		years = index;
+		$('.tab-list.year .tab-item').removeClass('active');
+		//$('.tab-list.qihao .tab-item').removeClass('active');
+		qishu();
+		$('#years' + index).addClass('active');
+	};
+	//年份对应的期号
+	// $('.tab-list.qihao .tab-item').click(function() {
+	// 	$('.tab-list.qihao .tab-item').removeClass('active');
+	// 	$(this).addClass('active');
+	// });
+	function qishutab(index) {
+		UIChatBox.closeKeyboard();
+		UIChatBox.close();
+		chatBoxOpen();
+		console.log('qishutab' + index);
+		dianzan = 0;
+		pinglun = 0;
+		fenxiang = 0;
+		dashang = 0;
+		// $('.tab-list.qihao .tab-item').removeClass('active');
+		// $('#qishu' + index).addClass('active');
+		var qishuDialog = $api.getStorage('qishuDialog');
+		//console.log(qishuDialog.data.qishu[0].years);
+		//console.log(years);
+		if (qishuDialog.data.qishu[0].years == years) {
+			qishuDialog.data.qishu.forEach(function(item, num) {
+				//console.log(item.post_id+'=='+index);
+				if (item.post_id == index) {
+					postId = index;
+					galleryTitleId = item.gallery_title_id
+					dianzan = item.like;
+					isLike = item.isLike
+					pinglun = item.comment_sum;
+					fenxiang = item.forwarding;
+					dashang = item.money;
+					$('#dianzan').html(dianzan);
+					$('#pinglun').html(pinglun);
+					$('#fenxiang').html(fenxiang);
+					$('#dashang').html(dashang);
+					$('#dqqs').html(item.title);
+					if (isLike == 0) {
+						dian = 0;
+						$('#is_like').removeClass('active');
+					} else {
+						dian = 1;
+						$('#is_like').addClass('active');
+					}
+					//console.log(9999);
+					if (item.img_type == 0) {
+						$('.image-bd img').attr('src', img_url + item.head_path);
+						$('.image-bd img').attr('data-src', img_url + item.head_path);
+					} else {
+						$('.image-bd img').attr('src', item.head_path);
+						$('.image-bd img').attr('data-src', item.head_path);
+					}
+					CommentList();
+				}
+			});
+		}
+	};
+	//滚到底部
+	function scrollToEnd() {
+		setTimeout(function() {
+			$("html,body").finish().animate({
+				"scrollTop": $('#j-bottom').offset().top
+			}, 150);
+		}, 200);
+	};
+	//点赞
+	function postLike() {
+		if (is_free == 1) {
+			$api.setStorage('dialog', 0);
+			openDialog('widget://app/dialog/dialog');
+			return false;
+		}
+		var qishuDialog = $api.getStorage('qishuDialog');
+		if (dian == 0) {
+			dian = 1;
+			dianzan = Number(dianzan) + 1;
+			$('#dianzan').html(dianzan);
+			$('#is_like').addClass('active');
+			qishuDialog.data.qishu.forEach(function(item, num) {
+				if (item.post_id == postId) {
+					qishuDialog.data.qishu[num].like = dianzan;
+					qishuDialog.data.qishu[num].isLike = -1;
+				}
+			});
+		} else {
+			dian = 0;
+			dianzan = Number(dianzan) - 1;
+			$('#dianzan').html(dianzan);
+			$('#is_like').removeClass('active');
+			qishuDialog.data.qishu.forEach(function(item, num) {
+				if (item.post_id == postId) {
+					qishuDialog.data.qishu[num].like = dianzan;
+					qishuDialog.data.qishu[num].isLike = 0;
+				}
+			});
+		}
+		$api.setStorage('qishuDialog', qishuDialog);
+		$cjy.ajax({
+			url: configIndex.like,
+			method: 'post',
+			data: {
+				post_id: postId,
+				type: 3,
+				a_member_id: 0
+			}
+		}, function(ret) {
+			console.log(JSON.stringify(ret));
+		}, function(err) {
+			console.log(JSON.stringify(err));
+			toast1('操作失败请重试~!');
+		});
+	};
+	//打赏
+	function moneyWindow() {
+		console.log(8888);
+		if (is_free == 1) {
+			$api.setStorage('dialog', 0);
+			openDialog('widget://app/dialog/dialog');
+		} else {
+			openDialog('widget://app/dialog/dialog-reward', {
+				post_id: postId
+			});
+		}
+	};
+	//分享
+	function fx() {
+		console.log(77);
+		if (is_free == 1) {
+			$api.setStorage('dialog', 0);
+			openDialog('widget://app/dialog/dialog');
+		} else {
+			openWin('widget://app/derby/html/forward_win', {
+				content: content,
+				post_id: postId,
+				gt_id: galleryTitleId,
+				lottery_id: lotteryId,
+				years: years,
+				type: 1
+			});
+		}
+	};
+	//评论
+	function pl() {
+		if (is_free == 1) {
+			$api.setStorage('dialog', 0);
+			openDialog('widget://app/dialog/dialog');
+			return false;
+		}
+		chatBoxOpen();
+	}
+	//热门评论start
+	function CommentList() {
+		$cjy.ajax({
+			url: configIndex.postCommentList,
+			method: 'post',
+			data: {
+				'id': postId,
+				'page': page,
+			}
+		}, function(ret) {
+			// console.log(222);
+			// console.log(head_path);
+			ret.head_path = head_path;
+			// console.log(JSON.stringify(ret));
+			commentData = ret;
+			// console.log(commentData.data.length);
+			var text = template('comment-tpl1', ret);
+			$('#comment-tpl').html(text);
+
+		});
+	}
+
+	function relpys(id, type) {
+		relpy(id, type);
+	}
+
+	function retract(id) {
+		console.log('retract 1111');
+		$('#zhankai' + id).hide();
+		$('#reply-more' + id).show();
+		$("#reply-retract" + id).hide();
+	}
+
+	function relpy(id, type, num = '') {
+		console.log(id);
+		if (is_free == 1) {
+			$api.setStorage('dialog', 0);
+			openDialog('widget://app/dialog/dialog');
+			return false;
+		}
+
+		$('#reply-more' + id).hide();
+		$("#reply-retract" + id).show();
+		$('#zhankai' + id).show();
+		if (type == 1) {
+			//$('#reply-more' + id).css('display', 'none');
+		}
+		if (pageArray[id]) {
+			pageArray[id] += 1;
+		} else {
+			pageArray[id] = 1;
+		}
+		replyPage = pageArray[id];
+		console.log(replyPage);
+		//if(replyData[id]==undefined){
+		$cjy.ajax({
+			url: configIndex.reply,
+			method: 'post',
+			data: {
+				'post_comment_id': id,
+				'page': replyPage
+			}
+		}, function(ret) {
+			console.log(333);
+			console.log(JSON.stringify(ret));
+			ret.data.head_path = head_path;
+			//data.reply = replyPage != 1 ? replyData[id].concat(ret.data) : ret.data;
+			//replyData[id] = data.reply;
+			replyData[id] = ret.data;
+			var text = template('zhankai1', ret.data);
+			$('#zhankai' + id).html(text);
+
+		});
+		//}else{
+		//$('#zhankai' + id).show();
+		//}
+
+	}
+
+	function commentLike(id, member_id) {
+		console.log("id=========>", id);
+		$cjy.ajax({
+			url: configIndex.postLike,
+			method: 'post',
+			data: {
+				'post_comment_id': id,
+				'member_id': member_id,
+				'type': 2
+			}
+		}, function(ret) {
+			console.log($api.jsonToStr(ret));
+			changeCommentImg(id);
+		}, function(err) {
+			console.log($api.jsonToStr(err));
+		});
+	};
+	//点赞改变样式
+	function changeCommentImg(id) {
+		var path = $("#comment" + id).attr('src');
+		if (path == '../../../image/praise.png') {
+			var like = $("#conmentnum" + id).text();
+			like = Number(like) + 1;
+			$("#conmentnum" + id).text(like);
+			path = '../../../image/praise-active.png'
+		} else {
+			var like = $("#conmentnum" + id).text();
+			like = Number(like) - 1;
+			$("#conmentnum" + id).text(like);
+			path = '../../../image/praise.png'
+		}
+		$("#comment" + id).attr('src', path);
+
+	};
+
+	function chatBoxOpenRelpy(post_id, member_id, id, nickname) {
+		console.log(4444);
+		console.log(post_id);
+		post_id = post_id;
+		replyMember_id = member_id;
+		postComment_id = id;
+		nickName = nickname;
+		chatBoxOpen(1);
+	}
+	//打开聊天窗口
+	function chatBoxOpen(type) {
+
+		console.log(999);
+		console.log(post_id);
+		console.log(replyMember_id);
+		console.log(postComment_id);
+		var UIChatBox = api.require('UIChatBox');
+		// UIChatBox.popupKeyboard();
+		if (type == 1) {
+			var placeholder = '回复' + nickName + ':';
+		} else {
+			var placeholder = '输入评论内容';
+		}
+		UIChatBox.open({
+			autoFocus: false,
+			maxRows: 4,
+			emotionPath: 'widget://image/keyboard/emotion',
+			texts: {
+				recordBtn: {
+					normalTitle: '按住说话',
+					activeTitle: '松开结束'
+				},
+				sendBtn: {
+					title: '发送'
+				}
+			},
+
+			styles: {
+				topDivider: {
+					width: 1,
+					color: '#d2d2d2'
+				},
+				inputBar: {
+					bgColor: '#fff',
+					textMarginLeft: 10
+				},
+				inputBox: {
+					borderColor: '#F4F8FC',
+					topMargin: 5
+				},
+				sendBtn: {
+					titleColor: '#fff',
+					bg: '#FF3952',
+					activeBg: '#FF3952',
+					titleSize: 14
+				},
+			},
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'send') {
+					if (ret.msg != '') {
+						if (type == 1) {
+							$cjy.ajax({
+								url: configIndex.postComment,
+								method: 'post',
+								data: {
+									'post_id': postId,
+									'a_member_id': replyMember_id,
+									'content': ret.msg,
+									'id': postComment_id
+								}
+							}, function(ret1) {
+								console.log(23323);
+								console.log(JSON.stringify(ret1));
+								var replyNum = 0;
+								commentData.data.forEach(function(item, ind) {
+									if (item.id == ret1.data.c_id) {
+										if (item.reply == 0) {
+											console.log(item.id + '==' + ret1.data.c_id);
+
+											console.log(commentData.data[ind].reply);
+											replyNum = 1;
+											commentData.data[ind].reply = 1;
+											console.log(commentData.data[ind].reply);
+											console.log(JSON.stringify(commentData))
+											var text = template('comment-tpl1', commentData);
+											$('#comment-tpl').html(text);
+											relpy(item.id, 1, 1)
+										} else {
+											replyNum = 0
+										}
+									}
+								});
+								if (replyNum == 0) {
+									replyData[postComment_id].data.push(ret1.data);
+									var text = template('zhankai1', replyData[postComment_id]);
+									$('#zhankai' + postComment_id).html(text);
+								}
+
+							});
+							pinglun = pinglun + 1;
+							$('#pinglun').html(pinglun);
+							var jsfun = 'galleryComment();';
+							api.execScript({
+								frameName: 'photodetail',
+								script: jsfun
+							});
+							// UIChatBox.closeKeyboard();
+							// UIChatBox.close();
+						} else {
+							$cjy.ajax({
+								url: configIndex.galleryComment,
+								method: 'post',
+								data: {
+									'post_id': postId,
+									'content': ret.msg
+								}
+							}, function(ret1) {
+								console.log(55555);
+								console.log(JSON.stringify(ret1));
+								ret1.data.isLike = 0;
+								commentData.data.push(ret1.data);
+								console.log(commentData.data.length);
+								var text = template('comment-tpl1', commentData);
+								$('#comment-tpl').html(text);
+
+								pinglun = pinglun + 1;
+								$('#pinglun').html(pinglun);
+								// UIChatBox.closeKeyboard();
+								// UIChatBox.close();
+							});
+						}
+					}
+				}
+				if (ret.eventType == "clickExtras") {}
+			}
+		});
+		UIChatBox.setPlaceholder({
+			placeholder: placeholder
+		});
+	};
+	//预览图片
+	function openP(obj, activeIndex) {
+		var photoItem = [];
+		var photoList = $(obj).parent().children();
+		for (var i = 0; i < photoList.length; i++) {
+			photoItem[i] = photoList.eq(i).attr("data-src");
+		}
+		UIPhotoViewer.open({
+			images: photoItem,
+			zoomEnabled: true,
+			gestureClose: true,
+			bgColor: '#000',
+			activeIndex: activeIndex
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'change') {
+					api.sendEvent({
+						name: 'previewPage',
+						extra: {
+							key1: ret.index + 1,
+							key2: photoList.length
+						}
+					});
+				} else if (ret.eventType == 'click') {
+					UIPhotoViewer.close();
+					api.closeFrame({
+						name: 'photoView2_fra'
+					});
+				} else if (ret.eventType == 'gestureColse') {
+					api.sendEvent({
+						name: 'gestureColse'
+					});
+				}
+			}
+		});
+		setTimeout(function() {
+			// var tabHeight = $api.offset($api.dom('#aui-header')).h; //tab切换栏高度
+			api.openFrame({
+				name: 'photoView2_fra',
+				url: 'widget://app/derby/html/photoView2_fra.html',
+				rect: {
+					x: 0,
+					y: 0,
+					w: 'auto',
+					h: 70
+				},
+				pageParam: {
+					name: 'test'
+				},
+				bounces: false,
+				bgColor: 'rgba(0,0,0,0)',
+				vScrollBarEnabled: true,
+				hScrollBarEnabled: true
+			});
+		}, 800);
+	};
+	//关闭预览
+	function closeView() {
+		UIPhotoViewer.close();
+	};
+</script>

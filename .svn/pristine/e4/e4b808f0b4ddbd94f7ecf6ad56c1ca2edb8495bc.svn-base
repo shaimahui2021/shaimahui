@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="aui-content aui-padded-t-15">
+			<ul class="aui-list aui-form-list aui-list-noborder">
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-label">
+							昵称:
+						</div>
+						<div class="aui-list-item-input">
+							<input type="text" placeholder="" id="nickname">
+						</div>
+					</div>
+					
+				</li>
+				
+			</ul>
+			*注意  昵称只能进行一次修改！
+			<div class="aui-padded-15 mt-30">
+				<div class="aui-btn aui-btn-block btn-red" tapmode onclick="editNickname()">保 存</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+	};
+
+	//昵称修改改变显示
+	function editNickname(){
+		$cjy.ajax({
+			url: index_url+'api/Member/setupEdit',
+			method: 'post',
+			data:{nickname:$('#nickname').val()}
+		}, function(ret) {
+			console.log(JSON.stringify(ret));
+			if(ret.code == 0){
+					var userInfo = $api.getStorage('userInfo');
+					userInfo.nickname = ret.data;
+					$api.setStorage('userInfo',userInfo);
+					api.closeWin();
+			}
+			toast1(ret.msg);
+		});
+	}
+</script>

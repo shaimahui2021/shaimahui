@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.indexedlist.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-gray">
+		<section class="aui-content ">
+			<div id='list' class="mui-indexed-list">
+				<div class="mui-indexed-list-search mui-input-row mui-search border-b-none">
+					<!-- <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索你要的图片"> -->
+					<input class="mui-indexed-list-search-input search-input bg-fff" type="text" placeholder="搜索你要的图片" />
+				</div>
+				<div class="mui-indexed-list-bar">
+					<a>#</a>
+					<a>A</a>
+					<a>B</a>
+					<a>C</a>
+					<a>D</a>
+					<a>E</a>
+					<a>F</a>
+					<a>G</a>
+					<a>H</a>
+					<a>I</a>
+					<a>J</a>
+					<a>K</a>
+					<a>L</a>
+					<a>M</a>
+					<a>N</a>
+					<a>O</a>
+					<a>P</a>
+					<a>Q</a>
+					<a>R</a>
+					<a>S</a>
+					<a>T</a>
+					<a>U</a>
+					<a>V</a>
+					<a>W</a>
+					<a>X</a>
+					<a>Y</a>
+					<a>Z</a>
+				</div>
+				<div class="mui-indexed-list-alert"></div>
+				<div class="mui-indexed-list-inner">
+					<div class="mui-indexed-list-empty-alert">没有数据</div>
+					<ul id="indexedList" class="mui-table-view">
+						<!-- <script id="tpl1" type="text/template">
+						{{each list as value index}}
+						<li data-group="{{index}}" class="mui-table-view-divider mui-indexed-list-group">{{index}}</li>
+							{{each value as val key}}
+							<li data-value="{{val.chart}}bc{{key}}" data-tags="{{val.chart}}bc{{key}}" class="mui-table-view-cell mui-indexed-list-item"  tapmode onclick="openWin('photodetail_win',{id:val.id)">
+								{{val.title}}
+								<span class="indexed-list-number">
+									<label>{{val.qihao}}</label>
+								</span>
+							</li> 
+							{{/each}}
+						{{/each}}
+						</script> -->
+					</ul>
+				</div>
+			</div>
+
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/template.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script> 
+<script type="text/javascript" src="../../../res/api-index.js"></script> 
+<script type="text/javascript" src="../js/mui.indexedlist.js"></script> 
+<script type="text/template" id="tpl1">
+	<%for(var key in list){%>
+	<li data-group="<%=key%>" class="mui-table-view-divider mui-indexed-list-group"><%=key%></li>
+		<%for(var i=0; i<list[key].length; i++){%>
+		<li class="mui-table-view-cell mui-indexed-list-item"  tapmode 
+		data-post_id="<%=list[key][i]['id']%>" 
+		data-gallery_title_id="<%=list[key][i]['gallery_title_id']%>"
+		data-content="<%=list[key][i]['content']%>"
+		onclick="toDetail(this)">
+			<%=list[key][i]['content']%>
+			<span class="indexed-list-number">
+				<label><%=list[key][i]['periods']%></label>
+			</span>
+		</li> 
+		<% } %>
+	<% } %>
+</script>
+<script type="text/javascript">
+	var lottory_id,year;
+	apiready = function() {
+		api.parseTapmode();
+		api.setFrameAttr({
+		    name: 'search',
+		    bounces: false
+		});
+		pageParam = api.pageParam[1]; 
+		lottery_id = pageParam.lottery_id;
+		//没传年份就默认当前年份
+		var myDate = new Date();
+    	var cur_year = myDate.getFullYear();
+		year = pageParam.year || cur_year;
+		gallerySearch(lottery_id,year);
+	};
+
+	function toDetail(_this){
+		let post_id = $(_this).data('post_id');
+		let gallery_title_id = $(_this).data('gallery_title_id');
+		let content = $(_this).data('content');
+		// console.log(`进入详情页post_id:${post_id},years:${year},gallery_title_id:${gallery_title_id},lottery_id:${lottery_id},content:${content}`);return
+		openWin('photodetail_win',{post_id:post_id,gallery_title_id:gallery_title_id,years:year,lottery_id:lottery_id,content:content})
+	}
+
+	function gallerySearch(lottery_id,year){
+			$cjy.ajax({
+				url: configIndex.gallerySearch,
+				method: 'post',
+				data : {
+					lottery_id:lottery_id,
+					year:year
+				}
+			}, function(ret) {
+				$api.html($api.byId('indexedList'), tpl('tpl1', {
+					list: ret.data
+				}));
+				mui.init();
+				mui.ready(function() {
+					var list = document.getElementById('list');
+					//calc hieght
+					list.style.height = document.body.offsetHeight + 'px';
+					//create
+					window.indexedList = new mui.IndexedList(list);
+				});
+			},function(err){
+				console.log(JSON.stringify(err));
+			});
+	};
+</script>

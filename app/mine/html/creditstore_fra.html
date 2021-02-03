@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body>
+		<header class="aui-bar aui-bar-nav header-nobg header-nobg-red aui-padded-t-0" id="aui-header">
+			<div class="aui-tab" id="tab">
+				<div class="aui-tab-item aui-margin-r-15 aui-active"><span>手机</span></div>
+				<div class="aui-tab-item aui-margin-r-15"><span>彩金</span></div>
+				<div class="aui-tab-item aui-margin-r-15"><span>话费充值</span></div>
+			</div>
+		</header>
+		<div id="listData"></div> 
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="Data-list">
+	<!-- 手机 -->
+
+	<section id="tab1" class="aui-content">
+		<div class="aui-margin-t-10 aui-padded-15 bg-fff">
+			<p class="creditstore-title">当前积分:<span class="aui-margin-l-5 color-red score"><%=score%></span></p>
+		</div>
+	<% for(var i = 0; i<listData.length; i++){ %>
+			<%if (listData[i]['commodity_type_id']==1){ %>
+				<div class="aui-margin-t-10 aui-padded-15 bg-fff">
+					<p class="creditstore-title"><%=listData[i]['product_name']%></p>
+					<div class="aui-padded-t-10 aui-padded-b-5">
+						<div style="background: url(<%=img_url + listData[i]['head_path']%>) no-repeat;background-size: cover;width: 100%;padding-top: 100%;"></div>
+					</div>
+						<div class="aui-info aui-padded-l-10">
+						<div class="aui-info-item align-start" style="flex-direction: column;">
+							<p class="aui-font-size-14"><%=listData[i]['money']%>元</p>
+							<p class="aui-font-size-14 color-red"><%=listData[i]['growth_value']%>积分</p>
+						</div>
+						<div class="aui-info-item" onclick="exchange(<%=listData[i]['id']%>,<%=listData[i]['growth_value']%>)">
+							<img class="focus-icon" src="../img/exchange-icon.png" />
+						</div>
+					</div>
+				</div>
+			<% } %>
+		<% } %>
+	</section>
+
+	<!-- 彩金 -->
+	<section id="tab2" class="aui-content" style="display: none;">
+		<div class="aui-margin-t-10 aui-padded-15 bg-fff">
+			<p class="creditstore-title">当前积分:<span class="aui-margin-l-5 color-red score"><%=score%></span></p>
+		</div>
+		<% for(var i = 0; i<listData.length; i++){ %>
+				<%if (listData[i]['commodity_type_id']==2){ %>
+					<div class="aui-margin-t-10 aui-padded-15 bg-fff">
+						<p class="creditstore-title"><%=listData[i]['product_name']%>:<span class="aui-margin-l-5 color-red"><%=listData[i]['money']%></span></p>
+							<div class="aui-info aui-padded-l-10">
+							<img src="<%=img_url + listData[i]['head_path']%>" style="width: 50px;height: 50px"/>
+							<div class="aui-info-item align-start" style="flex-direction: column;">
+								
+								<p class="aui-font-size-14"><%=listData[i]['money']%>彩金</p>
+								<p class="aui-font-size-14 color-red"><%=listData[i]['growth_value']%>积分</p>
+							</div>
+							<div class="aui-info-item" onclick="exchange(<%=listData[i]['id']%>,<%=listData[i]['growth_value']%>)">
+								<img class="focus-icon" src="../img/exchange-icon.png" />
+							</div>
+						</div>
+					</div>
+				<% } %>
+		<% } %>
+	</section>
+	<!-- 话费充值 -->
+	<section  id="tab3" class="aui-content" style="display: none;">
+		<div class="aui-margin-t-10 aui-padded-15 bg-fff">
+			<p class="creditstore-title">当前积分:<span class="aui-margin-l-5 color-red score"><%=score%></span></p>
+		</div>
+		<% for(var i = 0; i<listData.length; i++){ %>
+				<%if (listData[i]['commodity_type_id']==3){ %>
+					<div class="aui-margin-t-10 aui-padded-15 bg-fff">
+						<p class="creditstore-title"><%=listData[i]['product_name']%>:<span class="aui-margin-l-5 color-red"><%=listData[i]['money']%></span></p>
+							<div class="aui-info aui-padded-l-10">
+							<div class="aui-info-item align-start" style="flex-direction: column;">
+								<p class="aui-font-size-14"><%=listData[i]['money']%>元</p>
+								<p class="aui-font-size-14 color-red"><%=listData[i]['growth_value']%>积分</p>
+							</div>
+							<div class="aui-info-item" tapmode onclick="openDialog('telrecharge-dialog');$api.setStorage('duihuang',{'id':<%=listData[i]['id']%>,'growth_value':<%=listData[i]['growth_value']%>})">
+								<img class="focus-icon" src="../img/exchange-icon.png" />
+							</div>
+						</div>
+					</div>
+				<% } %>
+		<% } %>
+	</section>
+</script>
+<script type="text/javascript">
+	var score = 0;
+	var money = 0;
+	var dialog = new auiDialog();
+	apiready = function() {
+		api.parseTapmode();
+		var tab = new auiTab({
+			element: document.getElementById("tab"),
+		}, function(ret) {
+			if(ret.index == 1){
+				$('#tab1').show();
+				$('#tab2').hide();
+				$('#tab3').hide();
+			}else if(ret.index == 2){
+				$('#tab1').hide();
+				$('#tab2').show();
+				$('#tab3').hide();
+			}else if(ret.index == 3){
+				$('#tab1').hide();
+				$('#tab2').hide();
+				$('#tab3').show();
+			}
+		});
+		init(); 
+		
+	}; 
+
+	//初始化
+	function init(){
+		$cjy.ajax({
+			url: index_url+'api/Member/exchange',
+			method: 'post',
+			data:{}
+		}, function(ret) {
+			if(ret.code == 0){
+				var data = {};
+				data.listData = ret.data.commodity;
+				data.score = ret.data.value.growth_value;
+				score = data.score;
+				data.img_url = img_url;
+				var html = template('Data-list',data);
+				$api.html($api.byId('listData'), html);
+			}
+		});
+	}
+
+	function exchange(id,growthValue,phone){
+		dialog.alert({
+		    title:"提示",
+		    msg:'确认兑换?',
+		    buttons:['取消','确定']
+		},function(ret){
+		    if(ret.buttonIndex == 2){
+				var data = {};
+				data.commodity_id = id;
+				data.growth_value = score;
+				if(phone) data.phone = phone;
+				$cjy.ajax({
+					url: index_url+'api/Member/exchangeEdit',
+					method: 'post',
+					data:data
+				}, function(ret) {
+					toast1(ret.msg);
+					if(ret.code == 0){
+						score = score-growthValue;
+						$('.score').html(score);
+						var userInfo = $api.getStorage('userInfo');
+						userInfo.growth_value = userInfo.growth_value-growthValue;
+						$api.setStorage('userInfo',userInfo);
+						openDialog('widget://app/dialog/dialog-customer');
+					}
+				});
+			}
+		})
+		
+	}
+</script>

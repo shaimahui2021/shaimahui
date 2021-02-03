@@ -1,0 +1,76 @@
+
+//videoPlayer模块play接口实现的播放器，确实简单，方便。附件有图标素材。跟大家分享一下。
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        body {
+            padding: 60px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button type="button" tapmode onclick="fnvideoPlayerPlay()" name="button">打开自带界面播放器</button>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+
+    function fnvideoPlayerPlay() {
+        var videoPlayer = api.require('videoPlayer');
+        videoPlayer.play({
+            texts: {
+                head: {
+                    title: ''
+                }
+            },
+            styles: {
+                head: {
+                    bg: 'rgba(0.5,0.5,0.5,0.7)',
+                    height: 44,
+                    titleSize: 20,
+                    titleColor: '#fff',
+                    backSize: 30,
+                    backImg: 'widget://image/videoPlayer/back.png',
+                    setSize: 30,
+                    setImg: 'widget://image/videoPlayer/more.png'
+                },
+                foot: {
+                    bg: 'rgba(0.5,0.5,0.5,0.7)',
+                    height: 44,
+                    playSize: 30,
+                    playImg: 'widget://image/videoPlayer/play.png',
+                    pauseImg: 'widget://image/videoPlayer/pause.png',
+                    nextSize: 0,
+                    nextImg: '',
+                    timeSize: 14,
+                    timeColor: '#fff',
+                    sliderImg: '',
+                    progressColor: '#696969',
+                    progressSelected: '#1296db',
+                    verticalImg: "widget://image/videoPlayer/unfullscreen.png",
+                    horizontalImg: "widget://image/videoPlayer/fullscreen.png"
+                }
+            },
+            path: 'http://7o50kb.com2.z0.glb.qiniucdn.com/c1.1.mp4',
+            autoPlay: true
+        }, function(ret, err) {
+            if (ret) {
+
+            } else {
+
+            }
+        });
+    }
+</script>
+
+</html>

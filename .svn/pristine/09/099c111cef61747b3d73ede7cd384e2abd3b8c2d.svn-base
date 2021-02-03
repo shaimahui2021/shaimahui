@@ -1,0 +1,50 @@
+.home-header,
+.home-header .aui-tab {
+	background-color: #01A84E;
+} 
+.banner {
+	background-color: #01A84E;
+}
+.banner .occupied-top{
+	background-color: #01A84E;
+}
+.notice {
+	background: url(../image/notice-green.png) no-repeat;
+	background-size: 1rem 100%;
+	background-position: .5rem 0;
+}
+
+.search-type-list .search-type-item.active:after {
+	background-color: #01A84E;
+}
+.search-type-list2 .search-type-item2.active span {
+	background: url(../img/type-green.png) no-repeat;
+	background-size: 100% 100%;
+}
+.lotteryhis-item {
+	background: url(../image/lotteryhis-green.png) no-repeat;
+	background-size: 100% 100%;
+}
+.lotteryhis-item .lotteryhis-txt {
+	color: #01A84E;
+} 
+.lotteryhis-item .lotteryhis-txt:after {
+	border-left: 1px solid #01A84E;
+	border-bottom: 1px solid #01A84E;
+} 
+.color {
+	color: #01A84E;
+} 
+.header-nobg .aui-tab .aui-tab-item.aui-active span {
+	color: #01A84E;
+} 
+.header-nobg .aui-tab .aui-tab-item.aui-active span:after {
+	background-color: #01A84E;
+} 
+.aui-tab-item.aui-active span:after{
+	background-color: #01A84E;
+}
+.search-type-list2 .search-type-item2.active span{
+	background: url(../app/index/img/type-green.png);
+	background-size: 100% 100%;
+}

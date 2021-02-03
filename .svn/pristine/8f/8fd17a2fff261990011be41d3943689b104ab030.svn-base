@@ -1,0 +1,20 @@
+.addfocus-icon{
+	display: block;
+	background: url(../../../image/add-focus.png) no-repeat;
+	background-size: 100% 100%;
+}
+.addfocus-icon.active{
+	display: block;
+	background: url(../../../image/has-focus.png) no-repeat;
+	background-size: 100% 100%;
+}
+.delfocus-icon{
+	display: block;
+	background: url(../../../image/delfocus-icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.cancelfocus-icon{
+	display: block;
+	background: url(../../../image/cancelfocus-icon.png) no-repeat;
+	background-size: 100% 100%;
+}

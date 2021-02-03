@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<script type="text/javascript" src="../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>消息首页--回复弹窗</title>
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.dialog-customer{
+				width: 70%;
+				background-color: #fff;
+				border-radius: .5rem;
+			}
+			.dialog-customer-title{
+				text-align: center;
+				line-height: 2.5rem; 
+			}
+			.dialog-customer-cont{
+				padding: 0rem 2rem;
+				padding-bottom: 0;
+			}
+			.dialog-customer-cont p{
+				line-height: 1.5rem;
+				text-align: center;
+			}
+			.dialog-customer-footer{
+				text-align: center;
+				line-height: 4rem;
+			}
+			.btn-red{
+				width: 6rem;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="dialog" class="aui-content dialog-customer">
+			<div class="dialog-customer-title">客服联系方式</div>
+			<div class="dialog-customer-cont">
+				<p>QQ:<span class="aui-margin-l-5 aui-margin-l-5" id="QQ">1234567890</span></p>
+				<p>微信:<span class="aui-margin-l-5 aui-margin-l-5" id="WX">1234567890</span></p>
+			</div>
+			<div class="dialog-customer-footer">
+				<div class="aui-btn btn-red" tapmode onclick="quxiao()">确定</div>
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/utils.js"></script>
+<script type="text/javascript" src="../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../res/api-index.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+		init();
+		$(document.body).on('touchend', function(e) {
+			var dialog = $("#dialog")[0];
+			if (!$.contains(dialog, e.target)) {
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			}
+		});
+	};
+
+	function init() {
+		$cjy.ajax({
+			url: configIndex.kefu,
+			method: 'post',
+		}, function(ret) {
+			if(ret.code == 0){
+				$('#QQ').text(ret.data.QQ);
+				$('#WX').text(ret.data.WX);
+			}
+		});
+	}
+
+	function quxiao() {
+		api.closeFrame();
+	}
+</script>

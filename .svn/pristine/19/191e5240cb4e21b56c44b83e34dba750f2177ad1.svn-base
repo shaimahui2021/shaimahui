@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<script type="text/javascript" src="../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>消息首页--回复弹窗</title>
+		<style>
+			html,
+			body {
+				background-color: rgba(0, 0, 0, .1);
+			}
+			body{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.dialog-reply{
+				width: 90%;
+			}
+			.dialog-reply-cont{
+				padding: 10%;
+				border-radius: .25rem;
+				background-color: #fff;
+			}
+			.textarea {
+			    height: 3rem;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="dialog" class="aui-content dialog-reply">
+			<div class="dialog-reply-cont">
+				<textarea class="aui-font-size-14 aui-padded-10 img-round-sm textarea bg-gray content" rows="3" placeholder="请输入回复内容~"></textarea>
+				<div class="aui-text-right aui-margin-t-15">
+					<div class="aui-btn btn-gray aui-margin-r-15" tapmode onclick="quxiao()">取消</div><div class="aui-btn btn-red" tapmode onclick="submit()">提交</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/utils.js"></script>
+<script type="text/javascript" src="../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../script/aui-tab.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+		$(document.body).on('touchend', function(e) {
+			var dialog = $("#dialog")[0];
+			if (!$.contains(dialog, e.target)) {
+				setTimeout(function() {
+					api.closeFrame();
+				}, 200);
+			}
+		});
+	};
+
+	function submit(){
+		if($('.content').val() == ''){
+			toast1('回复内容为空！');
+			return false;
+		}
+		api.execScript({
+				frameName: 'frame4',
+				script: 'saveReplyData("'+ $('.content').val() +'")'
+		});
+		api.closeFrame();
+	}
+	function quxiao(){
+		api.closeFrame();
+	}
+</script>

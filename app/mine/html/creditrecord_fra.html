@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-gray">
+		<section class="aui-content">
+			<div class="aui-row  aui-margin-t-15 bg-fff record-list-header">
+				<div class="aui-col-xs-4 record-list-item">
+					类型
+				</div>
+				<div class="aui-col-xs-4 record-list-item">
+					积分数
+				</div> 
+				<div class="aui-col-xs-4 record-list-item">
+					时间
+				</div>
+			</div>
+			<div class="aui-row bg-fff record-list-body" id="record-list">
+				<!-- <div class="aui-col-xs-4 record-list-item">
+					签到
+				</div>
+				<div class="aui-col-xs-4 record-list-item">
+					<span class="color-red">+1</span>
+				</div>
+				<div class="aui-col-xs-4 record-list-item">
+					<span class="aui-font-size-14 color-gray">09-01 13:54</span>
+				</div> -->
+			</div>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/template" id="record-tpl">
+	<% for (var i = 0; i<data.length; i++) {%>
+	<div class="aui-col-xs-4 record-list-item">
+		<%=data[i]['type_name']%>
+	</div>
+	<div class="aui-col-xs-4 record-list-item">
+		<span class="color-red"><%=data[i]['growth_value']%></span>
+	</div>
+	<div class="aui-col-xs-4 record-list-item">
+		<span class="aui-font-size-14 color-gray"><%=data[i]['create_time']%></span>
+	</div> 
+	<% } %>
+</script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+		record();
+	};
+	function record(){
+		$cjy.ajax({
+			url: configIndex.record,
+			method: 'post',
+		}, function(ret) {
+			if(ret.code == 0){
+				var html = template('record-tpl',ret);
+				$api.html($api.byId('record-list'), html);
+			}
+		});
+	}
+</script>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-fff">
+		<div class="aui-content aui-padded-15">
+			<textarea class="aui-font-size-14 aui-padded-10 img-round-sm textarea bg-gray content" rows="6" placeholder="说出你的问题~"></textarea>
+			<div class="aui-row aui-padded-t-15 aui-padded-b-15 uploadImgList">
+				<!-- <div class="aui-col-xs-4">
+					<img src="../../../image/l1.jpg" />
+				</div>  -->
+				<div class="aui-col-xs-4 add-img" tapmode onclick="showAction()">
+					<img src="../../derby/img/publish-add.png" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+	};
+	var files = new Array();
+	// 上传图片
+	function showAction() {
+		api.actionSheet({
+			title: '上传图片',
+			cancelTitle: '取消',
+			buttons: ['拍照', '从手机相册选择']
+		}, function(ret, err) {
+			if (ret) {
+				getPicture(ret.buttonIndex);
+			}
+		});
+	}
+
+	function submit() {
+		console.log(JSON.stringify(files));
+		$cjy.ajax({
+			url: configIndex.upload,
+			method: 'post',
+			files: {
+				'file[]': files
+			}
+		}, function(ret, err) {
+			if (ret) {
+				var imgPaths = ret.data.path;
+				toast1('图片上传成功！');
+				$cjy.ajax({
+					url: index_url + 'api/Member/Feedback',
+					method: 'post',
+					data: {
+						'head_path': imgPaths,
+						'content': $('.content').val()
+					}
+				}, function(ret, err) {
+					if (ret) {
+						toast1('反馈成功！');
+						api.closeWin();
+					} else {
+						toast1(err);
+					}
+				});
+			} else {
+				toast1(err);
+			}
+		})
+	}
+
+	function getPicture(sourceType) {
+		if (sourceType == 1) { // 拍照
+			api.getPicture({
+				sourceType: 'camera',
+				encodingType: 'jpg',
+				mediaValue: 'pic',
+				allowEdit: false,
+				destinationType: 'url',
+				quality: 90,
+				targetWidth: 750,
+				targetHeight: 750,
+				saveToPhotoAlbum: true
+			}, function(ret, err) {
+				if (ret.data != "") {
+					files.push(ret.data);
+					$('.add-img').before('<div class="aui-col-xs-4"><img src="' + ret.data + '" /></div>');
+				}
+			});
+		} else if (sourceType == 2) { // 从相机中选择
+			api.getPicture({
+				sourceType: 'library',
+				encodingType: 'jpg',
+				mediaValue: 'pic',
+				destinationType: 'url',
+				allowEdit: true,
+				saveToPhotoAlbum: false,
+				quality: 50,
+				targetWidth: 750,
+				targetHeight: 750
+			}, function(ret, err) {
+				if (ret.data != "") {
+					console.log(JSON.stringify(ret));
+					// $('#imgUp').attr('src', ret.base64Data)
+					files.push(ret.data);
+					$('.add-img').before('<div class="aui-col-xs-4"><img src="' + ret.data + '" /></div>');
+					// var aa   = ret.base64Data;
+					// $('#imgUp').attr('src',aa)
+
+				} 
+			});
+		}
+
+
+
+	}
+</script>

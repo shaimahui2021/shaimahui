@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui-flex.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/derby.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<style>
+			.aui-list.aui-list-in .aui-list-item{
+				border-bottom: 1px solid #DCDCDC !important;
+			}
+			.aui-list.aui-list-in .aui-list-item:last-child{
+				border-bottom: none !important;
+			}
+		</style>
+	</head>
+	<body id="bodyDel">
+		<section class="aui-content aui-padded-t-15">
+			<div class="aui-card-list aui-padded-t-10 aui-margin-b-0" id="details-tpl">
+				<!-- <div class="aui-card-list-header aui-padded-t-0 aui-padded-b-0">
+					<ul class="aui-list aui-list-in aui-media-list aui-list-noborder w-100">
+						<li class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-l-0">
+							<div class="aui-media-list-item-inner">
+								<div class="aui-list-item-media" style="width: 3.5rem;">
+									<img src="../../../image/empty-head.png" class="aui-img-round">
+								</div>
+								<div class="aui-list-item-inner aui-padded-r-0">
+									<div class="aui-list-item-text">
+										<div class="aui-list-item-title aui-font-size-16 aui-ellipsis">超级预测员</div>
+									</div>
+									<div class="aui-list-item-text">
+										<div class="aui-font-size-12 aui-ellipsis">
+											08-15 12:20
+										</div>
+									</div>
+								</div>
+								<div class="aui-list-item-media aui-flex-col aui-flex-right aui-padded-r-0">
+									<i class="addfocus-icon"></i>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div> -->
+				<!-- <div class="aui-card-list-content-padded aui-padded-t-0">
+					<div class="aui-ellipsis-1">
+					</div>
+					<div class="aui-row aui-row-padded aui-padded-t-5">
+						<div class="aui-col-xs-6">
+							<img class="img-round-sm" src="../../../image/l1.jpg">
+						</div>
+						<div class="aui-col-xs-6">
+							<img class="img-round-sm" src="../../../image/l1.jpg">
+						</div>
+					</div>
+				</div>
+				<div class="aui-card-list-footer aui-padded-t-0">
+					<div class="aui-info w-100">
+						<div class="aui-info-item"><img class="aui-margin-r-5 praise-icon" src="../../../image/praise-active.png" /></div>
+						<div class="aui-info-item"><img class="aui-margin-r-5 msg-icon" src="../../../image/msg.png" /> </div>
+						<div class="aui-info-item" tapmode onclick="openWin('widget://app/derby/html/forward_win')"><img class="aui-margin-r-5 forward-icon"
+							 src="../../../image/forward.png" /> </div>
+						<div class="aui-info-item" tapmode onclick="openDialog('widget://app/dialog/dialog-reward')"><img class="aui-margin-r-5 gift-icon"
+							 src="../../../image/gift-active.png" /></div>
+					</div>
+				</div> -->
+			</div>
+			评论
+			<ul class="aui-list aui-list-in aui-media-list aui-list-noborder aui-margin-t-10 aui-padded-10">
+				<li class="aui-list-header aui-font-size-16 bg-fff border-b aui-padded-l-0">热门评论</li>
+				<div id="comment-tpl" style="text-align:center">
+					<!-- <li class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-5 aui-padded-t-5">
+						<div class="aui-media-list-item-inner align-start">
+							<div class="aui-list-item-media" style="width: 2.5rem;">
+								<img src="../../../image/empty-head.png" class="aui-img-round">
+							</div>
+							<div class="aui-list-item-inner">
+								<div class="aui-list-item-text">
+									<div class="aui-font-size-12 aui-ellipsis-1">木村拓哉</div>
+									<div class="aui-list-item-right">
+										<div class="aui-info aui-padded-t-0 aui-padded-b-0">
+											<div class="aui-info-item">
+												<img class="aui-margin-r-15 godcomment-icon" src="../../../image/godcomment.png" />
+												<img class="aui-margin-r-10 praise-icon" src="../../../image/praise.png" />
+												42
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+									<div class="aui-font-size-14 color-black">在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊</div>
+									<div class="aui-font-size-12 aui-padded-t-5">昨天 13:04<span class="aui-margin-l-10">回复</span></div>
+								</div>
+								<div class="aui-list-item-text justify-start aui-text-left">
+									<span class="aui-margin-r-5">---</span>展开更多回复<i class="aui-margin-l-5 down-arrow"></i> 
+								</div>
+								<div class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-0">
+									<div class="aui-media-list-item-inner align-start">
+										<div class="aui-list-item-media" style="width: 2.25rem;">
+											<img src="../../../image/empty-head.png" class="aui-img-round">
+										</div>
+										<div class="aui-list-item-inner">
+											<div class="aui-list-item-text">
+												<div class="aui-font-size-12 aui-ellipsis-1">木村拓哉</div>
+											</div>
+											<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5">
+												<div class="aui-font-size-14  color-black">在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊在哪啊</div>
+												<div class="aui-font-size-12 aui-padded-t-5">昨天 13:04<span class="aui-margin-l-10">回复</span></div>
+											</div>
+										</div>
+									</div> 
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- <div class="comment-div">
+								<p class="aui-text-left"><span class="comment-man">发布者</span>:我雷子家这</p>
+								<p class="aui-text-left"><span class="comment-man">木村拓哉</span>回复<span class="comment-man">发布者</span>:等我要去我问你 我也想去 蘑菇多吗</p>
+								<p class="aui-text-left"><span class="comment-man">发布者</span>回复<span class="comment-man">木村拓哉</span>:好的 超级多</p>
+								<p class="aui-text-left comment-sum">共3条回复&nbsp;&gt;</p>
+								<p class="aui-text-left comment-takeback" style="display: none;">收回</p>
+						</div> -->
+				</div>
+			</ul>
+		</section>
+		<!--输入框占位 注意要跟聊天内容同级为兄弟关系#F4F8FC-->
+		<div id="j-bottom" style="height: 3.2rem;background: #F4F8FC;bottom:0;"></div>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/template" id="details-list">
+	<div class="aui-card-list-header aui-padded-t-0 aui-padded-b-0">
+	    <ul class="aui-list aui-list-in aui-media-list aui-list-noborder w-100">
+	    	<li class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-l-0">
+	    		<div class="aui-media-list-item-inner">
+	    			<div class="aui-list-item-media" style="width: 3.5rem;"  tapmode onclick="openWin('widget://app/derby/html/perscenter_win',{member_id:<%=post['member_id']%>,post_id:<%=post['id']%>})">
+	    				<img src="<%=head_path + post['m_head_path']%>" class="aui-img-round">
+	    			</div>
+	    			<div class="aui-list-item-inner aui-padded-r-0">
+	    				<div class="aui-list-item-text">
+	    					<div class="aui-list-item-title aui-font-size-16 aui-ellipsis"><%=post['nickname']%></div>
+	    				</div>
+	    				<div class="aui-list-item-text">
+	    					<div class="aui-font-size-12 aui-ellipsis">
+	    						<%=post['create_time']%>
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="aui-list-item-media aui-flex-col aui-flex-right aui-padded-r-0">
+						<% if(post['is_attention'] == 0) {%>
+	    				<i class="addfocus-icon" tapmode onclick="focusToggle(this,<%=post['member_id']%>,<%=post['is_attention']%>)"></i>
+						<% }else {%>
+						<i class="addfocus-icon active" tapmode onclick="focusToggle(this,<%=post['member_id']%>,<%=post['is_attention']%>)"></i>
+						<% } %>
+	    			</div>
+	    		</div>
+	    	</li>
+	    </ul>
+	</div>
+	<div class="aui-card-list-content-padded aui-padded-t-5">
+		<div class="aui-text-left">
+			<span style="white-space: pre-line"><%=post['content']%></span>
+			
+		</div>
+		<% if(post['head_path']) {%>
+		<% if(post['video_path'] != 0) {%>
+		<div id="myVideoControls"  tapmode onclick="openVideo('<%=post['video_path']%>');" class="videoList aui-padded-t-5">
+			<div class="videoListItem">
+			    <% for(var i = 0; i<post['head_path'].length; i++) {%>
+			    <div id="uploaderFiles" data-src="<%=head_path + post['head_path'][i]%>" style="background: url('<%=head_path + post['head_path'][i]%>') no-repeat;background-size: cover;" class="videoListItemImg"></div>
+			    <% } %>
+			    <div id="videoBtn"></div>
+			</div>
+		</div>
+		<% }else{  %>
+		<div class="aui-row aui-row-padded aui-padded-t-5">
+			<div class="aui-col-xs-12 uploadImgList">
+			<%for(var i = 0; i<post['head_path'].length; i++) {%>
+				<% if(post['head_path'][i]!="未选择文件") {%>
+			    <div <%if(post['head_path'][i].length == 1) {%> class="picOnlyOne" <% } %> style="background: url(<%=head_path + post['head_path'][i]%>) no-repeat;background-size: cover;" data-src="<%=head_path + post['head_path'][i]%>" tapmode onclick="openP(this,<%=i%>)"></div>
+			    <% } %>
+			<% } %>
+			</div>
+		</div>
+		<% } %>
+		<% } %>
+	</div>
+	<div class="aui-card-list-footer aui-padded-t-0">
+		<div class="aui-info w-100">
+			<% if(post['isLike'] == 0) {%>
+			<div class="aui-info-item"  id="dianzan<%=post['id']%>"><img class="aui-margin-r-5 praise-icon" tapmode onclick="dianzan(<%=post['id']%>,<%=post['member_id']%>)" src="../../../image/praise.png" /><p id="p<%=post['id']%>"> <%=post['like']%></p></div>
+			<% }else{ %>
+			<div class="aui-info-item"  id="dianzan<%=post['id']%>"><img class="aui-margin-r-5 praise-icon" tapmode onclick="dianzan(<%=post['id']%>,<%=post['member_id']%>)" src="../../../image/praise-active.png" /><p id="p<%=post['id']%>"> <%=post['like']%></p></div>
+			<% } %>
+			<div class="aui-info-item" tapmode onclick="openComment()"><i class="aui-margin-r-5 msg-icon"></i> <p id="comment_sum"><%=post['comment_sum']%></p></div>
+			<div class="aui-info-item" tapmode onclick="openWin('widget://app/derby/html/forward_win',{post_id:<%=post['id']%>,lottery_id:<%=post['lottery_id']%>})"><i class="aui-margin-r-5 forward-icon"></i> <%=post['forwarding']%></div>
+			<div class="aui-info-item" tapmode onclick="openDialog('widget://app/dialog/dialog-reward',{post_id:<%=post['id']%>,type:1})"><i class="aui-margin-r-5 gift-icon"></i> <%=post['money']%></div>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="comment-list">
+	<% if(postComment != '') {%>
+	<% for(var i = 0; i<postComment.length; i++) {%>
+    <li class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-5 aui-padded-t-5">
+		<div class="aui-media-list-item-inner align-start">
+			<div class="aui-list-item-media" style="width: 2.5rem;"  tapmode onclick="openWin('widget://app/derby/html/perscenter_win',{member_id:<%=postComment[i]['member_id']%>})">
+				<img src="<%=head_path + postComment[i]['head_path']%>" class="aui-img-round">
+			</div>
+			<div class="aui-list-item-inner">
+				<div class="aui-list-item-text">
+					<div class="aui-font-size-12 aui-ellipsis-1 author" id="nickName<%postComment[i]['id']%>">
+					<%=postComment[i]['nickname']%>
+					<% if(postComment[i]['nickname'] == nickname) {%>
+					<img class="icon-author" src="../../../image/icon-author.png" />
+					<% } %>
+					</div>
+					<div class="aui-list-item-right">
+						<div class="aui-info aui-padded-t-0 aui-padded-b-0">
+							<div class="aui-info-item">
+								<% if( postComment[i]['like'] >= 50) {%>
+									<img class="aui-margin-r-15 godcomment-icon" src="../../../image/godcomment.png" />
+								<% }else {%>
+								<% } %>
+								<% if(postComment[i]['isLike'] == 0){ %>
+									<img  id="comment<%=postComment[i]['id']%>" class="aui-margin-r-5 praise-icon-sm" tapmode onclick="commentLike(<%=postComment[i]['id']%>,<%=postComment[i]['member_id']%>)" src="../../../image/praise.png" />
+								<% }else {%>
+									<img  id="comment<%=postComment[i]['id']%>" class="aui-margin-r-5 praise-icon-sm" tapmode onclick="commentLike(<%=postComment[i]['id']%>,<%=postComment[i]['member_id']%>)" src="../../../image/praise-active.png" />
+								<% } %>
+								<p id="conmentnum<%=postComment[i]['id']%>"><%=postComment[i]['like']%></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5"  tapmode onclick="chatBoxOpenRelpy(<%=postComment[i]['post_id']%>,<%=postComment[i]['member_id']%>,<%=postComment[i]['id']%>,'<%=postComment[i]['nickname']%>',<%=postComment[i]['reply']%>)">
+					<div class="aui-font-size-14  color-black">
+					<span style="white-space: pre-line"><%=postComment[i]['content']%></span>
+					
+					</div>
+					<div class="aui-font-size-12 aui-padded-t-5"><%=postComment[i]['create_time']%><span class="aui-margin-l-10">回复</span></div>
+				</div> 
+				<% if(postComment[i]['reply'] > 0){%>
+				<div class="aui-media-list-item-inner" id="reply-click-none<%=postComment[i]['id']%>" tapmode onclick="relpy(<%=postComment[i]['id']%>,1,<%=postComment[i]['reply']%>)"> 
+					<div class="aui-list-item-inner">
+						<div class="aui-list-item-text justify-start">——展开<%=postComment[i]['reply']%>条回复<i class="aui-margin-l-5 down-arrow"></i></div>
+					</div>
+				</div>
+				<% } %>
+				<div class="aui-list-item aui-list-item-noactive aui-list-item-middle aui-padded-b-15 aui-padded-l-0" id="comment-reply<%=postComment[i]['id']%>" style="display: none;">
+					
+				</div>
+			</div>
+		</div>
+	</li>
+	<% } %>
+	<% }else{%>
+	<% } %>
+</script>
+<script type="text/template" id="reply-tpl">
+	<% for(var i = 0; i < reply.length; i++) {%>
+	<div class="aui-media-list-item-inner align-start">
+		<div class="aui-list-item-media" style="width: 2.25rem;">
+			<img src="<%=head_path + reply[i]['head_path']%>" class="aui-img-round">
+		</div>
+		<div class="aui-list-item-inner">
+			<div class="aui-list-item-text justify-start">
+				<div class="aui-font-size-12 aui-ellipsis-1">
+					<% if(reply[i]['nickname'] == nickname) {%>
+					<img class="icon-author2" src="../../../image/icon-author.png" />
+					<% }else{ %>
+					<%=reply[i]['nickname']%>
+					<% } %>
+				</div>
+				<i class="aui-margin-l-5 right-arrow"></i>
+				<div class="aui-list-item-right nickName ">
+					<% if(reply[i]['replyNickname'] == nickname) {%>
+					<img class="icon-author2" src="../../../image/icon-author.png" />
+					<% }else{ %>
+					<%=reply[i]['replyNickname']%>
+					<% } %>
+				</div>
+			</div> 
+			<div class="aui-list-item-text flex-column align-start aui-text-left aui-padded-t-5" tapmode onclick="chatBoxOpenRelpy(<%=reply[i]['post_id']%>,<%=reply[i]['member_id']%>,<%=postComment_id%>,'<%=reply[i]['nickname']%>')">
+				<div class="aui-font-size-14 color-black">
+				<span style="white-space: pre-line"><%=reply[i]['content']%></span>
+				</div>
+				<div class="aui-font-size-12 aui-padded-t-5"><%=reply[i]['create_time']%><span class="aui-margin-l-10" >回复</span></div>
+			</div> 
+		</div>
+	</div>
+	<% } %>
+	<div class="aui-media-list-item-inner" id="reply-more<%=postComment_id%>" tapmode onclick="relpys(<%=postComment_id%>,2)"> 
+		<div class="aui-list-item-inner">
+			<div class="aui-list-item-text justify-start">——展开更多回复<i class="aui-margin-l-5 down-arrow"></i></div>
+		</div>
+	</div>
+	<div class="aui-media-list-item-inner" id="reply-retract<%=postComment_id%>"  tapmode onclick="retract(<%=postComment_id%>)" style="display: none;"> 
+		<div class="aui-list-item-inner">
+			<div class="aui-list-item-text justify-start">——收回<i class="aui-margin-l-5 top-arrow"></i></div>
+		</div>
+	</div>
+</script>
+<script type="text/javascript">
+	var isInit = true;
+	var commentType = 1;
+	var post_id;
+	var member_id;
+	var authorMember_id;
+	var replyMember_id;
+	var nickName;
+	var a_member_id;
+	var postComment_id;
+	var page = 1;
+	var replyPage = 1;
+	var replyNum = 0;
+	var username;
+	var autoFocus = false;
+	var listData = new Array();
+	var replyData = new Array();
+	var pageArray = new Array();
+	var videoScreenshots, videoPlayer, UIPhotoViewer, UILoading, UILoadingId;
+	apiready = function() {
+		api.parseTapmode();
+		lotteryOpenType = api.pageParam[1];
+		post_id = lotteryOpenType.post_id;
+		member_id = lotteryOpenType.member_id;
+		videoPlayer = api.require('videoPlayer');
+		videoScreenshots = api.require('videoScreenshots');
+		UIPhotoViewer = api.require('UIPhotoViewer');
+		UILoading = api.require('UILoading');
+		api.addEventListener({
+			name: 'delpost'
+		}, function(ret, err) {
+			deletePost();
+		});
+
+		UIChatBox = api.require('UIChatBox');
+		// 监听 inputBar 输入框把内容顶上去
+		UIChatBox.addEventListener({
+			target: 'inputBar',
+			name: 'move'
+		}, function(ret, err) {
+			if (ret) {
+				if (api.systemType == 'ios') {
+					api.setFrameAttr({
+						name: api.frameName,
+						rect: {
+							marginBottom: ret.panelHeight
+						}
+					});
+				}
+				if (api.systemType == 'android') { //键盘上顶的
+					if (api.winHeight > (ret.inputBarHeight + ret.panelHeight)) {
+
+						api.setFrameAttr({
+							name: api.frameName,
+							rect: {
+								h: winH - (ret.inputBarHeight + ret.panelHeight) - 40
+							}
+						});
+					}
+				}
+				scrollToEnd();
+			}
+		});
+		init();
+		chatBoxOpen(0);
+		api.addEventListener({
+			name: 'scrolltobottom',
+			extra: {
+				threshold: -1000
+			} //设置距离底部多少距离时触发，默认值为0，数字类型
+		}, function(ret, err) {
+			page += 1;
+			init();
+		});
+		// setTimeout(function() {
+		// 	api.addEventListener({
+		// 		name: 'viewappear'
+		// 	}, function(ret, err) {
+		// 		init(); //初始化一下页面，重新加载一下数据
+		// 	});
+		// }, 1000)
+	};
+
+	function openComment() {
+		chatBoxOpen(0, 1);
+	}
+
+	function deletePost() {
+		$api.html($api.byId('bodyDel'), '');
+	}
+
+	function retract(id) {
+		$('#comment-reply' + id).css('display', 'none');
+		$('#reply-click-none' + id).css('display', 'block');
+		$('#reply-more' + id).css('display', 'none');
+	}
+
+	function relpys(id, type) {
+		relpy(id, type);
+	}
+
+	function relpy(id, type, num = '') {
+		if (pageArray[id]) {
+			pageArray[id] += 1;
+		} else {
+			pageArray[id] = 1;
+		}
+		if (type == 1) {
+			$('#reply-click-none' + id).css('display', 'none');
+			pageArray[id] = 1;
+		}
+		replyPage = pageArray[id];
+		$cjy.ajax({
+			url: configIndex.reply,
+			method: 'post',
+			data: {
+				'post_comment_id': id,
+				'page': replyPage
+			}
+		}, function(ret) {
+			if (ret.data.length > 0) {
+				var data = {};
+				data.head_path = head_path;
+				data.member_id = authorMember_id;
+				data.nickname = username;
+				data.postComment_id = id;
+				data.reply = replyPage != 1 ? replyData[id].concat(ret.data) : ret.data;
+				replyData[id] = data.reply;
+				var text = template('reply-tpl', data);
+				$api.html($api.byId('comment-reply' + id), text);
+				api.parseTapmode();
+				if (type == 1) {
+					$('#comment-reply' + id).css('display', 'block');
+					$('#reply-click-none' + id).css('display', 'none');
+					$('#reply-more' + id).css('display', 'block');
+					replyNum = num;
+				}
+				if (replyData[id].length >= replyNum) {
+					$('#reply-more' + id).css('display', 'none');
+					$('#reply-retract' + id).css('display', 'block');
+				}
+			} else {
+				replyPage -= 1;
+				$('#reply-more' + id).css('display', 'none');
+				$('#reply-retract' + id).css('display', 'block');
+			}
+
+		});
+		$('#comment-reply' + id).css('display', 'block')
+	}
+
+	function init() {
+		$cjy.ajax({
+			url: configIndex.spaceDetails,
+			method: 'post',
+			data: {
+				'id': post_id,
+				'page': page,
+			}
+		}, function(ret) {
+			if (ret.code == 0) {
+				ret.data.head_path = head_path;
+				username = ret.data.post.nickname;
+				var html = template('details-list', ret.data);
+				$api.html($api.byId('details-tpl'), html);
+				if (ret.data.postComment.length > 0) {
+					var data = {};
+					data.head_path = head_path;
+					data.nickname = ret.data.post.nickname;
+					authorMember_id = ret.data.post.member_id;
+					data.postComment = page != 1 ? listData.concat(ret.data.postComment) : ret.data.postComment;
+					listData = data.postComment;
+					var text = template('comment-list', data);
+					$api.html($api.byId('comment-tpl'), text);
+					api.parseTapmode();
+				} else {
+					if (page == 1) {
+						$api.html($api.byId('comment-tpl'), '还没有评论,你的机会来了!');
+					} else {
+						page -= 1;
+					}
+				}
+			} else {}
+
+		});
+	}
+
+	function commentLike(id, member_id) {
+		console.log("id=========>", id);
+		$cjy.ajax({
+			url: configIndex.postLike,
+			method: 'post',
+			data: {
+				'post_comment_id': id,
+				'member_id': member_id,
+				'type': 2
+			}
+		}, function(ret) {
+			console.log($api.jsonToStr(ret));
+			changeCommentImg(id);
+		}, function(err) {
+			console.log($api.jsonToStr(err));
+		});
+	};
+
+	//点赞改变样式
+	function changeCommentImg(id) {
+		var path = $("#comment" + id).attr('src');
+		if (path == '../../../image/praise.png') {
+			var like = $("#conmentnum" + id).text();
+			like = Number(like) + 1;
+			$("#conmentnum" + id).text(like);
+			path = '../../../image/praise-active.png'
+		} else {
+			var like = $("#conmentnum" + id).text();
+			like = Number(like) - 1;
+			$("#conmentnum" + id).text(like);
+			path = '../../../image/praise.png'
+		}
+		$("#comment" + id).attr('src', path);
+
+	};
+	//帖子点赞/取消
+	function dianzan(post_id, member_id) {
+		$cjy.ajax({
+			url: configIndex.postLike,
+			method: 'post',
+			data: {
+				'post_id': post_id,
+				'a_member_id': member_id,
+				'type': 1
+			}
+		}, function(ret) {
+			changeImg(post_id);
+		}, function(err) {});
+
+	};
+
+	function changeImg(post_id) {
+		var path = $("#dianzan" + post_id).children().attr('src');
+		var num = 0;
+		if (path == '../../../image/praise.png') {
+			var like = $("#p" + post_id).text();
+			like = Number(like) + 1;
+			$("#p" + post_id).text(like);
+			path = '../../../image/praise-active.png';
+			num = 1;
+		} else {
+			var like = $("#p" + post_id).text();
+			like = Number(like) - 1;
+			$("#p" + post_id).text(like);
+			path = '../../../image/praise.png';
+			num = -1;
+		}
+		$("#dianzan" + post_id).children().attr('src', path);
+		api.sendEvent({
+			name: 'eventProcessing',
+			extra: {
+				type: 'p',
+				num: num,
+				id: post_id
+			}
+		});
+
+	};
+
+	function chatBoxOpenRelpy(post_id, member_id, id, nickname, num) {
+		post_id = post_id;
+		replyMember_id = member_id;
+		postComment_id = id;
+		nickName = nickname;
+		replyNum = num;
+		chatBoxOpen(1);
+	}
+	//打开聊天窗口
+	function chatBoxOpen(type, types) {
+		var UIChatBox = api.require('UIChatBox');
+		if (type == 1) {
+			var placeholder = '回复' + nickName + ':';
+		} else {
+			var placeholder = '输入评论内容';
+		}
+		UIChatBox.close();
+		UIChatBox.open({
+			autoFocus: false,
+			maxRows: 4,
+			emotionPath: 'widget://image/keyboard/emotion',
+			texts: {
+				recordBtn: {
+					normalTitle: '按住说话',
+					activeTitle: '松开结束'
+				},
+				sendBtn: {
+					title: '发送'
+				}
+			},
+
+			styles: {
+				topDivider: {
+					width: 1,
+					color: '#d2d2d2'
+				},
+				inputBar: {
+					bgColor: '#fff',
+					textMarginLeft: 10
+				},
+				inputBox: {
+					borderColor: '#F4F8FC',
+					topMargin: 5
+				},
+				sendBtn: {
+					titleColor: '#fff',
+					bg: '#FF3952',
+					activeBg: '#FF3952',
+					titleSize: 14
+				},
+			},
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'send') {
+					if (ret.msg != '') {
+						if (type == 1) {
+							$cjy.ajax({
+								url: configIndex.postComment,
+								method: 'post',
+								data: {
+									'post_id': post_id,
+									'a_member_id': replyMember_id,
+									'content': ret.msg,
+									'id': postComment_id
+								}
+							}, function(ret1) {
+								var list = {};
+								list.id = ret1.data.id;
+								list.member_id = ret1.data.member_id;
+								list.create_time = ret1.data.create_time;
+								list.post_id = ret1.data.post_id;
+								list.c_id = ret1.data.c_id;
+								list.content = ret1.data.content;
+								list.nickname = ret1.data.nickname;
+								list.head_path = ret1.data.head_path;
+								list.a_member_id = ret1.data.a_member_id;
+								list.replyNickname = ret1.data.replyNickname;
+								if (replyData[postComment_id]) {
+									replyData[postComment_id].push(list);
+								} else {
+									replyData[postComment_id] = new Array();
+									replyData[postComment_id].push(list);
+								}
+								var data = {};
+								data.reply = replyData[postComment_id];
+								data.head_path = head_path;
+								data.member_id = authorMember_id;
+								data.nickname = username;
+								data.postComment_id = postComment_id;
+								var text = template('reply-tpl', data);
+								$api.html($api.byId('comment-reply' + postComment_id), text);
+								$('#comment-reply' + postComment_id).css('display', 'block');
+								$('#reply-click-none' + postComment_id).css('display', 'none');
+								var comment = $('#comment_sum').text();
+								comment = Number(comment) + 1;
+								$('#comment_sum').text(comment);
+								for (var i = 0; i < listData.length; i++) {
+									if (listData[i]['id'] == postComment_id) {
+										if (listData[i]['reply'] == 0) {
+											listData[i]['reply'] = 1;
+											$('#reply-more' + postComment_id).css('display', 'none');
+										} else {
+											replyNum = listData[i]['reply'];
+											$('#reply-more' + postComment_id).css('display', 'block');
+										}
+									}
+								}
+								//发送成功frame3的页面评论数量+1
+								api.sendEvent({
+									name: 'eventProcessing',
+									extra: {
+										type: 'comment',
+										num: 1,
+										id: ret1.data.id
+									}
+								});
+							});
+							UIChatBox.closeKeyboard();
+							UIChatBox.close();
+						} else {
+
+							$cjy.ajax({
+								url: configIndex.postComment,
+								method: 'post',
+								data: {
+									'post_id': post_id,
+									'member_id': member_id,
+									'content': ret.msg
+								}
+							}, function(ret1) {
+								console.log("~~~ret1:::" + $api.jsonToStr(ret));
+								var list = {};
+								list = ret1.data;
+								list.isLike = 0
+								listData.unshift(list);
+								console.log(JSON.stringify(listData))
+								var data = {}
+								data.postComment = listData;
+								data.head_path = head_path;
+								data.nickname = username;
+								var text = template('comment-list', data);
+								$api.html($api.byId('comment-tpl'), text);
+								var comment = $('#comment_sum').text();
+								comment = Number(comment) + 1;
+								$('#comment_sum').text(comment);
+								UIChatBox.closeKeyboard();
+								UIChatBox.close();
+							}, function(err) {
+								console.log($api.jsonToStr(err));
+							});
+						}
+
+						api.sendEvent({
+							name: 'eventProcessing',
+							extra: {
+								type: 'comment',
+								num: 1,
+								id: post_id
+							}
+						});
+					}
+
+
+				}
+				if (ret.eventType == "clickExtras") {
+					if (ret.index == 0) {}
+				}
+				scrollToEnd();
+			}
+		});
+		if (type == 1) {
+			UIChatBox.popupKeyboard();
+		}
+		if (type == 1) {
+			UIChatBox.popupKeyboard();
+		}
+		UIChatBox.setPlaceholder({
+			placeholder: placeholder
+		});
+	};
+	//滚到底部
+	function scrollToEnd() {
+		setTimeout(function() {
+			$("html,body").finish().animate({
+				"scrollTop": $('#j-bottom').offset().top
+			}, 150);
+		}, 200);
+	};
+	//加关注 已关注
+	function focusToggle(obj, member_id, is_attention) {
+		$(obj).toggleClass('active');
+		$cjy.ajax({
+			url: configIndex.isAttention,
+			method: 'post',
+			data: {
+				'a_member_id': member_id,
+				'isAttention': is_attention
+			}
+		}, function(ret) {
+			init();
+		});
+	};
+	//视频未播放时提示加载中
+	function openUILoading() {
+		UILoading.flower({
+			center: {
+				x: api.winWidth / 2.0,
+				y: api.winHeight / 2.0
+			},
+			size: 30,
+			fixed: true
+		}, function(ret) {
+			UILoadingId = ret.id;
+		});
+	};
+
+	function closeUILoading() {
+		// alert(UILoadingId)
+		UILoading.closeFlower({
+			id: UILoadingId,
+			isGradual: false
+		});
+	}
+	//视频播放
+	function openVideo(video_path) {
+		video_image = $('#uploaderFiles').attr('data-src').replace('/', '');
+		//打开一个frame用于专门播放短视频模块依附
+		var currentTime = Math.round(new Date() / 1000);
+		var imgIP = '';
+		api.download({
+			url: video_image,
+			savePath: 'fs://' + currentTime + 'img.jpg',
+			report: true,
+			cache: true,
+			allowResume: true
+		}, function(ret, err) {
+			if (ret.state == 1) {
+				imgIP = ret['savePath'];
+				api.saveMediaToAlbum({
+					path: 'fs://' + currentTime + 'img.jpg'
+				}, function(ret, err) {
+
+				});
+				//打开一个frame用于专门播放短视频模块依附
+				api.openFrame({
+					name: 'video_fra',
+					url: 'video_fra.html',
+					rect: {
+						x: 0,
+						y: 0,
+						w: 'auto',
+						h: 'auto'
+					},
+				});
+				openUILoading();
+				videoPlayer.open({
+					rect: {
+						x: 0,
+						y: 0,
+						w: api.winWidth,
+						h: api.winHeight
+					},
+					bg: '#000',
+					// coverImg: 'fs://' + imgIP + '',
+					path: video + video_path,
+					fixedOn: 'video_fra',
+					loop: true,
+				}, function(ret, err) {
+					if (ret.eventType == 'playing') {
+						closeUILoading();
+					}
+					if (ret.status) {
+						//监听单击播放器
+						videoPlayer.addEventListener({
+							name: 'click'
+						}, function(ret, err) {
+							if (ret) {
+								videoPlayer.close();
+								api.closeFrame({
+									name: 'video_fra'
+								});
+							} else {
+								toast('退出失败');
+								api.closeFrame({
+									name: 'video_fra'
+								});
+							}
+						});
+					} else {
+						toast('播放失败');
+						api.closeFrame({
+							name: 'video_fra'
+						});
+					}
+				});
+			} else {
+
+			}
+		});
+	};
+	// 关闭视频
+	function closeVideo() {
+		videoPlayer.close();
+		api.closeFrame({
+			name: 'video_fra'
+		});
+	};
+	//预览图片
+	function openP(obj, activeIndex) {
+		var photoItem = [];
+		var photoList = $(obj).parent().children();
+		for (var i = 0; i < photoList.length; i++) {
+			photoItem[i] = photoList.eq(i).attr("data-src");
+		}
+		UIPhotoViewer.open({
+			images: photoItem,
+			zoomEnabled: true,
+			gestureClose: true,
+			bgColor: '#000',
+			activeIndex: activeIndex
+		}, function(ret, err) {
+			if (ret) {
+				if (ret.eventType == 'change') {
+					api.sendEvent({
+						name: 'previewPage',
+						extra: {
+							key1: ret.index + 1,
+							key2: photoList.length
+						}
+					});
+				} else if (ret.eventType == 'click') {
+					UIPhotoViewer.close();
+					api.closeFrame({
+						name: 'photoView2_fra'
+					});
+				} else if (ret.eventType == 'gestureColse') {
+					api.sendEvent({
+						name: 'gestureColse'
+					});
+				}
+			}
+		});
+		setTimeout(function() {
+			// var tabHeight = $api.offset($api.dom('#aui-header')).h; //tab切换栏高度
+			api.openFrame({
+				name: 'photoView2_fra',
+				url: 'photoView2_fra.html',
+				rect: {
+					x: 0,
+					y: 0,
+					w: 'auto',
+					h: 70
+				},
+				bounces: false,
+				bgColor: 'rgba(0,0,0,0)',
+				vScrollBarEnabled: true,
+				hScrollBarEnabled: true
+			});
+		}, 800);
+	};
+	//关闭预览
+	function closeView() {
+		UIPhotoViewer.close();
+	};
+</script>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/swiper-3.4.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+		<title>我的</title>
+	</head>
+	<body class="bg-gray">
+		<!-- <div class="aui-flex-col aui-flex-center aui-flex-middle" style="width: 100%;height: 100%;background-color: #F5F5F5;">5</div> -->
+		<section class="aui-content aui-padded-b-5 aui-padded-t-15 bg-fff">
+			<ul class="aui-list aui-media-list aui-list-noborder aui-padded-t-15">
+				<li class="aui-list-item aui-padded-15 aui-padded-b-0">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media" style="width: 3.5rem;" tapmode onclick="openWin('widget://app/mine/html/personinfo_win')">
+							<img id="headPath" src="../../../image/empty-head.png" class="aui-img-round" />
+						</div>
+						<div class="aui-list-item-inner" tapmode onclick="openWin('widget://app/mine/html/personinfo_win')">
+							<div class="aui-info aui-padded-0 aui-padded-t-5">
+								<div class="aui-info-item">
+									<span class="aui-font-size-16 color-black font-bold nickName aui-ellipsis-1"></span>
+									<div class="aui-margin-l-5 sex"></div>
+								</div>
+							</div>
+							<div class="aui-list-item-text">
+								<div class=" aui-ellipsis noticeShow">
+								</div>
+							</div>
+						</div>
+						<div class="flex align-center signinShow">
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="aui-row">
+				<div class="aui-col-xs-3 aui-text-center" tapmode onclick="openWin('widget://app/mine/html/credit_win')">
+					<h3 class="aui-font-size-14 growthValue">0</h3>
+					<h3 class="aui-font-size-14">积分</h3>
+				</div>
+				<div class="aui-col-xs-3 aui-text-center" tapmode onclick="openWin('widget://app/mine/html/derbyrecord_win')">
+					<h3 class="aui-font-size-14 article">0</h3>
+					<h3 class="aui-font-size-14">晒码</h3>
+				</div>
+				<div class="aui-col-xs-3 aui-text-center" tapmode onclick="openWin('widget://app/mine/html/attenlist_win')">
+					<h3 class="aui-font-size-14 attention">0</h3>
+					<h3 class="aui-font-size-14">关注</h3>
+				</div>
+				<div class="aui-col-xs-3 aui-text-center" tapmode onclick="openWin('widget://app/mine/html/fanslist_win')">
+					<h3 class="aui-font-size-14 fans">0</h3>
+					<h3 class="aui-font-size-14">粉丝</h3>
+				</div>
+			</div>
+			<div class="aui-padded-10">
+				<div class="swiper-container">
+					<div class="swiper-wrapper" id="swiper-wrapper">
+						<!-- <div class="swiper-slide" style="height: 7.5rem;">
+							<img src="../../../image/l1.jpg" alt="" style="width: 100%;height: 7.5rem;">
+						</div>
+						<div class="swiper-slide" style="height: 7.5rem;">
+							<img src="../../../image/l1.jpg" alt="" style="width: 100%;height: 7.5rem;">
+						</div>
+						<div class="swiper-slide" style="height: 7.5rem;">
+							<img src="../../../image/l1.jpg" alt="" style="width: 100%;height: 7.5rem;">
+						</div> -->
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+		</section>
+		<section class="aui-content">
+			<ul class="aui-list aui-media-list aui-list-in aui-list-noborder aui-margin-t-15 aui-padded-t-10 aui-padded-b-10">
+				<li class="aui-list-item" tapmode onclick="goToMsg()">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media align-center aui-padded-r-10" style="width: 1.5rem;">
+							<img src="../../mine/img/msg-icon.png">
+						</div>
+						<div class="aui-list-item-inner aui-list-item-arrow">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">我的消息</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item" tapmode onclick="openWin('widget://app/mine/html/creditstore_win')">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media align-center aui-padded-r-10" style="width: 1.5rem;">
+							<img class="creditstore-icon" src="../../mine/img/creditstore-icon.png">
+						</div>
+						<div class="aui-list-item-inner aui-list-item-arrow">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">积分商城</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item" tapmode onclick="openWin('widget://app/mine/html/feedback_win')">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media align-center aui-padded-r-10" style="width: 1.5rem;">
+							<img class="feedback-icon" src="../../mine/img/feedback-icon.png">
+						</div>
+						<div class="aui-list-item-inner aui-list-item-arrow">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">意见反馈</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item" tapmode onclick="openWin('widget://app/mine/html/about_win')">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media align-center aui-padded-r-10" style="width: 1.5rem;">
+							<img class="about-icon" src="../../mine/img/about-icon.png">
+						</div>
+						<div class="aui-list-item-inner aui-list-item-arrow">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">关于晒码汇</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item" tapmode onclick="openWin('widget://app/mine/html/contactgroup_win')">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media align-center aui-padded-r-10" style="width: 1.5rem;">
+							<img class="contactgroup-icon" src="../../mine/img/contactgroup-icon.png">
+						</div>
+						<div class="aui-list-item-inner aui-list-item-arrow">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">晒码交流群</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<ul class="aui-list aui-media-list aui-list-in aui-list-noborder aui-margin-t-15 aui-padded-t-5 aui-padded-b-5">
+				<li class="aui-list-item" tapmode onclick="openWin('widget://app/mine/html/personinfo_win')">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-media align-center aui-padded-r-10" style="width: 1.5rem;">
+							<img class="settin-icon" src="../../mine/img/settin-icon.png">
+						</div>
+						<div class="aui-list-item-inner aui-list-item-arrow">
+							<div class="aui-list-item-text">
+								<div class="aui-list-item-title">设置</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</section>
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../../../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/template" id="swiper-wrapper-list">
+	<% for(var i = 0; i<banner.length; i++){ %>
+	<% if(banner[i]['is_disable'] == 0) { %>
+	<div class="swiper-slide" style="height: 7.5rem;">
+		<% if(banner[i]['url']) {%>
+		<img src="<%=img_url + banner[i]['head_path']%>" alt="" style="width: 100%;height: 7.5rem;" class="img-round-sm" tapmode onclick="openWin('widget://app/home/html/webbrowser_win','<%=banner[i]['url']%>')">
+		<% }else { %>
+		<img src="<%=img_url + banner[i]['head_path']%>" alt="" style="width: 100%;height: 7.5rem;" class="img-round-sm">
+		<% } %>
+	</div> 
+	<% } %>
+	<% } %>
+</script>
+<script type="text/javascript">
+	var dialog = new auiDialog();
+	apiready = function() {
+		var userInfo = $api.getStorage('userInfo');
+		var is_free = userInfo.is_free;
+		if(is_free == 1){
+			openDialog2('widget://app/dialog/dialog')
+		}
+		init();
+		updateStatistics();
+		api.parseTapmode();
+		setInterval("updateStatistics()", 5000);
+		api.addEventListener({
+			name: 'refreshIndex5'
+		}, function() {
+			var userInfo = $api.getStorage('userInfo');
+			var is_free = userInfo.is_free;
+			if(is_free == 1){
+				openDialog2('widget://app/dialog/dialog')
+			}else{
+				init();
+			}
+		})
+	};
+	//跳转到我的消息 执行index/js/index里的函数
+	function goToMsg() {
+		api.execScript({
+			script: "openFrame(4)"
+		});
+		api.execScript({
+			script: "tabSetActive(4)"
+		});
+	};
+
+	//初始化
+	function init() {
+		getMine();
+		var userInfo = $api.getStorage('userInfo');
+		if(userInfo){
+			$("#headPath").attr("src", index_url.replace('/index.php/', '') + userInfo.head_path);
+			$('.nickName').html(userInfo.nickname);
+			$('.growthValue').html(userInfo.growth_value);
+			$('.article').html(userInfo.article);
+			$('.attention').html(userInfo.attention);
+			$('.fans').html(userInfo.fans);
+			$('.noticeShow').html(userInfo.autograph);
+			if (userInfo.sex == 1) {
+				$('.sex').addClass('sex-nan');
+				$('.sex').removeClass('sex-nv');
+			} else {
+				$('.sex').addClass('sex-nv');
+				$('.sex').removeClass('sex-nan');
+			}
+			
+			api.addEventListener({
+				name: 'viewappear'
+			}, function(ret, err) {
+				init(); //初始化一下页面，重新加载一下数据
+			});
+		}
+	}
+	//更新统计数据
+	function updateStatistics() {
+		console.log("刷新");
+		$cjy.ajax({
+			url: index_url + 'api/Member/updateStatistics',
+			method: 'post',
+			data: {}
+		}, function(ret) {
+			console.log($api.jsonToStr(ret));
+			$api.setStorage('userInfo.article', ret.data.article);
+			$api.setStorage('userInfo.attention', ret.data.attention);
+			$api.setStorage('userInfo.fans', ret.data.fans);
+			$('.article').html(ret.data.article);
+			$('.attention').html(ret.data.attention);
+			$('.fans').html(ret.data.fans);
+			// init();
+		}, function(err) {
+			console.log($api.jsonToStr(err));
+		});
+
+	}
+	//获取我的信息
+	function getMine() {
+		$cjy.ajax({
+			url: index_url + 'api/Member/mine',
+			method: 'post',
+			data: {}
+		}, function(ret) {
+			if (ret.code == 0) {
+				$api.setStorage('userInfo', ret.data.user);
+
+				var html = ret.data.user.sign_in ? '<div class="signedin-icon"></div>' :
+					'<div class="signin-icon" onclick="signin()"></div>';
+				$('.signinShow').html(html);
+				ret.data.img_url = img_url;
+				var text = template('swiper-wrapper-list', ret.data);
+				$api.html($api.byId('swiper-wrapper'), text);
+				api.parseTapmode();
+				swiperStart();
+			}
+			// toast1(ret.msg);
+			// console.log(JSON.stringify(ret));
+		});
+	}
+
+	//签到
+	function signin() {
+		$cjy.ajax({
+			url: index_url + 'api/Member/signIn',
+			method: 'post',
+			data: {}
+		}, function(ret) {
+			if (ret.code == 0) {
+				toast1('签到成功！');
+				var userInfo = $api.getStorage('userInfo');
+				$('.signinShow').html('<div class="signedin-icon"></div>');
+				$('.growthValue').html(userInfo.growth_value + 1);
+				userInfo.sign_in = true;
+				userInfo.growth_value = userInfo.growth_value + 1;
+				$api.setStorage('userInfo', userInfo);
+			}
+			// console.log(JSON.stringify(ret));
+		});
+	}
+
+	function swiperStart() {
+		var mySwiper = new Swiper('.swiper-container', {
+			loop: true,
+			autoplay: 3000,
+			speed: 1000,
+			pagination: '.swiper-pagination',
+			prevButton: '.swiper-button-prev',
+			paginationClickable: true,
+			grabCursor: true,
+			parallax: true,
+			autoplayDisableOnInteraction: false,
+		});
+	};
+</script>

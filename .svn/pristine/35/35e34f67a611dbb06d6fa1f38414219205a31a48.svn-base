@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/login.css" />
+		<script type="text/javascript" src="../../../script/fastclick.js"></script>
+		<script type="text/javascript">
+			if ('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+	</head>
+	<body class="bg-fff">
+		<section class="aui-content">
+			<ul class="aui-list aui-list-in aui-form-list aui-list-noborder aui-padded-15  aui-padded-l-0 aui-margin-t-15">
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner sm-round-border">
+						<div class="aui-list-item-label-icon">
+							<img class="username-icon" src="../img/username-icon.png" />
+						</div>
+						<div class="aui-list-item-input">
+							<input id="username" type="text" placeholder="请输入用户名">
+						</div>
+					</div>
+				</li>
+				<li class="aui-list-item aui-margin-t-15">
+					<div class="aui-list-item-inner aui-list-item-btn aui-padded-r-0">
+						<div class="aui-btn aui-btn-block btn-red" tapmode onclick="updatePassword()">确
+							认</div>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<!-- <div class="absolute-bottom">
+			<p class="aui-text-center">登录注册即代表同意&nbsp;<span class="color-blue">&lt;&lt;用户协议&gt;&gt;</span>&nbsp;和&nbsp;<span class="color-blue">&lt;&lt;隐私政策&gt;&gt;</span>&nbsp;</p>
+		</div> -->
+	</body>
+</html>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/utils.js"></script>
+<script type="text/javascript" src="../../../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../res/api-index.js"></script>
+<script type="text/javascript" src="../../../script/cjy-ajax.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		api.parseTapmode();
+	};
+
+	//获取验证码
+	function updatePassword() {
+		var phone = $('#username').val();
+		$cjy.ajax({
+			url: configIndex.memberEdit,
+			method: 'post',
+			data: {
+				'phone': phone,
+			}
+		}, function(ret) {
+			if (ret.code == 0) {
+				openWin('widget://app/login/html/forgotpwd2_win',{problem_id:ret.data.problem_id,phone:phone});
+				setTimeout(function() {
+					closeWin();
+				}, 500);
+			}else{
+				toast1(ret.msg);
+			}
+		});
+	}
+</script>
